@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'motion/react';
 
 const QUIZ_QUESTIONS = [
   { id: 'interest', q: 'What interests you most?', options: ['Building projects', 'Learning in workshops', 'Mentoring others', 'Competing at hackathons'] },
@@ -12,6 +13,13 @@ const PATHWAYS: Record<string, string> = {
   workshops: 'Attend workshops and grow your skills. Keep an eye on events and our Discord.',
   mentor: 'Share your experience as a mentor. Reach out to the team to get involved.',
   hackathons: 'MacHacks 2026 is for you. Register and join us on March 21st.',
+};
+
+const fadeIn = {
+  initial: { opacity: 0, y: 8 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 1, delay: 0.5 },
 };
 
 export default function GetInvolved() {
@@ -39,7 +47,9 @@ export default function GetInvolved() {
     return (
       <section className="max-w-2xl mx-auto px-4 py-20 text-center">
         <h1 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-4">Your MacAI pathway</h1>
-        <p className="text-[#A7C2C3] mb-8">{PATHWAYS[p] || PATHWAYS.projects}</p>
+        <motion.p {...fadeIn} className="text-[#A7C2C3] mb-8">
+          {PATHWAYS[p] || PATHWAYS.projects}
+        </motion.p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link to="/contact" className="btn-cta">Join or contact the team</Link>
           <Link to="/projects" className="btn-secondary">View projects</Link>
@@ -52,9 +62,16 @@ export default function GetInvolved() {
   return (
     <section className="max-w-xl mx-auto px-4 py-20">
       <h1 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-2">Which MacAI pathway is right for you?</h1>
-      <p className="text-[#A7C2C3] mb-10">Answer a few quick questions.</p>
-      <div className="bg-[#0f0066]/60 rounded-xl p-8 border border-[#1CB1E3]/20">
-        <h2 className="font-heading text-xl text-[#3DDFF5] mb-6">{current.q}</h2>
+      <motion.p {...fadeIn} className="text-[#A7C2C3] mb-10">
+        Answer a few quick questions.
+      </motion.p>
+      <motion.div
+        {...fadeIn}
+        className="bg-[#0f0066]/60 rounded-xl p-8 border border-[#1CB1E3]/20"
+      >
+        <h2 className="font-heading text-xl text-[#3DDFF5] mb-6">
+          {current.q}
+        </h2>
         <ul className="space-y-3">
           {current.options.map((opt) => (
             <li key={opt}>
@@ -68,8 +85,13 @@ export default function GetInvolved() {
             </li>
           ))}
         </ul>
-        <p className="mt-6 text-[#A7C2C3] text-sm">Question {step + 1} of {QUIZ_QUESTIONS.length}</p>
-      </div>
+        <motion.p
+          {...fadeIn}
+          className="mt-6 text-[#A7C2C3] text-sm"
+        >
+          Question {step + 1} of {QUIZ_QUESTIONS.length}
+        </motion.p>
+      </motion.div>
     </section>
   );
 }

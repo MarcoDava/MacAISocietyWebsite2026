@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'motion/react';
 
 type Project = {
   id: string;
@@ -26,6 +27,13 @@ const DOMAINS = ['All', 'Health', 'Robotics', 'NLP', 'Vision'];
 const DIFFICULTIES = ['All', 'Beginner', 'Intermediate', 'Advanced'];
 const YEARS = ['All', 2026, 2025];
 
+const fadeIn = {
+  initial: { opacity: 0, y: 8 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 1, delay: 0.5 },
+};
+
 export default function Projects() {
   const [domain, setDomain] = useState('All');
   const [difficulty, setDifficulty] = useState('All');
@@ -51,9 +59,12 @@ export default function Projects() {
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-[#F0F4F4]">
             Projects
           </h1>
-          <p className="mt-4 text-xl text-[#A7C2C3] max-w-2xl">
+          <motion.p
+            {...fadeIn}
+            className="mt-4 text-xl text-[#A7C2C3] max-w-2xl"
+          >
             CUCAI 2025 and 2026 — real AI projects by MacAI members. Browse by year, domain, or difficulty.
-          </p>
+          </motion.p>
         </div>
       </section>
 
@@ -143,7 +154,12 @@ export default function Projects() {
           )}
 
           <div className="mt-16 text-center">
-            <p className="text-[#A7C2C3] mb-4">Want to propose a project or join an existing one?</p>
+            <motion.p
+              {...fadeIn}
+              className="text-[#A7C2C3] mb-4"
+            >
+              Want to propose a project or join an existing one?
+            </motion.p>
             <Link to="/contact" className="btn-cta">Contribute — apply or join Slack/Discord</Link>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'motion/react';
 import Countdown from '../Components/Countdown';
 
 const SCHEDULE = [
@@ -26,6 +27,13 @@ const FAQ = [
   { q: 'What should I bring?', a: 'Laptop, charger, and enthusiasm. We\'ll share a full list closer to the event.' },
 ];
 
+const fadeIn = {
+  initial: { opacity: 0, y: 8 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 1, delay: 0.5 },
+};
+
 export default function MacHacks() {
   const [scheduleFilter, setScheduleFilter] = useState<string>('all');
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
@@ -42,9 +50,12 @@ export default function MacHacks() {
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-[#F0F4F4]">
             MacHacks 2026
           </h1>
-          <p className="mt-4 text-xl text-[#A7C2C3] max-w-2xl mx-auto">
+          <motion.p
+            {...fadeIn}
+            className="mt-4 text-xl text-[#A7C2C3] max-w-2xl mx-auto"
+          >
             McMaster AI Society's flagship hackathon. March 21st, 2026. AI challenges, industry mentorship, and prizes.
-          </p>
+          </motion.p>
           <div className="mt-10">
             <Countdown />
           </div>
@@ -52,7 +63,12 @@ export default function MacHacks() {
             <button type="button" className="btn-cta text-lg px-8 py-4">
               Register for MacHacks 2026
             </button>
-            <p className="mt-4 text-[#A7C2C3] text-sm">Registration opening soon. Sign up below for updates.</p>
+            <motion.p
+              {...fadeIn}
+              className="mt-4 text-[#A7C2C3] text-sm"
+            >
+              Registration opening soon. Sign up below for updates.
+            </motion.p>
           </div>
         </div>
       </section>
@@ -61,9 +77,12 @@ export default function MacHacks() {
       <section className="py-16 md:py-24 bg-[#0f0066]/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-6">Event overview</h2>
-          <p className="text-[#A7C2C3] max-w-3xl">
+          <motion.p
+            {...fadeIn}
+            className="text-[#A7C2C3] max-w-3xl"
+          >
             MacHacks 2026 is a one-day hackathon focused on AI and innovation. You'll work in teams, attend workshops led by partners and industry experts, and compete for prizes. Location and full agenda will be confirmed soon — we'll keep you updated.
-          </p>
+          </motion.p>
           <div className="mt-8 flex flex-wrap gap-4">
             <span className="px-4 py-2 rounded-full bg-[#1CB1E3]/20 text-[#3DDFF5] text-sm">March 21, 2026</span>
             <span className="px-4 py-2 rounded-full bg-[#1CB1E3]/20 text-[#3DDFF5] text-sm">McMaster University</span>
@@ -113,7 +132,8 @@ export default function MacHacks() {
           <h2 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-8">Past MacHacks</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {PAST_YEARS.map(({ year, attendees, countries, link }) => (
-              <a
+              <motion.a
+                {...fadeIn}
                 key={year}
                 href={link}
                 target="_blank"
@@ -123,7 +143,7 @@ export default function MacHacks() {
                 <h3 className="font-heading text-2xl font-bold text-[#3DDFF5]">MacHacks {year}</h3>
                 <p className="mt-2 text-[#A7C2C3] text-sm">{attendees} attendees · {countries} countries</p>
                 <span className="mt-4 inline-block text-[#3DDFF5] text-sm font-medium">View Devpost →</span>
-              </a>
+              </motion.a>
             ))}
           </div>
         </div>
@@ -133,7 +153,12 @@ export default function MacHacks() {
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-4">Sponsors & partners</h2>
-          <p className="text-[#A7C2C3] mb-8">MacHacks wouldn't be possible without our sponsors. Interested in supporting 2026?</p>
+          <motion.p
+            {...fadeIn}
+            className="text-[#A7C2C3] mb-8"
+          >
+            MacHacks wouldn't be possible without our sponsors. Interested in supporting 2026?
+          </motion.p>
           <Link to="/partnerships" className="btn-cta">Partner with us</Link>
         </div>
       </section>
@@ -144,7 +169,11 @@ export default function MacHacks() {
           <h2 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-8">FAQ</h2>
           <ul className="space-y-2">
             {FAQ.map(({ q, a }, i) => (
-              <li key={i} className="rounded-xl border border-[#1CB1E3]/20 overflow-hidden">
+              <motion.li
+                key={i}
+                {...fadeIn}
+                className="rounded-xl border border-[#1CB1E3]/20 overflow-hidden"
+              >
                 <button
                   type="button"
                   className="w-full text-left px-6 py-4 flex justify-between items-center bg-[#1800AD]/40 text-[#F0F4F4] hover:bg-[#1800AD]/60 transition-colors"
@@ -155,11 +184,14 @@ export default function MacHacks() {
                   <span className="text-[#3DDFF5]">{faqOpen === i ? '−' : '+'}</span>
                 </button>
                 {faqOpen === i && (
-                  <div className="px-6 py-4 bg-[#1800AD]/20 text-[#A7C2C3] text-sm border-t border-[#1CB1E3]/20">
+                  <motion.div
+                    {...fadeIn}
+                    className="px-6 py-4 bg-[#1800AD]/20 text-[#A7C2C3] text-sm border-t border-[#1CB1E3]/20"
+                  >
                     {a}
-                  </div>
+                  </motion.div>
                 )}
-              </li>
+              </motion.li>
             ))}
           </ul>
         </div>

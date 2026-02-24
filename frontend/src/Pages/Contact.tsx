@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'motion/react';
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -11,6 +12,13 @@ export default function Contact() {
     message: form.message.trim().length < 10 ? 'Message must be at least 10 characters' : '',
   };
   const valid = !errors.name && !errors.email && !errors.message;
+
+  const fadeIn = {
+    initial: { opacity: 0, y: 8 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.2 },
+    transition: { duration: 1, delay: 0.5 },
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,9 +37,12 @@ export default function Contact() {
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-[#F0F4F4]">
             Contact
           </h1>
-          <p className="mt-4 text-xl text-[#A7C2C3] max-w-2xl">
+          <motion.p
+            {...fadeIn}
+            className="mt-4 text-xl text-[#A7C2C3] max-w-2xl"
+          >
             Have a question or want to get involved? We'd love to hear from you.
-          </p>
+          </motion.p>
         </div>
       </section>
 
@@ -114,10 +125,13 @@ export default function Contact() {
           {/* Map & info */}
           <div>
             <h2 className="font-heading text-2xl font-bold text-[#F0F4F4] mb-6">Find us</h2>
-            <p className="text-[#A7C2C3] mb-4">
+            <motion.p
+              {...fadeIn}
+              className="text-[#A7C2C3] mb-4"
+            >
               McMaster University<br />
               1280 Main St W, Hamilton, ON L8S 4L8
-            </p>
+            </motion.p>
             <a
               href="https://www.google.com/maps?q=McMaster+University+1280+Main+St+W+Hamilton+ON"
               target="_blank"
@@ -126,9 +140,12 @@ export default function Contact() {
             >
               Open in Google Maps →
             </a>
-            <div className="aspect-video bg-[#0f0066]/60 rounded-xl border border-[#1CB1E3]/20 flex items-center justify-center text-[#A7C2C3] text-sm">
+            <motion.div
+              {...fadeIn}
+              className="aspect-video bg-[#0f0066]/60 rounded-xl border border-[#1CB1E3]/20 flex items-center justify-center text-[#A7C2C3] text-sm"
+            >
               Map embed placeholder (embed Google Map iframe here)
-            </div>
+            </motion.div>
             <div className="mt-8">
               <h3 className="font-heading font-bold text-[#F0F4F4] mb-3">Follow us</h3>
               <div className="flex gap-4">

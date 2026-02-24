@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'motion/react';
 
 const NEW_SPONSORS = [
   { name: 'Sponsor A', tier: 'Platinum' },
@@ -12,6 +13,13 @@ const PAST_SPONSORS = [
   { name: 'Past Sponsor 3', year: 2023 },
 ];
 
+const fadeIn = {
+  initial: { opacity: 0, y: 8 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 1, delay: 0.5 },
+};
+
 export default function Partnerships() {
   return (
     <>
@@ -23,9 +31,12 @@ export default function Partnerships() {
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-[#F0F4F4]">
             Partnerships
           </h1>
-          <p className="mt-4 text-xl text-[#A7C2C3] max-w-2xl">
+          <motion.p
+            {...fadeIn}
+            className="mt-4 text-xl text-[#A7C2C3] max-w-2xl"
+          >
             None of what we do would be possible without our sponsors. Thank you for believing in the next generation of AI talent.
-          </p>
+          </motion.p>
         </div>
       </section>
 
@@ -33,9 +44,12 @@ export default function Partnerships() {
       <section className="py-16 md:py-24 bg-[#0f0066]/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-6">Our new sponsors this year</h2>
-          <p className="text-[#A7C2C3] max-w-3xl mb-12">
+          <motion.p
+            {...fadeIn}
+            className="text-[#A7C2C3] max-w-3xl mb-12"
+          >
             We're proud to partner with organizations that share our mission. Their support fuels workshops, hackathons, and community events — and helps students gain real-world skills and connections.
-          </p>
+          </motion.p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {NEW_SPONSORS.map(({ name, tier }) => (
               <div
@@ -90,9 +104,12 @@ export default function Partnerships() {
       <section className="py-16 md:py-24 bg-gradient-to-b from-[#1CB1E3]/10 to-transparent">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-4">Interested in collaborating?</h2>
-          <p className="text-[#A7C2C3] mb-8">
+          <motion.p
+            {...fadeIn}
+            className="text-[#A7C2C3] mb-8"
+          >
             We're always looking for partners who want to support student AI innovation. Get in touch to discuss sponsorship and opportunities.
-          </p>
+          </motion.p>
           <Link to="/contact" className="btn-cta">Contact us</Link>
         </div>
       </section>

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+// import { motion } from 'motion/react';
+import logo from '../assets/mcmasterAiLogo.svg';
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
@@ -15,12 +17,11 @@ export default function Header() {
   const location = useLocation();
 
   return (
-    <header className="sticky top-0 z-50 bg-[#1800AD]/95 backdrop-blur-sm border-b border-[#1CB1E3]/20">
+    <header className="w-full fixed top-0 z-50 bg-[#F0F4F4]/70 backdrop-blur-sm border-b border-[#1CB1E3]/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <Link to="/" className="flex items-center gap-2 focus-ring rounded" aria-label="MacAI Society home">
-            <span className="font-heading font-bold text-xl text-[#F0F4F4]">MacAI</span>
-            <span className="text-[#3DDFF5] text-sm hidden sm:inline">Society</span>
+          <Link to="/" className="flex items-center gap-2 focus-ring rounded h-full" aria-label="MacAI Society home">
+            <img src={logo} alt="MacAI Society Logo" className="h-[80%]" />
           </Link>
 
           <nav className="hidden md:flex items-center gap-1">
@@ -30,8 +31,8 @@ export default function Header() {
                 to={to}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   location.pathname === to
-                    ? 'text-[#3DDFF5] bg-[#1CB1E3]/10'
-                    : 'text-[#A7C2C3] hover:text-[#F0F4F4] hover:bg-white/5'
+                    ? 'text-[#1800AD] bg-[#1CB1E3]/10'
+                    : 'text-[#1800AD]/70 hover:text-[#1800AD] hover:bg-[#A7C2C3]/20'
                 }`}
               >
                 {label}

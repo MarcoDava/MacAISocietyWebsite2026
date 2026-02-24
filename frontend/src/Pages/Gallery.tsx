@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'motion/react';
 
 type GalleryItem = {
   id: string;
@@ -19,6 +20,13 @@ const PLACEHOLDERS: GalleryItem[] = [
 
 const EVENTS = ['All', 'Workshops', 'MacHacks 2023', 'CUCAI 2025'];
 const YEARS = ['All', 2025, 2023];
+
+const fadeIn = {
+  initial: { opacity: 0, y: 8 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 1, delay: 0.5 },
+};
 
 export default function Gallery() {
   const [eventFilter, setEventFilter] = useState('All');
@@ -41,9 +49,12 @@ export default function Gallery() {
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-[#F0F4F4]">
             Gallery
           </h1>
-          <p className="mt-4 text-xl text-[#A7C2C3] max-w-2xl">
+          <motion.p
+            {...fadeIn}
+            className="mt-4 text-xl text-[#A7C2C3] max-w-2xl"
+          >
             Curated moments from workshops, MacHacks, and CUCAI — our community in action.
-          </p>
+          </motion.p>
         </div>
       </section>
 
@@ -107,9 +118,12 @@ export default function Gallery() {
       <section className="py-16 md:py-24 bg-[#0f0066]/50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-heading text-2xl font-bold text-[#F0F4F4] mb-6">Highlight reels</h2>
-          <div className="aspect-video bg-[#1800AD]/60 rounded-xl border border-[#1CB1E3]/20 flex items-center justify-center text-[#A7C2C3]">
+          <motion.div
+            {...fadeIn}
+            className="aspect-video bg-[#1800AD]/60 rounded-xl border border-[#1CB1E3]/20 flex items-center justify-center text-[#A7C2C3]"
+          >
             Video embed placeholder (MacHacks / workshop highlights)
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -129,8 +143,18 @@ export default function Gallery() {
               Image
             </div>
             <div className="p-6">
-              <p className="text-[#F0F4F4]">{selected.caption}</p>
-              <p className="mt-2 text-[#A7C2C3] text-sm">{selected.event} · {selected.year}</p>
+              <motion.p
+                {...fadeIn}
+                className="text-[#F0F4F4]"
+              >
+                {selected.caption}
+              </motion.p>
+              <motion.p
+                {...fadeIn}
+                className="mt-2 text-[#A7C2C3] text-sm"
+              >
+                {selected.event} · {selected.year}
+              </motion.p>
               <button
                 type="button"
                 onClick={() => setSelected(null)}

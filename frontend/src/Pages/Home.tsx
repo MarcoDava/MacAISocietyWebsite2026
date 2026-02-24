@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom';
 import Countdown from '../Components/Countdown';
 import CountUp from '../Components/CountUp';
+import { motion } from 'motion/react';
+import { Spotlight } from "../Components/ui/spotlight";
+import {EncryptedText} from "../Components/ui/encrypted-text";
+ 
 
 const STATS = [
-  { value: 100, suffix: '+', label: 'Members' },
-  { value: 50, suffix: '+', label: 'Industry Speakers' },
+  { value: -1, suffix: '+', label: 'Members' },
+  { value: -1, suffix: '+', label: 'Industry Speakers' },
   { value: 1, suffix: '', label: 'Flagship Hackathon' },
-  { value: 30, suffix: '+', label: 'Workshops Hosted' },
-  { value: 20, suffix: '+', label: 'Sponsors' },
+  { value: -1, suffix: '+', label: 'Workshops Hosted' },
+  { value: -1, suffix: '+', label: 'Sponsors' },
 ];
 
 const OFFERINGS = [
@@ -25,28 +29,39 @@ const SPOTLIGHT = [
 
 export default function Home() {
   return (
-    <>
+    <div className="bg-[#1800AD] text-[#F0F4F4] pt-[7vh]">
       {/* 1) Hero – Hook (vision + energy) */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#1800AD] via-[#0f0066] to-[#1800AD]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_70%_30%,rgba(28,177,227,0.15),transparent)]" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid lg:grid-cols-2 gap-12 items-center">
+        <Spotlight
+          className="-top-40 left-0 md:-top-20 md:left-20"
+          fill="white"
+          />
           <div>
-            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F0F4F4] leading-tight">
+            {/* <motion.h1 initial={{ opacity: 0, y: -10 }} animate={{ opacity: [0,0.40, 1], y: [-10, -4, 0] }} transition={{ duration: 0.5 }} className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F0F4F4] leading-tight">
+              
               Building the Future of AI at McMaster.
-            </h1>
-            <p className="mt-6 text-xl text-[#A7C2C3] max-w-xl">
+            </motion.h1> */}
+            <EncryptedText 
+            text="Building the Future of AI at McMaster." 
+            className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F0F4F4] leading-tight" 
+            revealDelayMs={20}
+            charset="abcdefghijklmnopqrstuvwxyz"
+            />
+            <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.40, 1], x: [-60, -5, 0] }} transition={{ duration: 2, delay: 0.5 }} className="mt-6 text-xl text-[#A7C2C3] max-w-xl">
               Canada's next generation of AI innovators, creators, and problem-solvers starts here.
-            </p>
-            <p className="mt-4 text-[#3DDFF5] font-medium">TBD</p>
-            <div className="mt-10 flex flex-wrap gap-4">
+            </motion.p>
+            <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.20, 1], x: [-60, -10, 0] }} transition={{ duration: 2, delay: 1 }} className="mt-4 text-[#3DDFF5] font-medium">TBD</motion.p>
+            <motion.div initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.10, 1], x: [-60, -20, 0] }} transition={{ duration: 2, delay: 1.5 }} className="mt-10 flex flex-wrap gap-4">
               <Link to="/contact" className="btn-cta">
                 Join the Society
               </Link>
               <Link to="/machacks" className="btn-secondary">
                 Explore MacHacks 2026
               </Link>
-            </div>
+            </motion.div>
           </div>
           <div className="hidden lg:block relative">
             <div className="aspect-square rounded-2xl bg-[#1CB1E3]/10 border border-[#3DDFF5]/30 flex items-center justify-center">
@@ -66,7 +81,7 @@ export default function Home() {
             {STATS.map(({ value, suffix, label }) => (
               <div
                 key={label}
-                className="bg-[#1800AD]/60 rounded-xl p-6 text-center card-lift border border-[#1CB1E3]/20"
+                className="bg-[#1800AD]/60 rounded-xl p-6 text-center border border-[#1CB1E3]/20"
               >
                 <div className="font-heading text-3xl md:text-4xl font-bold text-[#3DDFF5]">
                   <CountUp end={value} suffix={suffix} />
@@ -79,7 +94,7 @@ export default function Home() {
       </section>
 
       {/* 3) What we offer */}
-      <section className="py-16 md:py-24">
+      <section className="py-16 md:py-24 bg-[radial-gradient(ellipse_80%_50%_at_70%_30%,rgba(28,177,227,0.15),transparent)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-4">What we offer</h2>
           <p className="text-[#A7C2C3] max-w-2xl mb-12">
@@ -89,7 +104,7 @@ export default function Home() {
             {OFFERINGS.map(({ title, desc }) => (
               <div
                 key={title}
-                className="bg-[#0f0066]/60 rounded-xl p-6 border border-[#1CB1E3]/X card-lift"
+                className="bg-[#0f0066]/60 rounded-xl p-6 border border-[#1CB1E3]/20 card-lift"
               >
                 <h3 className="font-heading text-xl font-bold text-[#3DDFF5]">{title}</h3>
                 <p className="mt-2 text-[#A7C2C3] text-sm">{desc}</p>
@@ -121,7 +136,7 @@ export default function Home() {
             {SPOTLIGHT.map(({ quote, name }) => (
               <blockquote
                 key={quote.slice(0, 30)}
-                className="bg-[#0f0066]/60 rounded-xl p-8 border border-[#1CB1E3]/X card-lift"
+                className="bg-[#0f0066]/60 rounded-xl p-8 border border-[#1CB1E3]/20 card-lift"
               >
                 <p className="text-[#F0F4F4] italic">"{quote}"</p>
                 <cite className="mt-4 block text-[#3DDFF5] not-italic">— {name}</cite>
@@ -181,6 +196,6 @@ export default function Home() {
           </p>
         </div>
       </section>
-    </>
+    </div>
   );
 }
