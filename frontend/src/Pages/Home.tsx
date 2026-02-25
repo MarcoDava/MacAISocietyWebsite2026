@@ -27,6 +27,18 @@ const SPOTLIGHT = [
   { quote: 'MacAI feels like home. Everyone is here to grow together.', name: 'Member' },
 ];
 
+const fadeInRight = {
+  initial: { opacity: 0, x: -24 },
+  whileInView: { opacity: 1, x: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 1, delay: 0.2 },
+};
+const fadeInDown = {
+  initial: { opacity: 0, y: -24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 1, delay: 0.2 },
+};
 export default function Home() {
   return (
     <div className="bg-[#1800AD] text-[#F0F4F4] pt-[7vh]">
@@ -50,11 +62,11 @@ export default function Home() {
             revealDelayMs={20}
             charset="abcdefghijklmnopqrstuvwxyz"
             />
-            <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.40, 1], x: [-60, -5, 0] }} transition={{ duration: 2, delay: 0.5 }} className="mt-6 text-xl text-[#A7C2C3] max-w-xl">
+            <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.40, 1], x: [-60, -5, 0] }} transition={{ duration: 2, delay: 0.2 }} className="mt-6 text-xl text-[#A7C2C3] max-w-xl">
               Canada's next generation of AI innovators, creators, and problem-solvers starts here.
             </motion.p>
-            <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.20, 1], x: [-60, -10, 0] }} transition={{ duration: 2, delay: 1 }} className="mt-4 text-[#3DDFF5] font-medium">TBD</motion.p>
-            <motion.div initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.10, 1], x: [-60, -20, 0] }} transition={{ duration: 2, delay: 1.5 }} className="mt-10 flex flex-wrap gap-4">
+            <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.20, 1], x: [-60, -10, 0] }} transition={{ duration: 2, delay: 0.2 }} className="mt-4 text-[#3DDFF5] font-medium">TBD</motion.p>
+            <motion.div initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.10, 1], x: [-60, -20, 0] }} transition={{ duration: 2, delay: 0.2 }} className="mt-10 flex flex-wrap gap-4">
               <Link to="/contact" className="btn-cta">
                 Join the Society
               </Link>
@@ -74,20 +86,22 @@ export default function Home() {
       {/* 2) Social proof */}
       <section className="py-16 md:py-24 bg-[#0f0066]/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-3xl font-bold text-center text-[#F0F4F4] mb-12">
+          <motion.h2 {...fadeInDown} className="font-heading text-3xl font-bold text-center text-[#F0F4F4] mb-12">
             Our community in numbers
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          </motion.h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 ">
             {STATS.map(({ value, suffix, label }) => (
-              <div
+              <motion.div
                 key={label}
-                className="bg-[#1800AD]/60 rounded-xl p-6 text-center border border-[#1CB1E3]/20"
+                {...fadeInRight}
+                whileHover={{  scale: 1.10, y: -5 , transition: { duration: 0.2 }}}
+                className="bg-[#1800AD]/60 rounded-xl p-6 text-center border border-[#1CB1E3]/20 hover:shadow-[0_6px_20px_#000000]/20"
               >
                 <div className="font-heading text-3xl md:text-4xl font-bold text-[#3DDFF5]">
                   <CountUp end={value} suffix={suffix} />
                 </div>
                 <div className="mt-1 text-[#A7C2C3] text-sm">{label}</div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -96,19 +110,20 @@ export default function Home() {
       {/* 3) What we offer */}
       <section className="py-16 md:py-24 bg-[radial-gradient(ellipse_80%_50%_at_70%_30%,rgba(28,177,227,0.15),transparent)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-4">What we offer</h2>
-          <p className="text-[#A7C2C3] max-w-2xl mb-12">
+          <motion.h2 {...fadeInRight} className="font-heading text-3xl font-bold text-[#F0F4F4] mb-4">What we offer</motion.h2>
+          <motion.p {...fadeInRight} className="text-[#A7C2C3] max-w-2xl mb-12">
             From workshops and hackathons to networking and real-world projects, MacAI gives you the tools and community to grow in AI. Whether you're just starting or already building, there's a place for you.
-          </p>
+          </motion.p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {OFFERINGS.map(({ title, desc }) => (
-              <div
+              <motion.div
                 key={title}
+                {...fadeInRight}
                 className="bg-[#0f0066]/60 rounded-xl p-6 border border-[#1CB1E3]/20 card-lift"
               >
                 <h3 className="font-heading text-xl font-bold text-[#3DDFF5]">{title}</h3>
                 <p className="mt-2 text-[#A7C2C3] text-sm">{desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -117,8 +132,8 @@ export default function Home() {
       {/* 4) Upcoming events + countdown */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-[#1CB1E3]/10 to-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-4">MacHacks 2026</h2>
-          <p className="text-[#A7C2C3] mb-8">March 21st, 2026 — Our flagship hackathon. Build, learn, compete.</p>
+          <motion.h2 {...fadeInDown} className="font-heading text-3xl font-bold text-[#F0F4F4] mb-4">MacHacks 2026</motion.h2>
+          <motion.p {...fadeInRight} className="text-[#A7C2C3] mb-8">March 21st, 2026 — Our flagship hackathon. Build, learn, compete.</motion.p>
           <Countdown />
           <Link to="/machacks" className="btn-cta inline-block mt-10">
             Sign up for the Hackathon
@@ -129,18 +144,19 @@ export default function Home() {
       {/* 5) Member spotlight */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-12 text-center">
+          <motion.h2 {...fadeInDown} className="font-heading text-3xl font-bold text-[#F0F4F4] mb-12 text-center">
             Why our members joined MacAI
-          </h2>
+          </motion.h2>
           <div className="grid md:grid-cols-3 gap-8">
             {SPOTLIGHT.map(({ quote, name }) => (
-              <blockquote
+              <motion.blockquote
                 key={quote.slice(0, 30)}
+                {...fadeInRight}
                 className="bg-[#0f0066]/60 rounded-xl p-8 border border-[#1CB1E3]/20 card-lift"
               >
                 <p className="text-[#F0F4F4] italic">"{quote}"</p>
                 <cite className="mt-4 block text-[#3DDFF5] not-italic">— {name}</cite>
-              </blockquote>
+              </motion.blockquote>
             ))}
           </div>
         </div>
@@ -149,12 +165,12 @@ export default function Home() {
       {/* 6) Get involved – quiz CTA + buttons */}
       <section className="py-16 md:py-24 bg-[#0f0066]/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-4 text-center">
+          <motion.h2 {...fadeInDown} className="font-heading text-3xl font-bold text-[#F0F4F4] mb-4 text-center">
             Get involved
-          </h2>
-          <p className="text-[#A7C2C3] text-center max-w-xl mx-auto mb-10">
+          </motion.h2>
+          <motion.p {...fadeInRight} className="text-[#A7C2C3] text-center max-w-xl mx-auto mb-10">
             Not sure where to start? Take a quick quiz to find the right path for you — projects, workshops, or mentoring.
-          </p>
+          </motion.p>
           <div className="flex justify-center mb-12">
             <Link to="/get-involved" className="btn-cta">
               Which MacAI pathway is right for you?
@@ -180,20 +196,21 @@ export default function Home() {
       {/* Sponsor strip – bottom of landing */}
       <section className="py-12 border-t border-[#1CB1E3]/20 bg-[#0f0066]/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-[#A7C2C3] text-sm mb-6">Supported by our partners</p>
+          <motion.p {...fadeInRight} className="text-center text-[#A7C2C3] text-sm mb-6">Supported by our partners</motion.p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
             {['Partner 1', 'Partner 2', 'Partner 3'].map((name) => (
-              <div
+              <motion.div
                 key={name}
+                {...fadeInRight}
                 className="w-24 h-12 bg-[#1CB1E3]/10 rounded-lg border border-[#1CB1E3]/20 flex items-center justify-center text-[#3DDFF5]/70 text-xs"
               >
                 {name}
-              </div>
+              </motion.div>
             ))}
           </div>
-          <p className="text-center mt-6">
+          <motion.p {...fadeInRight} className="text-center mt-6">
             <Link to="/partnerships" className="text-[#3DDFF5] hover:underline text-sm">View all sponsors</Link>
-          </p>
+          </motion.p>
         </div>
       </section>
     </div>
