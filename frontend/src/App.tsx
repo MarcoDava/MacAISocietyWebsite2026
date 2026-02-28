@@ -6,7 +6,6 @@ import Projects from './Pages/Projects';
 import Partnerships from './Pages/Partnerships';
 import Gallery from './Pages/Gallery';
 import Contact from './Pages/Contact';
-import GetInvolved from './Pages/GetInvolved';
 import PlaceholderLegal from './Pages/PlaceholderLegal';
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
           <Route path="partnerships" element={<Partnerships />} />
           <Route path="gallery" element={<Gallery />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="get-involved" element={<GetInvolved />} />
           <Route path="accessibility" element={<PlaceholderLegal title="Accessibility" />} />
           <Route path="privacy" element={<PlaceholderLegal title="Privacy Policy" />} />
           <Route path="terms" element={<PlaceholderLegal title="Terms of Service" />} />
