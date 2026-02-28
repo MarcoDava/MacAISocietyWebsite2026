@@ -52,7 +52,7 @@ export default function Projects() {
   return (
     <>
       {/* Hero */}
-      <section className="relative py-20 md:py-28 overflow-hidden">
+      <section className="relative py-30 md:py-38 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#1800AD] via-[#0f0066] to-[#1800AD]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_70%_30%,rgba(28,177,227,0.12),transparent)]" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -69,7 +69,7 @@ export default function Projects() {
       </section>
 
       {/* Filters & search */}
-      <section className="py-8 bg-[#0f0066]/50 sticky top-[4rem] z-40 border-b border-[#1CB1E3]/20">
+      <section className="py-8 bg-[#0f0066]/50 backdrop-blur-sm sticky top-[4rem] z-40 border-b border-[#1CB1E3]/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <input
             type="search"

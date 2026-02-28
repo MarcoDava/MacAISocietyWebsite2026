@@ -4,6 +4,7 @@ import CountUp from '../Components/CountUp';
 import { motion } from 'motion/react';
 import { Spotlight } from "../Components/ui/spotlight";
 import {EncryptedText} from "../Components/ui/encrypted-text";
+import { useState } from 'react';
  
 
 const STATS = [
@@ -27,6 +28,26 @@ const SPOTLIGHT = [
   { quote: 'MacAI feels like home. Everyone is here to grow together.', name: 'Member' },
 ];
 
+const QUIZ_QUESTIONS = [
+  { id: 'interest', q: 'What interests you most?', options: ['Building projects', 'Learning in workshops', 'Mentoring others', 'Competing at hackathons'] },
+  { id: 'time', q: 'How much time can you give?', options: ['A few hours per month', 'Regular weekly commitment', 'Intensive during events only'] },
+  { id: 'goal', q: "What's your main goal?", options: ['Land an internship or job', 'Learn AI from scratch', 'Meet people and network', 'Ship a portfolio project'] },
+];
+
+const PATHWAYS: Record<string, string> = {
+  projects: 'Join a project team and ship something real. Check out our Projects page and apply.',
+  workshops: 'Attend workshops and grow your skills. Keep an eye on events and our Discord.',
+  mentor: 'Share your experience as a mentor. Reach out to the team to get involved.',
+  hackathons: 'MacHacks 2026 is for you. Register and join us on March 21st.',
+};
+
+const partners = [
+  {name:'Partner 1',image:'https://dev.fairparkfc.com.au/wp-content/uploads/2024/04/sponsor-placeholder.jpg', link:'https://www.google.com'}, 
+  {name:'Partner 4',image:'https://dev.fairparkfc.com.au/wp-content/uploads/2024/04/sponsor-placeholder.jpg', link:'https://www.google.com'},
+  {name:'Partner 5',image:'https://dev.fairparkfc.com.au/wp-content/uploads/2024/04/sponsor-placeholder.jpg', link:'https://www.google.com'},
+  {name:'Partner 6',image:'https://dev.fairparkfc.com.au/wp-content/uploads/2024/04/sponsor-placeholder.jpg', link:'https://www.google.com'},
+  {name:'Partner 7',image:'https://dev.fairparkfc.com.au/wp-content/uploads/2024/04/sponsor-placeholder.jpg', link:'https://www.google.com'},
+];
 const fadeInRight = {
   initial: { opacity: 0, x: -24 },
   whileInView: { opacity: 1, x: 0 },
@@ -39,7 +60,32 @@ const fadeInDown = {
   viewport: { once: true, amount: 0.2 },
   transition: { duration: 1, delay: 0.2 },
 };
+const fadeIn = {
+  initial: { opacity: 0, y: 8 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 1, delay: 0.2 },
+};
 export default function Home() {
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [done, setDone] = useState(false);
+
+  const current = QUIZ_QUESTIONS[step];
+  const isLast = step === QUIZ_QUESTIONS.length - 1;
+
+  const handleNext = (value: string) => {
+    const next = { ...answers, [current.id]: value };
+    setAnswers(next);
+    if (isLast) {
+      const pathway = value.toLowerCase().includes('project') ? 'projects' : value.toLowerCase().includes('workshop') ? 'workshops' : value.toLowerCase().includes('mentor') ? 'mentor' : 'hackathons';
+      setAnswers((a) => ({ ...a, pathway }));
+      setDone(true);
+    } else {
+      setStep((s) => s + 1);
+    }
+  };
+  
   return (
     <div className="bg-[#1800AD] text-[#F0F4F4] pt-[7vh]">
       {/* 1) Hero – Hook (vision + energy) */}
@@ -164,18 +210,57 @@ export default function Home() {
 
       {/* 6) Get involved – quiz CTA + buttons */}
       <section className="py-16 md:py-24 bg-[#0f0066]/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2 {...fadeInDown} className="font-heading text-3xl font-bold text-[#F0F4F4] mb-4 text-center">
-            Get involved
-          </motion.h2>
-          <motion.p {...fadeInRight} className="text-[#A7C2C3] text-center max-w-xl mx-auto mb-10">
-            Not sure where to start? Take a quick quiz to find the right path for you — projects, workshops, or mentoring.
-          </motion.p>
-          <div className="flex justify-center mb-12">
-            <Link to="/get-involved" className="btn-cta">
-              Which MacAI pathway is right for you?
-            </Link>
-          </div>
+        <div className="max-w-7xl h-full mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="max-w-xl mx-auto px-4 py-20">
+            
+            {done ?
+            
+              <section className="max-w-2xl mx-auto px-4 py-20 text-center">
+                
+                <h1 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-4">Your MacAI pathway</h1>
+                <motion.p {...fadeIn} className="text-[#A7C2C3] mb-8">
+                  {PATHWAYS[answers.pathway ?? 'projects'] || PATHWAYS.projects}
+                </motion.p>
+                
+              </section>
+              
+              :
+              <div>
+                <h1 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-2">Which MacAI pathway is right for you?</h1>
+                <motion.p {...fadeIn} className="text-[#A7C2C3] mb-10">
+                  Answer a few quick questions.
+                </motion.p>
+                <motion.div
+                  {...fadeIn}
+                  className="bg-[#0f0066]/60 rounded-xl p-8 border border-[#1CB1E3]/20"
+                >
+                  <h2 className="font-heading text-xl text-[#3DDFF5] mb-6">
+                    {current.q}
+                  </h2>
+                    <ul className="space-y-3">
+                      {current.options.map((opt) => (
+                        <li key={opt}>
+                          <button
+                            type="button"
+                            onClick={() => handleNext(opt)}
+                            className="w-full text-left px-4 py-3 rounded-lg bg-[#1800AD]/60 border border-[#1CB1E3]/30 text-[#F0F4F4] hover:border-[#3DDFF5] hover:bg-[#1CB1E3]/10 transition-colors"
+                          >
+                            {opt}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                    <motion.p
+                      {...fadeIn}
+                      className="mt-6 text-[#A7C2C3] text-sm"
+                    >
+                      Question {step + 1} of {QUIZ_QUESTIONS.length}
+                    </motion.p>
+                  </motion.div>
+                </div>
+            }
+            </section>
+                    
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/contact" className="btn-secondary">
               Join the Society
@@ -198,14 +283,11 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.p {...fadeInRight} className="text-center text-[#A7C2C3] text-sm mb-6">Supported by our partners</motion.p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-            {['Partner 1', 'Partner 2', 'Partner 3'].map((name) => (
-              <motion.div
-                key={name}
-                {...fadeInRight}
-                className="w-24 h-12 bg-[#1CB1E3]/10 rounded-lg border border-[#1CB1E3]/20 flex items-center justify-center text-[#3DDFF5]/70 text-xs"
-              >
-                {name}
-              </motion.div>
+            {partners.map((name) => (
+              <a href={name.link} target="_blank" rel="noopener noreferrer">
+                <img src={name.image} alt={name.name} className="w-24 h-12 object-contain" />
+                {name.name}
+              </a>
             ))}
           </div>
           <motion.p {...fadeInRight} className="text-center mt-6">

@@ -17,7 +17,7 @@ export default function Header() {
   const location = useLocation();
 
   return (
-    <header className="w-full fixed top-0 z-50 bg-[#F0F4F4]/70 backdrop-blur-sm border-b border-[#1CB1E3]/70">
+    <header className="w-full fixed top-0 z-50 bg-[#F0F4F4]/60 backdrop-blur-sm border-b border-[#1CB1E3]/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <Link to="/" className="flex items-center gap-2 focus-ring rounded h-full" aria-label="MacAI Society home">
