@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
+import type {
+  DevpostProject,
+  DevpostProjectsPayload,
+} from '../types/devpost';
 
 type Project = {
   id: string;
   name: string;
-  year: number;
+  year: number | 'Unknown';
   domain: string;
   difficulty: string;
   description: string;
@@ -14,14 +18,6 @@ type Project = {
   link?: string;
   video?: string;
 };
-
-const PROJECTS: Project[] = [
-  { id: '1', name: 'HealthBot', year: 2025, domain: 'Health', difficulty: 'Intermediate', description: 'AI assistant for patient triage and symptom checking.', stack: ['Python', 'TensorFlow', 'NLP'], team: ['Team Alpha'] },
-  { id: '2', name: 'RoboNav', year: 2025, domain: 'Robotics', difficulty: 'Advanced', description: 'Autonomous navigation for indoor environments.', stack: ['ROS', 'Python', 'CV'], team: ['Team Beta'] },
-  { id: '3', name: 'DocSum', year: 2025, domain: 'NLP', difficulty: 'Beginner', description: 'Summarization and Q&A over long documents.', stack: ['Python', 'Transformers'], team: ['Team Gamma'] },
-  { id: '4', name: 'EduAssist', year: 2026, domain: 'NLP', difficulty: 'Intermediate', description: 'Personalized learning recommendations.', stack: ['PyTorch', 'Recommendation'], team: ['TBD'] },
-  { id: '5', name: 'VisionQA', year: 2026, domain: 'Vision', difficulty: 'Advanced', description: 'Visual question answering for accessibility.', stack: ['Vision-Language', 'PyTorch'], team: ['TBD'] },
-];
 
 const DOMAINS = ['All', 'Health', 'Robotics', 'NLP', 'Vision'];
 const DIFFICULTIES = ['All', 'Beginner', 'Intermediate', 'Advanced'];
@@ -41,7 +37,74 @@ export default function Projects() {
   const [search, setSearch] = useState('');
   const [modal, setModal] = useState<Project | null>(null);
 
-  const filtered = PROJECTS.filter((p) => {
+  const [devpostProjects, setDevpostProjects] = useState<DevpostProject[] | null>(null);
+  const [devpostLoading, setDevpostLoading] = useState(true);
+  const [devpostError, setDevpostError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadProjects() {
+      try {
+        setDevpostLoading(true);
+        setDevpostError(null);
+
+        const res = await fetch('/devpost-projects.json', {
+          headers: {
+            Accept: 'application/json',
+          },
+        });
+
+        if (!res.ok) {
+          throw new Error(`Failed to load projects (${res.status})`);
+        }
+
+        const data = (await res.json()) as DevpostProjectsPayload | DevpostProject[];
+        const loadedProjects = Array.isArray(data)
+          ? data
+          : Array.isArray((data as DevpostProjectsPayload).projects)
+            ? (data as DevpostProjectsPayload).projects
+            : [];
+
+        if (cancelled) return;
+
+        setDevpostProjects(loadedProjects);
+      } catch (error) {
+        if (cancelled) return;
+        setDevpostError('Devpost projects are temporarily unavailable.');
+        // eslint-disable-next-line no-console
+        console.error('Failed to load Devpost projects', error);
+      } finally {
+        if (!cancelled) {
+          setDevpostLoading(false);
+        }
+      }
+    }
+
+    void loadProjects();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const mappedProjects: Project[] = (devpostProjects ?? []).map((p) => {
+    const createdYear = p.createdAt ? new Date(p.createdAt).getFullYear() : 'Unknown';
+    return {
+      id: p.id,
+      name: p.name,
+      year: createdYear,
+      domain: p.eventName || 'Other',
+      difficulty: 'N/A',
+      description: p.tagline || p.description,
+      stack: p.technologies ?? [],
+      team: [],
+      link: p.devpostUrl,
+      video: undefined,
+    };
+  });
+
+  const filtered = mappedProjects.filter((p) => {
     if (domain !== 'All' && p.domain !== domain) return false;
     if (difficulty !== 'All' && p.difficulty !== difficulty) return false;
     if (year !== 'All' && p.year !== year) return false;
@@ -71,6 +134,16 @@ export default function Projects() {
       {/* Filters & search */}
       <section className="py-8 bg-[#0f0066]/50 backdrop-blur-sm sticky top-[4rem] z-40 border-b border-[#1CB1E3]/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {devpostLoading && (
+            <p className="text-[#A7C2C3] text-sm mb-2">
+              Loading Devpost projects...
+            </p>
+          )}
+          {devpostError && (
+            <p className="text-[#A7C2C3] text-sm mb-2">
+              {devpostError}
+            </p>
+          )}
           <input
             type="search"
             placeholder="Search projects..."
@@ -126,31 +199,64 @@ export default function Projects() {
       {/* Grid */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((project) => (
-              <button
-                key={project.id}
-                type="button"
-                onClick={() => setModal(project)}
-                className="text-left bg-[#0f0066]/60 rounded-xl overflow-hidden border border-[#1CB1E3]/20 card-lift"
-              >
-                <div className="aspect-video bg-[#1CB1E3]/10 flex items-center justify-center">
-                  <span className="text-[#3DDFF5]/50 text-sm">Thumbnail</span>
+          {devpostLoading ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="bg-[#1800AD]/40 rounded-xl p-6 border border-[#1CB1E3]/20 animate-pulse"
+                >
+                  <div className="aspect-video rounded-lg bg-[#1CB1E3]/10 mb-4" />
+                  <div className="h-5 w-2/3 bg-[#1CB1E3]/20 rounded mb-2" />
+                  <div className="h-4 w-full bg-[#1CB1E3]/10 rounded mb-1" />
+                  <div className="h-4 w-3/4 bg-[#1CB1E3]/10 rounded" />
                 </div>
-                <div className="p-6">
-                  <div className="flex gap-2 mb-2">
-                    <span className="px-2 py-0.5 rounded bg-[#1CB1E3]/20 text-[#3DDFF5] text-xs">{project.year}</span>
-                    <span className="px-2 py-0.5 rounded bg-[#1CB1E3]/20 text-[#A7C2C3] text-xs">{project.domain}</span>
+              ))}
+            </div>
+          ) : filtered.length === 0 ? (
+            <p className="text-center text-[#A7C2C3] py-12">
+              No Devpost projects match your filters.
+            </p>
+          ) : (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filtered.map((project) => (
+                <button
+                  key={project.id}
+                  type="button"
+                  onClick={() => setModal(project)}
+                  className="text-left bg-[#0f0066]/60 rounded-xl overflow-hidden border border-[#1CB1E3]/20 card-lift"
+                >
+                  <div className="aspect-video bg-[#1CB1E3]/10 flex items-center justify-center">
+                    <span className="text-[#3DDFF5]/50 text-sm">
+                      {project.domain || 'Devpost project'}
+                    </span>
                   </div>
-                  <h3 className="font-heading text-xl font-bold text-[#F0F4F4]">{project.name}</h3>
-                  <p className="mt-2 text-[#A7C2C3] text-sm line-clamp-2">{project.description}</p>
-                  <p className="mt-3 text-[#3DDFF5] text-xs">{project.stack.join(' · ')}</p>
-                </div>
-              </button>
-            ))}
-          </div>
-          {filtered.length === 0 && (
-            <p className="text-center text-[#A7C2C3] py-12">No projects match your filters.</p>
+                  <div className="p-6">
+                    <div className="flex gap-2 mb-2">
+                      {project.year !== 'Unknown' && (
+                        <span className="px-2 py-0.5 rounded bg-[#1CB1E3]/20 text-[#3DDFF5] text-xs">
+                          {project.year}
+                        </span>
+                      )}
+                      <span className="px-2 py-0.5 rounded bg-[#1CB1E3]/20 text-[#A7C2C3] text-xs">
+                        {project.domain}
+                      </span>
+                    </div>
+                    <h3 className="font-heading text-xl font-bold text-[#F0F4F4]">
+                      {project.name}
+                    </h3>
+                    <p className="mt-2 text-[#A7C2C3] text-sm line-clamp-2">
+                      {project.description}
+                    </p>
+                    {project.stack.length > 0 && (
+                      <p className="mt-3 text-[#3DDFF5] text-xs">
+                        {project.stack.join(' · ')}
+                      </p>
+                    )}
+                  </div>
+                </button>
+              ))}
+            </div>
           )}
 
           <div className="mt-16 text-center">
@@ -190,13 +296,25 @@ export default function Projects() {
                   ×
                 </button>
               </div>
-              <p className="mt-2 text-[#A7C2C3] text-sm">{modal.year} · {modal.domain} · {modal.difficulty}</p>
+              <p className="mt-2 text-[#A7C2C3] text-sm">
+                {modal.year !== 'Unknown' ? `${modal.year} · ` : ''}
+                {modal.domain}
+              </p>
               <p className="mt-4 text-[#F0F4F4]">{modal.description}</p>
-              <p className="mt-4 text-[#3DDFF5] text-sm">Stack: {modal.stack.join(', ')}</p>
-              <p className="mt-2 text-[#A7C2C3] text-sm">Team: {modal.team.join(', ')}</p>
-              {modal.video && <p className="mt-4 text-sm text-[#3DDFF5]">Video demo available</p>}
+              {modal.stack.length > 0 && (
+                <p className="mt-4 text-[#3DDFF5] text-sm">
+                  Stack: {modal.stack.join(', ')}
+                </p>
+              )}
               {modal.link && (
-                <a href={modal.link} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block text-[#3DDFF5] hover:underline">GitHub →</a>
+                <a
+                  href={modal.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-block text-[#3DDFF5] hover:underline"
+                >
+                  View on Devpost →
+                </a>
               )}
             </div>
           </div>
