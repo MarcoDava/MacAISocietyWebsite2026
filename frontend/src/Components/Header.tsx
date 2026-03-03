@@ -17,7 +17,7 @@ export default function Header() {
   const location = useLocation();
 
   return (
-    <header className="w-full fixed top-0 z-50 bg-[#F0F4F4]/60 backdrop-blur-sm border-b border-[#1CB1E3]/70">
+    <header className={`w-full fixed top-0 z-50 backdrop-blur-sm border-b ${menuOpen ? 'bg-[#F0F4F4]' : 'bg-[#F0F4F4]/60'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <Link to="/" className="flex items-center gap-2 focus-ring rounded h-full" aria-label="MacAI Society home">
@@ -49,7 +49,7 @@ export default function Header() {
             </Link>
             <button
               type="button"
-              className="md:hidden p-2 text-[#F0F4F4] rounded-lg hover:bg-white/10 focus-ring"
+              className="md:hidden p-2 text-black rounded-lg hover:bg-white/10 focus-ring"
               onClick={() => setMenuOpen((o) => !o)}
               aria-expanded={menuOpen}
               aria-label="Toggle menu"
@@ -65,34 +65,36 @@ export default function Header() {
           </div>
         </div>
 
-        {menuOpen && (
-          <nav className="md:hidden py-4 border-t border-[#1CB1E3]/20">
-            <ul className="space-y-1">
-              {NAV_LINKS.map(({ to, label }) => (
-                <li key={to}>
-                  <Link
-                    to={to}
-                    className={`block px-4 py-3 rounded-lg text-[#F0F4F4] ${
-                      location.pathname === to ? 'bg-[#1CB1E3]/20' : 'hover:bg-white/5'
-                    }`}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-              <li>
+        <nav
+          className={`md:hidden border-t border-[#1CB1E3]/20 overflow-hidden transition-all duration-300 ease-out ${
+            menuOpen ? 'h-screen opacity-100 py-4' : 'h-0 opacity-0 py-0'
+          }`}
+        >
+          <ul className="space-y-1">
+            {NAV_LINKS.map(({ to, label }) => (
+              <li key={to}>
                 <Link
-                  to="/machacks"
-                  className="block px-4 py-3 text-[#E00064] font-bold"
+                  to={to}
+                  className={`block px-4 py-3 rounded-lg text-[#1800AD]/70 md:text-[#F0F4F4] ${
+                    location.pathname === to ? 'bg-[#1CB1E3]/20' : 'hover:bg-white/5'
+                  }`}
                   onClick={() => setMenuOpen(false)}
                 >
-                  Register for MacHacks 2026
+                  {label}
                 </Link>
               </li>
-            </ul>
-          </nav>
-        )}
+            ))}
+            <li>
+              <Link
+                to="/machacks"
+                className="block px-4 py-3 text-[#E00064] font-bold"
+                onClick={() => setMenuOpen(false)}
+              >
+                Register for MacHacks 2026
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
     </header>
   );

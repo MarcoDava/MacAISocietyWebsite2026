@@ -2,10 +2,9 @@ import { Link } from 'react-router-dom';
 import Countdown from '../Components/Countdown';
 import CountUp from '../Components/CountUp';
 import { motion } from 'motion/react';
-import { Spotlight } from "../Components/ui/spotlight";
-import {EncryptedText} from "../Components/ui/encrypted-text";
+import { Spotlight } from '../Components/ui/spotlight';
+import { EncryptedText } from '../Components/ui/encrypted-text';
 import { useState } from 'react';
- 
 
 const STATS = [
   { value: -1, suffix: '+', label: 'Members' },
@@ -187,7 +186,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5) Member spotlight */}
+      {/* 6) Member spotlight */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 {...fadeInDown} className="font-heading text-3xl font-bold text-[#F0F4F4] mb-12 text-center">
@@ -208,7 +207,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6) Get involved – quiz CTA + buttons */}
+      {/* 7) Get involved – quiz CTA + buttons */}
       <section className="py-16 md:py-24 bg-[#0f0066]/80">
         <div className="max-w-7xl h-full mx-auto px-4 sm:px-6 lg:px-8">
         <section className="max-w-xl mx-auto px-4 py-20">
