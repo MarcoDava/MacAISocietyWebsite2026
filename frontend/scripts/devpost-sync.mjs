@@ -7,7 +7,6 @@ const DEVPOST_ORG_URL =
   process.env.DEVPOST_ORG_URL || 'https://YOUR-ORG.devpost.com';
 
 function log(message, ...args) {
-  // eslint-disable-next-line no-console
   console.log(`[devpost-sync] ${message}`, ...args);
 }
 

@@ -72,7 +72,6 @@ export default function Projects() {
       } catch (error) {
         if (cancelled) return;
         setDevpostError('Devpost projects are temporarily unavailable.');
-        // eslint-disable-next-line no-console
         console.error('Failed to load Devpost projects', error);
       } finally {
         if (!cancelled) {

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import { motion, useInView } from "motion/react";
 import { cn } from "@/lib/utils";
 
@@ -57,57 +57,63 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
 
+  // Initialize scramble chars lazily based on text and charset
+  const initialScramble = useMemo(
+    () => (text ? generateGibberishPreservingSpaces(text, charset).split("") : []),
+    [text, charset]
+  );
+
   const [revealCount, setRevealCount] = useState<number>(0);
+  const [scrambleChars, setScrambleChars] = useState<string[]>(initialScramble);
   const animationFrameRef = useRef<number | null>(null);
   const startTimeRef = useRef<number>(0);
   const lastFlipTimeRef = useRef<number>(0);
-  const scrambleCharsRef = useRef<string[]>(
-    text ? generateGibberishPreservingSpaces(text, charset).split("") : [],
-  );
 
   useEffect(() => {
     if (!isInView) return;
 
-    // Reset state for a fresh animation whenever dependencies change
-    const initial = text
-      ? generateGibberishPreservingSpaces(text, charset)
-      : "";
-    scrambleCharsRef.current = initial.split("");
+    // Reset refs for new animation
     startTimeRef.current = performance.now();
     lastFlipTimeRef.current = startTimeRef.current;
-    setRevealCount(0);
 
     let isCancelled = false;
+    let currentScramble = [...initialScramble];
+    let currentReveal = 0;
 
     const update = (now: number) => {
       if (isCancelled) return;
 
       const elapsedMs = now - startTimeRef.current;
       const totalLength = text.length;
-      const currentRevealCount = Math.min(
+      const newRevealCount = Math.min(
         totalLength,
         Math.floor(elapsedMs / Math.max(1, revealDelayMs)),
       );
 
-      setRevealCount(currentRevealCount);
+      if (newRevealCount !== currentReveal) {
+        currentReveal = newRevealCount;
+        setRevealCount(currentReveal);
+      }
 
-      if (currentRevealCount >= totalLength) {
+      if (currentReveal >= totalLength) {
         return;
       }
 
       // Re-randomize unrevealed scramble characters on an interval
       const timeSinceLastFlip = now - lastFlipTimeRef.current;
       if (timeSinceLastFlip >= Math.max(0, flipDelayMs)) {
+        const newScramble = [...currentScramble];
         for (let index = 0; index < totalLength; index += 1) {
-          if (index >= currentRevealCount) {
+          if (index >= currentReveal) {
             if (text[index] !== " ") {
-              scrambleCharsRef.current[index] =
-                generateRandomCharacter(charset);
+              newScramble[index] = generateRandomCharacter(charset);
             } else {
-              scrambleCharsRef.current[index] = " ";
+              newScramble[index] = " ";
             }
           }
         }
+        currentScramble = newScramble;
+        setScrambleChars(newScramble);
         lastFlipTimeRef.current = now;
       }
 
@@ -122,7 +128,7 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [isInView, text, revealDelayMs, charset, flipDelayMs]);
+  }, [isInView, text, revealDelayMs, charset, flipDelayMs, initialScramble]);
 
   if (!text) return null;
 
@@ -139,8 +145,7 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
           ? char
           : char === " "
             ? " "
-            : (scrambleCharsRef.current[index] ??
-              generateRandomCharacter(charset));
+            : (scrambleChars[index] ?? generateRandomCharacter(charset));
 
         return (
           <span
