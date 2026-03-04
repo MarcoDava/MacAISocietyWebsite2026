@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import logo from '../assets/logosmall.svg';
 
 const SOCIAL = [
   { label: 'Instagram', href: 'https://instagram.com', icon: 'instagram' },
@@ -26,7 +27,8 @@ export default function Footer() {
     <footer className="bg-[#0f0066] border-t border-[#1CB1E3]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          <div>
+          <div className="flex flex-col items-start justify-start">
+            <img src={logo} alt="MacAI Society Logo" className="h-[80px] mb-4" />
             <h3 className="font-[family-name:var(--font-heading)] font-bold text-lg text-[#F0F4F4] mb-4">
               McMaster AI Society
             </h3>

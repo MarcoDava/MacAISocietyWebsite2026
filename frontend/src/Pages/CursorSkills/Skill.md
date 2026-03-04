@@ -13,6 +13,8 @@ and colour specifications; do not warp, rotate or alter logo colours.
 #F0F4F4 and #E00064. Use these consistently across the site, with darker blues/purples 
 (#1800AD) and teals (#1CB1E3/#3DDFF5) for backgrounds and highlights and the pink/red 
 (#E00064) sparingly for calls‑to‑action. 
+
+
 • Typography – approved fonts are Montserrat (bold or regular for headings) and Roboto (book 
 or bold for body text). Ensure type sizes create clear hierarchy and maintain readability. 
 • Imagery & tone of voice – visuals should support MacAI’s narrative and feel trustworthy, 
