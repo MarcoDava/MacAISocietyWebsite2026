@@ -61,13 +61,13 @@ export const HeroParallax = ({
     springConfig
   );
   const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [-700, 500]),
+    useTransform(scrollYProgress, [0, 0.2], [-300, 500]),
     springConfig
   );
   return (
     <div
       ref={ref}
-      className="h-[300vh] py-40 overflow-hidden  antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
+      className="h-[320vh] md:h-[300vh] py-10 md:py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
     >
       {/* Fixed header - stays visible above parallax content */}
       <div className="opacity-100 relative z-10">
@@ -85,7 +85,7 @@ export const HeroParallax = ({
         className="relative z-0"
       >
         {/* Row 1: moves right on scroll */}
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20">
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-8 md:space-x-20 mb-8 md:mb-20">
           {firstRow.map((product) => (
             <ProductCard
               product={product}
@@ -95,7 +95,7 @@ export const HeroParallax = ({
           ))}
         </motion.div>
         {/* Row 2: moves left on scroll */}
-        <motion.div className="flex flex-row  mb-20 space-x-20 ">
+        <motion.div className="flex flex-row mb-8 md:mb-20 space-x-8 md:space-x-20">
           {secondRow.map((product) => (
             <ProductCard
               product={product}
@@ -105,7 +105,7 @@ export const HeroParallax = ({
           ))}
         </motion.div>
         {/* Row 3: moves right on scroll */}
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20">
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-8 md:space-x-20">
           {thirdRow.map((product) => (
             <ProductCard
               product={product}
@@ -154,7 +154,7 @@ export const ProductCard = ({
         y: -20, // Lift on hover
       }}
       key={product.title}
-      className="group/product h-96 w-[30rem] relative shrink-0"
+      className="group/product h-64 w-[18rem] md:h-96 md:w-[30rem] relative shrink-0"
     >
       <a
         href={product.link}
