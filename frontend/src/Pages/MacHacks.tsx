@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import Countdown from '../Components/Countdown';
+import { HeroParallax } from '../Components/HeroParallax';
 
 const SCHEDULE = [
   { time: '9:00 AM', title: 'Doors & check-in', category: 'General' },
@@ -15,10 +16,19 @@ const SCHEDULE = [
 ];
 
 const PAST_YEARS = [
-  { year: 2023, attendees: '200+', countries: '5', link: 'https://devpost.com' },
-  { year: 2022, attendees: '150+', countries: '4', link: 'https://devpost.com' },
-  { year: 2021, attendees: '100+', countries: '3', link: 'https://devpost.com' },
+  { year: 2023, attendees: '200+', countries: '5', link: 'https://devpost.com', thumbnail: "https://picsum.photos/seed/machacks2023/600/400" },
+  { year: 2022, attendees: '150+', countries: '4', link: 'https://devpost.com', thumbnail: "https://picsum.photos/seed/machacks2022/600/400" },
+  { year: 2021, attendees: '100+', countries: '3', link: 'https://devpost.com', thumbnail: "https://picsum.photos/seed/machacks2021/600/400" },
 ];
+
+const PARALLAX_PRODUCTS = Array.from({ length: 15}, (_, i) => {
+  const item = PAST_YEARS[i % PAST_YEARS.length];
+  return {
+    title: `MacHacks ${item.year}`,
+    link: item.link,
+    thumbnail: item.thumbnail,
+  };
+});
 
 const FAQ = [
   { q: 'Who can participate?', a: 'Any current university or high school student. Some tracks may have prerequisites.' },
@@ -127,27 +137,7 @@ export default function MacHacks() {
       </section>
 
       {/* Past MacHacks */}
-      <section className="py-16 md:py-24 bg-[#0f0066]/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-8">Past MacHacks</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {PAST_YEARS.map(({ year, attendees, countries, link }) => (
-              <motion.a
-                {...fadeIn}
-                key={year}
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block bg-[#1800AD]/60 rounded-xl p-6 border border-[#1CB1E3]/20 card-lift"
-              >
-                <h3 className="font-heading text-2xl font-bold text-[#3DDFF5]">MacHacks {year}</h3>
-                <p className="mt-2 text-[#A7C2C3] text-sm">{attendees} attendees · {countries} countries</p>
-                <span className="mt-4 inline-block text-[#3DDFF5] text-sm font-medium">View Devpost →</span>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
+      <HeroParallax products={PARALLAX_PRODUCTS} />
 
       {/* Sponsors CTA */}
       <section className="py-16 md:py-24">
