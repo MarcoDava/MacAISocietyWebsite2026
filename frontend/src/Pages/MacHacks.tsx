@@ -140,7 +140,7 @@ export default function MacHacks() {
       <HeroParallax products={PARALLAX_PRODUCTS} />
 
       {/* Sponsors CTA */}
-      <section className="py-16 md:py-24">
+      <section className="pb-16 md:pb-24 pt-4 md:pt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-4">Sponsors & partners</h2>
           <motion.p

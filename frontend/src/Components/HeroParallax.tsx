@@ -67,7 +67,7 @@ export const HeroParallax = ({
   return (
     <div
       ref={ref}
-      className="h-[320vh] md:h-[300vh] py-10 md:py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
+      className="h-[230vh] sm:h-[280vh] pt-10 sm:pt-40 pb-0 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
     >
       {/* Fixed header - stays visible above parallax content */}
       <div className="opacity-100 relative z-10">
@@ -85,7 +85,7 @@ export const HeroParallax = ({
         className="relative z-0"
       >
         {/* Row 1: moves right on scroll */}
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-8 md:space-x-20 mb-8 md:mb-20">
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-8 sm:space-x-20 mb-8 sm:mb-20">
           {firstRow.map((product) => (
             <ProductCard
               product={product}
@@ -95,7 +95,7 @@ export const HeroParallax = ({
           ))}
         </motion.div>
         {/* Row 2: moves left on scroll */}
-        <motion.div className="flex flex-row mb-8 md:mb-20 space-x-8 md:space-x-20">
+        <motion.div className="flex flex-row mb-8 sm:mb-20 space-x-8 sm:space-x-20">
           {secondRow.map((product) => (
             <ProductCard
               product={product}
@@ -105,7 +105,7 @@ export const HeroParallax = ({
           ))}
         </motion.div>
         {/* Row 3: moves right on scroll */}
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-8 md:space-x-20">
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-8 sm:space-x-20">
           {thirdRow.map((product) => (
             <ProductCard
               product={product}
@@ -122,11 +122,11 @@ export const HeroParallax = ({
 /** Header section with title and description for the Past MacHacks parallax hero */
 export const Header = () => {
   return (
-    <div className="max-w-7xl relative mx-auto pt-0 pb-6 md:pb-8 px-4 w-full left-0 top-0">
-      <h1 className="font-heading text-2xl md:text-7xl font-bold text-[#F0F4F4]">
+    <div className="max-w-7xl relative mx-auto pt-0 pb-6 sm:pb-8 px-4 w-full left-0 top-0">
+      <h1 className="font-heading text-2xl sm:text-7xl font-bold text-[#F0F4F4]">
         Past MacHacks
       </h1>
-      <p className="max-w-2xl text-base md:text-xl mt-8 text-[#A7C2C3]">
+      <p className="max-w-2xl text-base sm:text-xl mt-8 text-[#A7C2C3]">
         Years of innovation, collaboration, and community. Browse our past hackathons.
       </p>
     </div>
@@ -154,7 +154,7 @@ export const ProductCard = ({
         y: -20, // Lift on hover
       }}
       key={product.title}
-      className="group/product h-64 w-[18rem] md:h-96 md:w-[30rem] relative shrink-0"
+      className="group/product h-64 w-[18rem] sm:h-96 sm:w-[30rem] relative shrink-0"
     >
       <a
         href={product.link}
