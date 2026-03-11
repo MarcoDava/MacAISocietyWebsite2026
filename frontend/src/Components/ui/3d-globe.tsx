@@ -265,22 +265,21 @@ function RotatingGlobe({
 }: RotatingGlobeProps) {
   const groupRef = useRef<THREE.Group>(null);
 
-  // Load Earth textures
-  const [earthTexture, bumpTexture] = useTexture([
-    config.textureUrl,
-    config.bumpMapUrl,
-  ]);
-
-  // Configure textures
-  useMemo(() => {
-    if (earthTexture) {
-      earthTexture.colorSpace = THREE.SRGBColorSpace;
-      earthTexture.anisotropy = 16;
+  // Load Earth textures with configuration
+  const [earthTexture, bumpTexture] = useTexture(
+    [config.textureUrl, config.bumpMapUrl],
+    (textures) => {
+      // Configure textures on load
+      const [earth, bump] = Array.isArray(textures) ? textures : [textures];
+      if (earth) {
+        earth.colorSpace = THREE.SRGBColorSpace;
+        earth.anisotropy = 16;
+      }
+      if (bump) {
+        bump.anisotropy = 8;
+      }
     }
-    if (bumpTexture) {
-      bumpTexture.anisotropy = 8;
-    }
-  }, [earthTexture, bumpTexture]);
+  );
 
   // Create geometries
   const geometry = useMemo(() => {
