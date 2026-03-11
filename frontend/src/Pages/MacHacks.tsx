@@ -70,14 +70,19 @@ export default function MacHacks() {
             <Countdown />
           </div>
           <div className="mt-10">
-            <button type="button" className="btn-cta text-lg px-8 py-4">
-              Register for MacHacks 2026
-            </button>
+          <a
+            href="https://forms.office.com/pages/responsepage.aspx?id=B2M3RCm0rUKMJSjNSW9HctZcAZxBhpdCi9Jv6HOWXYVURU1TRFBES0kxWENQMTVDNzY1SzdaSUFYWS4u&route=shorturl"
+            className="btn-cta text-lg px-8 py-4"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Volunteer for MacHacks
+          </a>
             <motion.p
               {...fadeIn}
               className="mt-4 text-[#A7C2C3] text-sm"
             >
-              Registration opening soon. Sign up below for updates.
+              Registration is closed, but you can still be part of MacHacks by volunteering.
             </motion.p>
           </div>
         </div>
