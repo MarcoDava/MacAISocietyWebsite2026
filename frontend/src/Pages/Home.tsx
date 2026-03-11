@@ -5,6 +5,7 @@ import { motion } from 'motion/react';
 import { Spotlight } from '../Components/ui/spotlight';
 import { EncryptedText } from '../Components/ui/encrypted-text';
 import { useState } from 'react';
+import { CURRENT_PARTNERS } from '../data/partners';
 
 const STATS = [
   { value: -1, suffix: '+', label: 'Members' },
@@ -40,13 +41,6 @@ const PATHWAYS: Record<string, string> = {
   hackathons: 'MacHacks 2026 is for you. Register and join us on March 21st.',
 };
 
-const partners = [
-  {name:'Partner 1',image:'https://dev.fairparkfc.com.au/wp-content/uploads/2024/04/sponsor-placeholder.jpg', link:'https://www.google.com'}, 
-  {name:'Partner 4',image:'https://dev.fairparkfc.com.au/wp-content/uploads/2024/04/sponsor-placeholder.jpg', link:'https://www.google.com'},
-  {name:'Partner 5',image:'https://dev.fairparkfc.com.au/wp-content/uploads/2024/04/sponsor-placeholder.jpg', link:'https://www.google.com'},
-  {name:'Partner 6',image:'https://dev.fairparkfc.com.au/wp-content/uploads/2024/04/sponsor-placeholder.jpg', link:'https://www.google.com'},
-  {name:'Partner 7',image:'https://dev.fairparkfc.com.au/wp-content/uploads/2024/04/sponsor-placeholder.jpg', link:'https://www.google.com'},
-];
 const fadeInRight = {
   initial: { opacity: 0, x: -24 },
   whileInView: { opacity: 1, x: 0 },
@@ -282,10 +276,20 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.p {...fadeInRight} className="text-center text-[#A7C2C3] text-sm mb-6">Supported by our partners</motion.p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-            {partners.map((name) => (
-              <a href={name.link} target="_blank" rel="noopener noreferrer">
-                <img src={name.image} alt={name.name} className="w-24 h-12 object-contain" />
-                {name.name}
+            {CURRENT_PARTNERS.map((partner) => (
+              <a
+                key={partner.name}
+                href={partner.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center text-center text-xs text-[#A7C2C3]"
+              >
+                <img
+                  src={partner.logoUrl}
+                  alt={partner.name}
+                  className="w-24 h-12 object-contain"
+                />
+                <span className="mt-1">{partner.name}</span>
               </a>
             ))}
           </div>

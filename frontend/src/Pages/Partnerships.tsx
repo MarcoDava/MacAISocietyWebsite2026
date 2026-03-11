@@ -1,17 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-
-const NEW_SPONSORS = [
-  { name: 'Sponsor A', tier: 'Platinum' },
-  { name: 'Sponsor B', tier: 'Gold' },
-  { name: 'Sponsor C', tier: 'Silver' },
-];
-
-const PAST_SPONSORS = [
-  { name: 'Past Sponsor 1', year: 2024 },
-  { name: 'Past Sponsor 2', year: 2024 },
-  { name: 'Past Sponsor 3', year: 2023 },
-];
+import { CURRENT_PARTNERS, PAST_PARTNERS } from '../data/partners';
 
 const fadeIn = {
   initial: { opacity: 0, y: 8 },
@@ -51,7 +40,7 @@ export default function Partnerships() {
             We're proud to partner with organizations that share our mission. Their support fuels workshops, hackathons, and community events — and helps students gain real-world skills and connections.
           </motion.p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {NEW_SPONSORS.map(({ name, tier }) => (
+            {CURRENT_PARTNERS.map(({ name, tier }) => (
               <div
                 key={name}
                 className="bg-[#1800AD]/60 rounded-xl p-8 border border-[#1CB1E3]/20 flex flex-col items-center justify-center min-h-[160px] card-lift"
@@ -74,7 +63,7 @@ export default function Partnerships() {
           <div className="mb-12">
             <h3 className="font-heading text-xl text-[#3DDFF5] mb-6">2025–2026</h3>
             <div className="flex flex-wrap gap-8 items-center">
-              {NEW_SPONSORS.map(({ name }) => (
+              {CURRENT_PARTNERS.map(({ name }) => (
                 <div
                   key={name}
                   className="w-28 h-14 bg-[#1CB1E3]/10 rounded-lg border border-[#1CB1E3]/30 flex items-center justify-center text-[#A7C2C3] text-xs"
@@ -87,7 +76,7 @@ export default function Partnerships() {
           <div>
             <h3 className="font-heading text-xl text-[#A7C2C3] mb-6">Previous years</h3>
             <div className="flex flex-wrap gap-6 items-center">
-              {PAST_SPONSORS.map(({ name, year }) => (
+              {PAST_PARTNERS.map(({ name, year }) => (
                 <div
                   key={name + year}
                   className="w-24 h-12 bg-[#0f0066]/60 rounded-lg border border-[#1CB1E3]/20 flex items-center justify-center text-[#A7C2C3] text-xs"

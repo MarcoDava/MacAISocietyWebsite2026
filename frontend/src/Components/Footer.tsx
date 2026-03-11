@@ -4,7 +4,6 @@ import logo from '../assets/logosmall.svg';
 const SOCIAL = [
   { label: 'Instagram', href: 'https://instagram.com', icon: 'instagram' },
   { label: 'LinkedIn', href: 'https://linkedin.com', icon: 'linkedin' },
-  { label: 'X (Twitter)', href: 'https://x.com', icon: 'twitter' },
 ];
 
 const FOOTER_LINKS = [
