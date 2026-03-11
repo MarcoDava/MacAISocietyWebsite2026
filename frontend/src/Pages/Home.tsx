@@ -6,6 +6,49 @@ import { Spotlight } from '../Components/ui/spotlight';
 import { EncryptedText } from '../Components/ui/encrypted-text';
 import { useState } from 'react';
 import { CURRENT_PARTNERS } from '../data/partners';
+import { InfiniteMovingCards } from '../Components/ui/infinite-moving-cards';
+// Row 1 images
+import row1MicrosoftTeams from '../assets/Content/Row1/MicrosoftTeams-image (5).png';
+import row1Dsc02544 from '../assets/Content/Row1/DSC02544.jpg';
+import row1IntroToAi from '../assets/Content/Row1/Intro to AI Workshop (2).jpeg';
+import row1Dsc02547 from '../assets/Content/Row1/DSC02547.jpg';
+import row1Cucai2024 from '../assets/Content/Row1/cucai-2024-037_53567022162_o.jpg';
+
+// Row 2 images
+import row2Img3359 from '../assets/Content/Row2/IMG_3359_Fotor.jpg';
+import row2Cucai2024_040 from '../assets/Content/Row2/cucai-2024-040_53568077373_o.jpg';
+import row2Img4908 from '../assets/Content/Row2/IMG_4908.jpg';
+import row2Img4885 from '../assets/Content/Row2/IMG_4885.jpg';
+import row2Img3360 from '../assets/Content/Row2/IMG_3360_Fotor.jpg';
+
+// Row 3 images
+import row3IntroToAi1 from '../assets/Content/Row3/Intro to AI Workshop (1).jpeg';
+import row3Dsc02557 from '../assets/Content/Row3/DSC02557.jpg';
+import row3Dsc02554 from '../assets/Content/Row3/DSC02554.jpg';
+import row3Dsc02558 from '../assets/Content/Row3/DSC02558.jpg';
+
+const row1Images = [
+  { src: row1MicrosoftTeams, alt: 'MacAI online collaboration screenshot' },
+  { src: row1Dsc02544, alt: 'MacAI members collaborating at an event' },
+  { src: row1IntroToAi, alt: 'Intro to AI workshop' },
+  { src: row1Dsc02547, alt: 'MacAI workshop in session' },
+  { src: row1Cucai2024, alt: 'CUCAI 2024 event photo' },
+];
+
+const row2Images = [
+  { src: row2Img3359, alt: 'MacAI event group photo' },
+  { src: row2Cucai2024_040, alt: 'CUCAI 2024 on-stage moment' },
+  { src: row2Img4908, alt: 'Hackathon participants working together' },
+  { src: row2Img4885, alt: 'MacAI members at a workshop' },
+  { src: row2Img3360, alt: 'MacAI event networking' },
+];
+
+const row3Images = [
+  { src: row3IntroToAi1, alt: 'Intro to AI workshop – alternate angle' },
+  { src: row3Dsc02557, alt: 'MacAI members collaborating at another event' },
+  { src: row3Dsc02554, alt: 'MacAI hackathon team photo' },
+  { src: row3Dsc02558, alt: 'MacAI workshop in progress' },
+];
 
 const STATS = [
   { value: -1, suffix: '+', label: 'Members' },
@@ -16,10 +59,10 @@ const STATS = [
 ];
 
 const OFFERINGS = [
-  { title: 'Workshops', desc: 'Hands-on sessions on ML, NLP, computer vision, and more.' },
-  { title: 'Hackathons', desc: 'MacHacks and other events where you build and compete.' },
-  { title: 'Networking', desc: 'Connect with industry speakers and like-minded peers.' },
-  { title: 'Projects', desc: 'Join CUCAI and other real-world AI projects.' },
+  { imgsrc: row1MicrosoftTeams, title: 'Workshops', desc: 'Hands-on sessions on ML, NLP, computer vision, and more.' },
+  { imgsrc: row1Dsc02544, title: 'Hackathons', desc: 'MacHacks and other events where you build and compete.' },
+  { imgsrc: row1Dsc02547, title: 'Networking', desc: 'Connect with industry speakers and like-minded peers.' },
+  { imgsrc: row2Img4908, title: 'Projects', desc: 'Join CUCAI and other real-world AI projects.' },
 ];
 
 const SPOTLIGHT = [
@@ -80,7 +123,7 @@ export default function Home() {
   };
   
   return (
-    <div className="bg-[#1800AD] text-[#F0F4F4] pt-[7vh]">
+    <div className="bg-[#1800AD] text-[#F0F4F4]">
       {/* 1) Hero – Hook (vision + energy) */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#1800AD] via-[#0f0066] to-[#1800AD]" />
@@ -90,14 +133,14 @@ export default function Home() {
           className="-top-40 left-0 md:-top-20 md:left-20"
           fill="white"
           />
-          <div>
+          <div className="relative z-20">
             {/* <motion.h1 initial={{ opacity: 0, y: -10 }} animate={{ opacity: [0,0.40, 1], y: [-10, -4, 0] }} transition={{ duration: 0.5 }} className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F0F4F4] leading-tight">
               
               Building the Future of AI at McMaster.
             </motion.h1> */}
             <EncryptedText 
             text="Building the Future of AI at McMaster." 
-            className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F0F4F4] leading-tight" 
+            className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F0F4F4] leading-tight z-10" 
             revealDelayMs={20}
             charset="abcdefghijklmnopqrstuvwxyz"
             />
@@ -114,9 +157,44 @@ export default function Home() {
               </Link>
             </motion.div>
           </div>
-          <div className="hidden lg:block relative">
-            <div className="aspect-square rounded-2xl bg-[#1CB1E3]/10 border border-[#3DDFF5]/30 flex items-center justify-center">
-              <span className="text-[#3DDFF5]/50 text-sm">Visual / illustration placeholder</span>
+            <div className="aspect-square rounded-2xl flex flex-col items-center justify-center">
+              <div className="block relative z-10">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.8, delay: 0.15 }}
+              >
+                <InfiniteMovingCards
+                  items={row1Images}
+                  direction="right"
+                  speed="slow"
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+              >
+                <InfiniteMovingCards
+                  items={row2Images}
+                  direction="left"
+                  speed="slow"
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.8, delay: 1.3 }}
+              >
+                <InfiniteMovingCards
+                  items={row3Images}
+                  direction="right"
+                  speed="slow"
+                />
+              </motion.div>
             </div>
           </div>
         </div>
@@ -134,7 +212,7 @@ export default function Home() {
                 key={label}
                 {...fadeInRight}
                 whileHover={{  scale: 1.10, y: -5 , transition: { duration: 0.2 }}}
-                className="bg-[#1800AD]/60 rounded-xl p-6 text-center border border-[#1CB1E3]/20 hover:shadow-[0_6px_20px_#000000]/20"
+                className="bg-[#1800AD] rounded-[3vh] p-6 text-center border border-[#1CB1E3]/20 hover:shadow-[0_6px_20px_#000000]/20"
               >
                 <div className="font-heading text-3xl md:text-4xl font-bold text-[#3DDFF5]">
                   <CountUp end={value} suffix={suffix} />
@@ -147,26 +225,27 @@ export default function Home() {
       </section>
 
       {/* 3) What we offer */}
-      <section className="py-16 md:py-24 bg-[radial-gradient(ellipse_80%_50%_at_70%_30%,rgba(28,177,227,0.15),transparent)]">
+      <motion.section {...fadeInRight} className="text-black py-16 md:py-24 bg-[#F0F4F4] rounded-[5vh]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2 {...fadeInRight} className="font-heading text-3xl font-bold text-[#F0F4F4] mb-4">What we offer</motion.h2>
-          <motion.p {...fadeInRight} className="text-[#A7C2C3] max-w-2xl mb-12">
+          <motion.h2 {...fadeInRight} className="font-heading text-3xl font-bold mb-4">What we offer</motion.h2>
+          <motion.p {...fadeInRight} className="max-w-2xl mb-12">
             From workshops and hackathons to networking and real-world projects, MacAI gives you the tools and community to grow in AI. Whether you're just starting or already building, there's a place for you.
           </motion.p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {OFFERINGS.map(({ title, desc }) => (
+            {OFFERINGS.map(({ imgsrc,   title, desc }) => (
               <motion.div
                 key={title}
                 {...fadeInRight}
-                className="bg-[#0f0066]/60 rounded-xl p-6 border border-[#1CB1E3]/20 card-lift"
+                className="bg-[#1800AD] rounded-[3vh] p-6 border border-[#1CB1E3]/20 card-lift"
               >
+                <img src={imgsrc} alt={title} className="w-full h-48 object-cover rounded-xl mb-4" />
                 <h3 className="font-heading text-xl font-bold text-[#3DDFF5]">{title}</h3>
                 <p className="mt-2 text-[#A7C2C3] text-sm">{desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 4) Upcoming events + countdown */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-[#1CB1E3]/10 to-transparent">
@@ -202,7 +281,7 @@ export default function Home() {
       </section>
 
       {/* 7) Get involved – quiz CTA + buttons */}
-      <section className="py-16 md:py-24 bg-[#0f0066]/80">
+      <section className="py-16 md:py-24 bg-[#F0F4F4] rounded-[5vh]">
         <div className="max-w-7xl h-full mx-auto px-4 sm:px-6 lg:px-8">
         <section className="max-w-xl mx-auto px-4 py-20">
             
@@ -210,8 +289,8 @@ export default function Home() {
             
               <section className="max-w-2xl mx-auto px-4 py-20 text-center">
                 
-                <h1 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-4">Your MacAI pathway</h1>
-                <motion.p {...fadeIn} className="text-[#A7C2C3] mb-8">
+                <h1 className="text-3xl font-bold text-[#1800AD] mb-4">Your MacAI pathway</h1>
+                <motion.p {...fadeIn} className="text-[#1800AD]/70 mb-8">
                   {PATHWAYS[answers.pathway ?? 'projects'] || PATHWAYS.projects}
                 </motion.p>
                 
@@ -219,8 +298,10 @@ export default function Home() {
               
               :
               <div>
-                <h1 className="font-heading text-3xl font-bold text-[#F0F4F4] mb-2">Which MacAI pathway is right for you?</h1>
-                <motion.p {...fadeIn} className="text-[#A7C2C3] mb-10">
+                <h1 className="font-heading text-3xl font-bold text-[#1800AD] mb-2">
+                  Which MacAI pathway is right for you?
+                </h1>
+                <motion.p {...fadeIn} className="text-[#1800AD]/50 mb-10">
                   Answer a few quick questions.
                 </motion.p>
                 <motion.div
@@ -255,16 +336,20 @@ export default function Home() {
             </section>
                     
           <div className="flex flex-wrap justify-center gap-4">
-            <Link to="/contact" className="btn-secondary">
+            <Link to="/contact"   className="font-heading font-bold text-[#1800AD] border-2 border-[#1800AD] px-6 py-3 rounded-md hover:bg-[#1800AD]/5 transition-colors">
               Join the Society
             </Link>
             <Link to="/machacks" className="btn-cta">
               Explore MacHacks 2026
             </Link>
-            <Link to="/contact" className="btn-secondary">
+            <Link to="/contact" className="font-heading font-bold text-[#1800AD] border-2 border-[#1800AD] px-6 py-3 rounded-md hover:bg-[#1800AD]/5 transition-colors"
+            >
               Get Involved
             </Link>
-            <Link to="/partnerships" className="btn-secondary">
+            <Link
+              to="/partnerships"
+              className="font-heading font-bold text-[#1800AD] border-2 border-[#1800AD] px-6 py-3 rounded-md hover:bg-[#1800AD]/5 transition-colors"
+            >
               Partner With Us
             </Link>
           </div>

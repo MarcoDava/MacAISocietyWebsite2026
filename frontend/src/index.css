@@ -243,3 +243,18 @@ html {
     transform: translate(-50%, -40%) scale(1);
   }
 }
+
+/* Infinite moving cards – horizontal scroll animation */
+@keyframes infinite-scroll-x {
+  to {
+    transform: translateX(calc(-50% - 0.5rem));
+  }
+}
+
+.animate-scroll {
+  animation-name: infinite-scroll-x;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: var(--animation-duration, 40s);
+  animation-direction: var(--animation-direction, forwards);
+}
