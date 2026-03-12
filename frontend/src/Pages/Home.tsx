@@ -17,8 +17,8 @@ import row1Cucai2024 from '../assets/Content/Row1/cucai-2024-037_53567022162_o.j
 // Row 2 images
 import row2Img3359 from '../assets/Content/Row2/IMG_3359_Fotor.jpg';
 import row2Cucai2024_040 from '../assets/Content/Row2/cucai-2024-040_53568077373_o.jpg';
-import row2Img4908 from '../assets/Content/Row2/IMG_4908.jpg';
-import row2Img4885 from '../assets/Content/Row2/IMG_4885.jpg';
+import row2Img4886 from '../assets/Content/Row2/IMG_4886.JPG';
+import row2Img4887 from '../assets/Content/Row2/IMG_4887.JPG';
 import row2Img3360 from '../assets/Content/Row2/IMG_3360_Fotor.jpg';
 
 // Row 3 images
@@ -38,8 +38,8 @@ const row1Images = [
 const row2Images = [
   { src: row2Img3359, alt: 'MacAI event group photo' },
   { src: row2Cucai2024_040, alt: 'CUCAI 2024 on-stage moment' },
-  { src: row2Img4908, alt: 'Hackathon participants working together' },
-  { src: row2Img4885, alt: 'MacAI members at a workshop' },
+  { src: row2Img4886, alt: 'MacAI members at a workshop' },
+  { src: row2Img4887, alt: 'MacAI event photo' },
   { src: row2Img3360, alt: 'MacAI event networking' },
 ];
 
@@ -62,7 +62,7 @@ const OFFERINGS = [
   { imgsrc: row1MicrosoftTeams, title: 'Workshops', desc: 'Hands-on sessions on ML, NLP, computer vision, and more.' },
   { imgsrc: row1Dsc02544, title: 'Hackathons', desc: 'MacHacks and other events where you build and compete.' },
   { imgsrc: row1Dsc02547, title: 'Networking', desc: 'Connect with industry speakers and like-minded peers.' },
-  { imgsrc: row2Img4908, title: 'Projects', desc: 'Join CUCAI and other real-world AI projects.' },
+  { imgsrc: row2Img4886, title: 'Projects', desc: 'Join CUCAI and other real-world AI projects.' },
 ];
 
 const SPOTLIGHT = [
