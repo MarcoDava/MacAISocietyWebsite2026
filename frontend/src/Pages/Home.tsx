@@ -125,7 +125,7 @@ export default function Home() {
   return (
     <div className="bg-[#1800AD] text-[#F0F4F4]">
       {/* 1) Hero – Hook (vision + energy) */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+      <section className="relative h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#1800AD] via-[#0f0066] to-[#1800AD]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_70%_30%,rgba(28,177,227,0.15),transparent)]" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid lg:grid-cols-2 gap-12 items-center">
@@ -133,7 +133,7 @@ export default function Home() {
           className="-top-40 left-0 md:-top-20 md:left-20"
           fill="white"
           />
-          <div className="relative z-20">
+          <div className="relative z-20 max-w-xl">
             {/* <motion.h1 initial={{ opacity: 0, y: -10 }} animate={{ opacity: [0,0.40, 1], y: [-10, -4, 0] }} transition={{ duration: 0.5 }} className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F0F4F4] leading-tight">
               
               Building the Future of AI at McMaster.
@@ -157,19 +157,16 @@ export default function Home() {
               </Link>
             </motion.div>
           </div>
-            <div className="aspect-square rounded-2xl flex flex-col items-center justify-center">
-              <div className="block relative z-10">
+          {/* Hero carousel – desktop beside text */}
+          <div className="hidden md:flex aspect-square rounded-2xl flex-col items-center justify-center">
+            <div className="block relative z-10">
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.8, delay: 0.15 }}
               >
-                <InfiniteMovingCards
-                  items={row1Images}
-                  direction="right"
-                  speed="slow"
-                />
+                <InfiniteMovingCards items={row1Images} direction="right" speed="slow" />
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
@@ -177,11 +174,7 @@ export default function Home() {
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
-                <InfiniteMovingCards
-                  items={row2Images}
-                  direction="left"
-                  speed="slow"
-                />
+                <InfiniteMovingCards items={row2Images} direction="left" speed="slow" />
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
@@ -189,13 +182,31 @@ export default function Home() {
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.8, delay: 1.3 }}
               >
-                <InfiniteMovingCards
-                  items={row3Images}
-                  direction="right"
-                  speed="slow"
-                />
+                <InfiniteMovingCards items={row3Images} direction="right" speed="slow" />
               </motion.div>
             </div>
+          </div>
+        </div>
+
+        {/* Mobile hero background carousel behind text */}
+        <div className="h-screen pointer-events-none absolute inset-x-0 top-18 md:hidden opacity-30">
+          <div className="max-w-xl mx-auto">
+            <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ duration: 0.8, delay: 0.8 }}
+                >
+              <InfiniteMovingCards items={row1Images} direction="right" speed="slow" />
+            </motion.div>
+            <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.8, delay: 1.3 }}
+              >
+              <InfiniteMovingCards items={row2Images} direction="left" speed="slow" />
+            </motion.div>
           </div>
         </div>
       </section>
