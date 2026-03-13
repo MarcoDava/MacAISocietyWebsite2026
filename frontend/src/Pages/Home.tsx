@@ -225,7 +225,7 @@ export default function Home() {
       </section>
 
       {/* 3) What we offer */}
-      <motion.section {...fadeInRight} className="text-black py-16 md:py-24 bg-[#F0F4F4] rounded-[5vh]">
+      <motion.section {...fadeInRight} className="text-black py-16 md:py-50 bg-[#F0F4F4] rounded-[5vh]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 {...fadeInRight} className="font-heading text-3xl font-bold mb-4">What we offer</motion.h2>
           <motion.p {...fadeInRight} className="max-w-2xl mb-12">
@@ -306,7 +306,7 @@ export default function Home() {
                 </motion.p>
                 <motion.div
                   {...fadeIn}
-                  className="bg-[#0f0066]/60 rounded-xl p-8 border border-[#1CB1E3]/20"
+                  className="bg-[#1800AD]/60 rounded-xl p-8 border border-[#1CB1E3]/20"
                 >
                   <h2 className="font-heading text-xl text-[#3DDFF5] mb-6">
                     {current.q}

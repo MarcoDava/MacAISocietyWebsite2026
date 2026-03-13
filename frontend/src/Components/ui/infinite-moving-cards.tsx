@@ -84,18 +84,24 @@ export const InfiniteMovingCards = ({
           pauseOnHover && "hover:[animation-play-state:paused]",
         )}
       >
-        {items.map((src, idx) => (
-          <li
-            key={idx}
-            className="relative h-[200px] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-transparent flex items-center justify-center"
-          >
-            <img
-              src={src.src}
-              alt={src.alt}
-              className="h-full w-full object-cover"
-            />
-          </li>
-        ))}
+        {items.map((item, idx) => {
+          const isPriority = idx < 2; // First 2 images load immediately
+          return (
+            <li
+              key={idx}
+              className="relative h-[200px] w-[320px] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-transparent flex items-center justify-center md:w-[420px]"
+            >
+              <img
+                src={item.src}
+                alt={item.alt}
+                className="h-full w-full object-cover"
+                loading={isPriority ? 'eager' : 'lazy'}
+                decoding="async"
+                fetchPriority={isPriority ? 'high' : undefined}
+              />
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
