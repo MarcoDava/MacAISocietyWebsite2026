@@ -7,6 +7,7 @@ import { EncryptedText } from '../Components/ui/encrypted-text';
 import { useState } from 'react';
 import { CURRENT_PARTNERS } from '../data/partners';
 import { InfiniteMovingCards } from '../Components/ui/infinite-moving-cards';
+import TestimonialCarousel from '../Components/TestimonialCarousel';
 // Row 1 images
 import row1MicrosoftTeams from '../assets/Content/Row1/MicrosoftTeams-image (5).png';
 import row1Dsc02544 from '../assets/Content/Row1/DSC02544.jpg';
@@ -121,8 +122,7 @@ export default function Home() {
       setStep((s) => s + 1);
     }
   };
-  
-  return (
+    return (
     <div className="bg-[#1800AD] text-[#F0F4F4]">
       {/* 1) Hero – Hook (vision + energy) */}
       <section className="relative h-screen flex items-center overflow-hidden">
@@ -134,10 +134,6 @@ export default function Home() {
           fill="white"
           />
           <div className="relative z-20 max-w-xl">
-            {/* <motion.h1 initial={{ opacity: 0, y: -10 }} animate={{ opacity: [0,0.40, 1], y: [-10, -4, 0] }} transition={{ duration: 0.5 }} className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F0F4F4] leading-tight">
-              
-              Building the Future of AI at McMaster.
-            </motion.h1> */}
             <EncryptedText 
             text="Building the Future of AI at McMaster." 
             className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F0F4F4] leading-tight z-10" 
@@ -147,7 +143,7 @@ export default function Home() {
             <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.40, 1], x: [-60, -5, 0] }} transition={{ duration: 2, delay: 0.2 }} className="mt-6 text-xl text-[#A7C2C3] max-w-xl">
               Canada's next generation of AI innovators, creators, and problem-solvers starts here.
             </motion.p>
-            <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.20, 1], x: [-60, -10, 0] }} transition={{ duration: 2, delay: 0.2 }} className="mt-4 text-[#3DDFF5] font-medium">TBD</motion.p>
+            <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.20, 1], x: [-60, -10, 0] }} transition={{ duration: 2, delay: 0.2 }} className="mt-4 text-[#3DDFF5] font-medium">Empowering the McMaster community through AI education and collaboration.</motion.p>
             <motion.div initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.10, 1], x: [-60, -20, 0] }} transition={{ duration: 2, delay: 0.2 }} className="mt-10 flex flex-wrap gap-4">
               <Link to="/contact" className="btn-cta">
                 Join the Society
@@ -157,7 +153,6 @@ export default function Home() {
               </Link>
             </motion.div>
           </div>
-          {/* Hero carousel – desktop beside text */}
           <div className="hidden md:flex aspect-square rounded-2xl flex-col items-center justify-center">
             <div className="block relative z-10">
               <motion.div
@@ -188,7 +183,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mobile hero background carousel behind text */}
         <div className="h-screen pointer-events-none absolute inset-x-0 top-18 md:hidden opacity-30">
           <div className="max-w-xl mx-auto">
             <motion.div
@@ -211,187 +205,169 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2) Social proof */}
-      <section className="py-16 md:py-24 bg-[#0f0066]/80">
+      {/* 2) What we offer – Immediate Value */}
+      <motion.section {...fadeInRight} className="text-black py-24 md:py-32 bg-[#F0F4F4] rounded-b-[5vh] relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2 {...fadeInDown} className="font-heading text-3xl font-bold text-center text-[#F0F4F4] mb-12">
-            Our community in numbers
-          </motion.h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 ">
-            {STATS.map(({ value, suffix, label }) => (
-              <motion.div
-                key={label}
-                {...fadeInRight}
-                whileHover={{  scale: 1.10, y: -5 , transition: { duration: 0.2 }}}
-                className="bg-[#1800AD] rounded-[3vh] p-6 text-center border border-[#1CB1E3]/20 hover:shadow-[0_6px_20px_#000000]/20"
-              >
-                <div className="font-heading text-3xl md:text-4xl font-bold text-[#3DDFF5]">
-                  <CountUp end={value} suffix={suffix} />
-                </div>
-                <div className="mt-1 text-[#A7C2C3] text-sm">{label}</div>
-              </motion.div>
-            ))}
+          <div className="text-center mb-16">
+            <motion.h2 {...fadeInDown} className="font-heading text-4xl font-bold mb-4">Elevate your AI journey</motion.h2>
+            <motion.p {...fadeIn} className="max-w-2xl mx-auto text-lg text-black/70">
+              MacAI provides a comprehensive ecosystem for learners and builders alike. From foundational knowledge to real-world deployment, we've got you covered.
+            </motion.p>
           </div>
-        </div>
-      </section>
-
-      {/* 3) What we offer */}
-      <motion.section {...fadeInRight} className="text-black py-16 md:py-50 bg-[#F0F4F4] rounded-[5vh]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2 {...fadeInRight} className="font-heading text-3xl font-bold mb-4">What we offer</motion.h2>
-          <motion.p {...fadeInRight} className="max-w-2xl mb-12">
-            From workshops and hackathons to networking and real-world projects, MacAI gives you the tools and community to grow in AI. Whether you're just starting or already building, there's a place for you.
-          </motion.p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {OFFERINGS.map(({ imgsrc,   title, desc }) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {OFFERINGS.map(({ imgsrc, title, desc }) => (
               <motion.div
                 key={title}
                 {...fadeInRight}
-                className="bg-[#1800AD] rounded-[3vh] p-6 border border-[#1CB1E3]/20 card-lift"
+                className="bg-white rounded-3xl p-6 border border-black/5 shadow-sm hover:shadow-xl transition-all duration-300 group"
               >
-                <img src={imgsrc} alt={title} className="w-full h-48 object-cover rounded-xl mb-4" />
-                <h3 className="font-heading text-xl font-bold text-[#3DDFF5]">{title}</h3>
-                <p className="mt-2 text-[#A7C2C3] text-sm">{desc}</p>
+                <div className="overflow-hidden rounded-2xl mb-6">
+                  <img src={imgsrc} alt={title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <h3 className="font-heading text-2xl font-bold text-[#1800AD] mb-3">{title}</h3>
+                <p className="text-black/60 leading-relaxed">{desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </motion.section>
 
-      {/* 4) Upcoming events + countdown */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-[#1CB1E3]/10 to-transparent">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h2 {...fadeInDown} className="font-heading text-3xl font-bold text-[#F0F4F4] mb-4">MacHacks 2026</motion.h2>
-          <motion.p {...fadeInRight} className="text-[#A7C2C3] mb-8">March 21st, 2026 — Our flagship hackathon. Build, learn, compete.</motion.p>
-          <Countdown />
-          <Link to="/machacks" className="btn-cta inline-block mt-10">
-            Sign up for the Hackathon
-          </Link>
-        </div>
-      </section>
-
-      {/* 6) Member spotlight */}
-      <section className="py-16 md:py-24">
+      {/* 3) Social proof — Condensed & Modern */}
+      <section className="py-24 md:py-32 bg-[#0f0066]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2 {...fadeInDown} className="font-heading text-3xl font-bold text-[#F0F4F4] mb-12 text-center">
-            Why our members joined MacAI
-          </motion.h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {SPOTLIGHT.map(({ quote, name }) => (
-              <motion.blockquote
-                key={quote.slice(0, 30)}
-                {...fadeInRight}
-                className="bg-[#0f0066]/60 rounded-xl p-8 border border-[#1CB1E3]/20 card-lift"
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+            {STATS.map(({ value, suffix, label }) => (
+              <motion.div
+                key={label}
+                {...fadeIn}
+                className="text-center group"
               >
-                <p className="text-[#F0F4F4] italic">"{quote}"</p>
-                <cite className="mt-4 block text-[#3DDFF5] not-italic">— {name}</cite>
-              </motion.blockquote>
+                <div className="font-heading text-4xl md:text-5xl font-bold text-[#3DDFF5] mb-2 group-hover:scale-110 transition-transform">
+                  <CountUp end={value} suffix={suffix} />
+                </div>
+                <div className="text-macai-sage font-medium tracking-wide uppercase text-xs">{label}</div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 7) Get involved – quiz CTA + buttons */}
-      <section className="py-16 md:py-24 bg-[#F0F4F4] rounded-[5vh]">
-        <div className="max-w-7xl h-full mx-auto px-4 sm:px-6 lg:px-8">
-        <section className="max-w-xl mx-auto px-4 py-20">
-            
-            {done ?
-            
-              <section className="max-w-2xl mx-auto px-4 py-20 text-center">
-                
-                <h1 className="text-3xl font-bold text-[#1800AD] mb-4">Your MacAI pathway</h1>
-                <motion.p {...fadeIn} className="text-[#1800AD]/70 mb-8">
-                  {PATHWAYS[answers.pathway ?? 'projects'] || PATHWAYS.projects}
-                </motion.p>
-                
-              </section>
-              
-              :
-              <div>
-                <h1 className="font-heading text-3xl font-bold text-[#1800AD] mb-2">
-                  Which MacAI pathway is right for you?
-                </h1>
-                <motion.p {...fadeIn} className="text-[#1800AD]/50 mb-10">
-                  Answer a few quick questions.
-                </motion.p>
-                <motion.div
-                  {...fadeIn}
-                  className="bg-[#1800AD]/60 rounded-xl p-8 border border-[#1CB1E3]/20"
-                >
-                  <h2 className="font-heading text-xl text-[#3DDFF5] mb-6">
-                    {current.q}
-                  </h2>
-                    <ul className="space-y-3">
-                      {current.options.map((opt) => (
-                        <li key={opt}>
-                          <button
-                            type="button"
-                            onClick={() => handleNext(opt)}
-                            className="w-full text-left px-4 py-3 rounded-lg bg-[#1800AD]/60 border border-[#1CB1E3]/30 text-[#F0F4F4] hover:border-[#3DDFF5] hover:bg-[#1CB1E3]/10 transition-colors"
-                          >
-                            {opt}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                    <motion.p
-                      {...fadeIn}
-                      className="mt-6 text-[#A7C2C3] text-sm"
-                    >
-                      Question {step + 1} of {QUIZ_QUESTIONS.length}
-                    </motion.p>
-                  </motion.div>
+      {/* 4) Testimonials — The Human Element */}
+      <section className="py-24 md:py-32 bg-gradient-to-b from-[#0f0066] to-[#1800AD]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <motion.h2 {...fadeInDown} className="font-heading text-3xl font-bold text-[#F0F4F4]">
+              Stories from our community
+            </motion.h2>
+          </div>
+          <TestimonialCarousel items={SPOTLIGHT} />
+        </div>
+      </section>
+
+      {/* 5) MacHacks — The Big Event */}
+      <section className="py-24 md:py-32 pb-36 md:pb-70 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[#1CB1E3]/5 pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <motion.div {...fadeInDown}>
+            <span className="inline-block px-4 py-1.5 rounded-full bg-[#1CB1E3]/20 text-[#3DDFF5] text-sm font-bold tracking-wider uppercase mb-6">
+              Coming Soon
+            </span>
+            <h2 className="font-heading text-5xl md:text-6xl font-bold text-[#F0F4F4] mb-6">MacHacks 2026</h2>
+            <p className="text-xl text-macai-sage mb-12 max-w-2xl mx-auto">
+              Our flagship hackathon returns on March 21st. Join hundreds of students to build, learn, and compete for $10k+ in prizes.
+            </p>
+          </motion.div>
+          <Countdown />
+          <motion.div {...fadeIn} className="mt-16">
+            <Link to="/machacks" className="btn-cta text-lg px-10 py-4">
+              Reserve Your Spot
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 6) Pathway Quiz — Discovery & Interaction */}
+      <section className="py-24 md:py-32 bg-[#F0F4F4] text-black rounded-t-[5vh]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto">
+            {done ? (
+              <motion.div {...fadeIn} className="text-center py-12">
+                <span className="text-[#1800AD] font-bold tracking-widest uppercase text-sm mb-4 block">Result</span>
+                <h2 className="text-4xl font-bold text-[#1800AD] mb-6">Your MacAI Pathway</h2>
+                <div className="bg-white p-8 rounded-3xl shadow-xl border border-[#1800AD]/10">
+                  <p className="text-xl text-[#1800AD]/80 leading-relaxed italic">
+                    {PATHWAYS[answers.pathway ?? 'projects'] || PATHWAYS.projects}
+                  </p>
                 </div>
-            }
-            </section>
-                    
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link to="/contact"   className="font-heading font-bold text-[#1800AD] border-2 border-[#1800AD] px-6 py-3 rounded-md hover:bg-[#1800AD]/5 transition-colors">
+                <button onClick={() => setDone(false)} className="mt-10 text-[#1800AD] font-bold hover:underline">Take it again</button>
+              </motion.div>
+            ) : (
+              <div className="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                  <h2 className="font-heading text-4xl font-bold text-[#1800AD] mb-6">
+                    Find your place in the society
+                  </h2>
+                  <p className="text-black/60 text-lg mb-8">
+                    Not sure where to start? Tell us a bit about your goals and we'll point you to the perfect pathway.
+                  </p>
+                </div>
+                <motion.div {...fadeIn} className="bg-white rounded-3xl p-8 shadow-2xl border border-black/5">
+                  <div className="mb-6 flex justify-between items-center text-xs font-bold uppercase tracking-widest text-black/40">
+                    <span>Question {step + 1} of {QUIZ_QUESTIONS.length}</span>
+                    <div className="w-24 h-1.5 bg-black/5 rounded-full overflow-hidden">
+                      <div className="h-full bg-[#1800AD]" style={{ width: `${((step + 1) / QUIZ_QUESTIONS.length) * 100}%` }} />
+                    </div>
+                  </div>
+                  <h3 className="font-heading text-2xl text-[#1800AD] mb-8">{current.q}</h3>
+                  <div className="space-y-3">
+                    {current.options.map((opt) => (
+                      <button
+                        key={opt}
+                        type="button"
+                        onClick={() => handleNext(opt)}
+                        className="w-full text-left px-6 py-4 rounded-xl border-2 border-black/5 hover:border-[#1800AD] hover:bg-[#1800AD]/5 transition-all group relative overflow-hidden"
+                      >
+                        <span className="relative z-10 font-bold text-black/80 group-hover:text-[#1800AD]">{opt}</span>
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
+            )}
+          </div>
+          
+          <div className="mt-24 pt-16 border-t border-black/5 flex flex-wrap justify-center gap-6">
+            <Link to="/contact" className="font-heading font-bold text-[#1800AD] border-2 border-[#1800AD] px-8 py-4 rounded-xl hover:bg-[#1800AD] hover:text-white transition-all">
               Join the Society
             </Link>
-            <Link to="/machacks" className="btn-cta">
+            <Link to="/machacks" className="btn-cta text-lg px-8 py-4 rounded-xl">
               Explore MacHacks 2026
-            </Link>
-            <Link to="/contact" className="font-heading font-bold text-[#1800AD] border-2 border-[#1800AD] px-6 py-3 rounded-md hover:bg-[#1800AD]/5 transition-colors"
-            >
-              Get Involved
-            </Link>
-            <Link
-              to="/partnerships"
-              className="font-heading font-bold text-[#1800AD] border-2 border-[#1800AD] px-6 py-3 rounded-md hover:bg-[#1800AD]/5 transition-colors"
-            >
-              Partner With Us
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Sponsor strip – bottom of landing */}
-      <section className="py-12 border-t border-[#1CB1E3]/20 bg-[#0f0066]/80">
+      {/* 7) Sponsors – Professional Finale */}
+      <section className="py-20 border-t border-[#1CB1E3]/20 bg-[#0f0066]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.p {...fadeInRight} className="text-center text-[#A7C2C3] text-sm mb-6">Supported by our partners</motion.p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+          <motion.p {...fadeIn} className="text-center text-macai-sage font-bold tracking-widest uppercase text-xs mb-10">Supported by our partners</motion.p>
+          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20">
             {CURRENT_PARTNERS.map((partner) => (
-              <a
+              <motion.a
+                whileHover={{ scale: 1.05 }}
                 key={partner.name}
                 href={partner.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center text-center text-xs text-[#A7C2C3]"
+                className="flex flex-col items-center opacity-60 hover:opacity-100 transition-opacity"
               >
-                <img
-                  src={partner.logoUrl}
-                  alt={partner.name}
-                  className="w-24 h-12 object-contain"
-                />
-                <span className="mt-1">{partner.name}</span>
-              </a>
+                <img src={partner.logoUrl} alt={partner.name} className="w-32 h-16 object-contain filter grayscale invert brightness-200" />
+              </motion.a>
             ))}
           </div>
-          <motion.p {...fadeInRight} className="text-center mt-6">
-            <Link to="/partnerships" className="text-[#3DDFF5] hover:underline text-sm">View all sponsors</Link>
-          </motion.p>
+          <div className="text-center mt-12">
+            <Link to="/partnerships" className="text-[#3DDFF5] font-bold hover:underline tracking-wide uppercase text-xs">Become a Partner</Link>
+          </div>
         </div>
       </section>
     </div>

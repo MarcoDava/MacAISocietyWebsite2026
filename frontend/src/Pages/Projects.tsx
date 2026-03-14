@@ -1,27 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import type {
-  DevpostProject,
-  DevpostProjectsPayload,
-} from '../types/devpost';
-
-type Project = {
-  id: string;
-  name: string;
-  year: number | 'Unknown';
-  domain: string;
-  difficulty: string;
-  description: string;
-  stack: string[];
-  team: string[];
-  link?: string;
-  video?: string;
-};
-
-const DOMAINS = ['All', 'Health', 'Robotics', 'NLP', 'Vision'];
-const DIFFICULTIES = ['All', 'Beginner', 'Intermediate', 'Advanced'];
-const YEARS = ['All', 2026, 2025];
+import type { GitHubProject, GitHubProjectsPayload } from '../types/github';
 
 const fadeIn = {
   initial: { opacity: 0, y: 8 },
@@ -31,83 +11,48 @@ const fadeIn = {
 };
 
 export default function Projects() {
-  const [domain, setDomain] = useState('All');
-  const [difficulty, setDifficulty] = useState('All');
-  const [year, setYear] = useState<string | number>('All');
-  const [search, setSearch] = useState('');
-  const [modal, setModal] = useState<Project | null>(null);
+  const [projects, setProjects] = useState<GitHubProject[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const [devpostProjects, setDevpostProjects] = useState<DevpostProject[] | null>(null);
-  const [devpostLoading, setDevpostLoading] = useState(true);
-  const [devpostError, setDevpostError] = useState<string | null>(null);
+  const [langFilter, setLangFilter] = useState('All');
+  const [yearFilter, setYearFilter] = useState<string | number>('All');
+  const [search, setSearch] = useState('');
+  const [modal, setModal] = useState<GitHubProject | null>(null);
 
   useEffect(() => {
     let cancelled = false;
 
-    async function loadProjects() {
+    async function load() {
       try {
-        setDevpostLoading(true);
-        setDevpostError(null);
-
-        const res = await fetch('/devpost-projects.json', {
-          headers: {
-            Accept: 'application/json',
-          },
-        });
-
-        if (!res.ok) {
-          throw new Error(`Failed to load projects (${res.status})`);
-        }
-
-        const data = (await res.json()) as DevpostProjectsPayload | DevpostProject[];
-        const loadedProjects = Array.isArray(data)
-          ? data
-          : Array.isArray((data as DevpostProjectsPayload).projects)
-            ? (data as DevpostProjectsPayload).projects
-            : [];
-
-        if (cancelled) return;
-
-        setDevpostProjects(loadedProjects);
-      } catch (error) {
-        if (cancelled) return;
-        setDevpostError('Devpost projects are temporarily unavailable.');
-        console.error('Failed to load Devpost projects', error);
+        setLoading(true);
+        const res = await fetch('/github-projects.json');
+        if (!res.ok) throw new Error(`Failed to load (${res.status})`);
+        const data = (await res.json()) as GitHubProjectsPayload;
+        if (!cancelled) setProjects(data.projects ?? []);
+      } catch (err) {
+        if (!cancelled) setError('Projects are temporarily unavailable.');
+        console.error(err);
       } finally {
-        if (!cancelled) {
-          setDevpostLoading(false);
-        }
+        if (!cancelled) setLoading(false);
       }
     }
 
-    void loadProjects();
-
-    return () => {
-      cancelled = true;
-    };
+    void load();
+    return () => { cancelled = true; };
   }, []);
 
-  const mappedProjects: Project[] = (devpostProjects ?? []).map((p) => {
-    const createdYear = p.createdAt ? new Date(p.createdAt).getFullYear() : 'Unknown';
-    return {
-      id: p.id,
-      name: p.name,
-      year: createdYear,
-      domain: p.eventName || 'Other',
-      difficulty: 'N/A',
-      description: p.tagline || p.description,
-      stack: p.technologies ?? [],
-      team: [],
-      link: p.devpostUrl,
-      video: undefined,
-    };
-  });
+  // Derive filter options from data
+  const languages = ['All', ...Array.from(new Set(projects.map((p) => p.language))).sort()];
+  const years = ['All', ...Array.from(new Set(projects.map((p) => p.year))).sort((a, b) => Number(b) - Number(a))];
 
-  const filtered = mappedProjects.filter((p) => {
-    if (domain !== 'All' && p.domain !== domain) return false;
-    if (difficulty !== 'All' && p.difficulty !== difficulty) return false;
-    if (year !== 'All' && p.year !== year) return false;
-    if (search && !p.name.toLowerCase().includes(search.toLowerCase()) && !p.description.toLowerCase().includes(search.toLowerCase())) return false;
+  const filtered = projects.filter((p) => {
+    if (langFilter !== 'All' && p.language !== langFilter) return false;
+    if (yearFilter !== 'All' && p.year !== yearFilter) return false;
+    if (search) {
+      const q = search.toLowerCase();
+      if (!p.name.toLowerCase().includes(q) && !p.description.toLowerCase().includes(q)) return false;
+    }
     return true;
   });
 
@@ -125,7 +70,7 @@ export default function Projects() {
             {...fadeIn}
             className="mt-4 text-xl text-[#A7C2C3] max-w-2xl"
           >
-            CUCAI 2025 and 2026 — real AI projects by MacAI members. Browse by year, domain, or difficulty.
+            Real AI projects built by MacAI members — straight from our GitHub organization.
           </motion.p>
         </div>
       </section>
@@ -133,15 +78,11 @@ export default function Projects() {
       {/* Filters & search */}
       <section className="py-8 bg-[#0f0066]/50 backdrop-blur-sm sticky top-[4rem] z-40 border-b border-[#1CB1E3]/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {devpostLoading && (
-            <p className="text-[#A7C2C3] text-sm mb-2">
-              Loading Devpost projects...
-            </p>
+          {loading && (
+            <p className="text-[#A7C2C3] text-sm mb-2">Loading projects…</p>
           )}
-          {devpostError && (
-            <p className="text-[#A7C2C3] text-sm mb-2">
-              {devpostError}
-            </p>
+          {error && (
+            <p className="text-[#A7C2C3] text-sm mb-2">{error}</p>
           )}
           <input
             type="search"
@@ -153,42 +94,29 @@ export default function Projects() {
           />
           <div className="flex flex-wrap gap-3">
             <span className="text-[#A7C2C3] text-sm mr-2">Year:</span>
-            {YEARS.map((y) => (
+            {years.map((y) => (
               <button
                 key={y}
                 type="button"
-                onClick={() => setYear(y)}
+                onClick={() => setYearFilter(y)}
                 className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                  year === y ? 'bg-[#3DDFF5] text-[#1800AD]' : 'bg-[#1CB1E3]/20 text-[#A7C2C3] hover:text-[#F0F4F4]'
+                  yearFilter === y ? 'bg-[#3DDFF5] text-[#1800AD]' : 'bg-[#1CB1E3]/20 text-[#A7C2C3] hover:text-[#F0F4F4]'
                 }`}
               >
                 {y}
               </button>
             ))}
-            <span className="text-[#A7C2C3] text-sm mx-2">Domain:</span>
-            {DOMAINS.map((d) => (
+            <span className="text-[#A7C2C3] text-sm mx-2">Language:</span>
+            {languages.map((l) => (
               <button
-                key={d}
+                key={l}
                 type="button"
-                onClick={() => setDomain(d)}
+                onClick={() => setLangFilter(l)}
                 className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                  domain === d ? 'bg-[#3DDFF5] text-[#1800AD]' : 'bg-[#1CB1E3]/20 text-[#A7C2C3] hover:text-[#F0F4F4]'
+                  langFilter === l ? 'bg-[#3DDFF5] text-[#1800AD]' : 'bg-[#1CB1E3]/20 text-[#A7C2C3] hover:text-[#F0F4F4]'
                 }`}
               >
-                {d}
-              </button>
-            ))}
-            <span className="text-[#A7C2C3] text-sm mx-2">Difficulty:</span>
-            {DIFFICULTIES.map((d) => (
-              <button
-                key={d}
-                type="button"
-                onClick={() => setDifficulty(d)}
-                className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                  difficulty === d ? 'bg-[#3DDFF5] text-[#1800AD]' : 'bg-[#1CB1E3]/20 text-[#A7C2C3] hover:text-[#F0F4F4]'
-                }`}
-              >
-                {d}
+                {l}
               </button>
             ))}
           </div>
@@ -198,7 +126,7 @@ export default function Projects() {
       {/* Grid */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {devpostLoading ? (
+          {loading ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {Array.from({ length: 6 }).map((_, index) => (
                 <div
@@ -214,7 +142,7 @@ export default function Projects() {
             </div>
           ) : filtered.length === 0 ? (
             <p className="text-center text-[#A7C2C3] py-12">
-              No Devpost projects match your filters.
+              No projects match your filters.
             </p>
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -227,19 +155,22 @@ export default function Projects() {
                 >
                   <div className="aspect-video bg-[#1CB1E3]/10 flex items-center justify-center">
                     <span className="text-[#3DDFF5]/50 text-sm">
-                      {project.domain || 'Devpost project'}
+                      {project.language}
                     </span>
                   </div>
                   <div className="p-6">
-                    <div className="flex gap-2 mb-2">
-                      {project.year !== 'Unknown' && (
-                        <span className="px-2 py-0.5 rounded bg-[#1CB1E3]/20 text-[#3DDFF5] text-xs">
-                          {project.year}
+                    <div className="flex gap-2 mb-2 flex-wrap">
+                      <span className="px-2 py-0.5 rounded bg-[#1CB1E3]/20 text-[#3DDFF5] text-xs">
+                        {project.year}
+                      </span>
+                      <span className="px-2 py-0.5 rounded bg-[#1CB1E3]/20 text-[#A7C2C3] text-xs">
+                        {project.language}
+                      </span>
+                      {project.stars > 0 && (
+                        <span className="px-2 py-0.5 rounded bg-[#1CB1E3]/20 text-[#A7C2C3] text-xs">
+                          ⭐ {project.stars}
                         </span>
                       )}
-                      <span className="px-2 py-0.5 rounded bg-[#1CB1E3]/20 text-[#A7C2C3] text-xs">
-                        {project.domain}
-                      </span>
                     </div>
                     <h3 className="font-heading text-xl font-bold text-[#F0F4F4]">
                       {project.name}
@@ -247,9 +178,9 @@ export default function Projects() {
                     <p className="mt-2 text-[#A7C2C3] text-sm line-clamp-2">
                       {project.description}
                     </p>
-                    {project.stack.length > 0 && (
+                    {project.topics.length > 0 && (
                       <p className="mt-3 text-[#3DDFF5] text-xs">
-                        {project.stack.join(' · ')}
+                        {project.topics.join(' · ')}
                       </p>
                     )}
                   </div>
@@ -296,25 +227,38 @@ export default function Projects() {
                 </button>
               </div>
               <p className="mt-2 text-[#A7C2C3] text-sm">
-                {modal.year !== 'Unknown' ? `${modal.year} · ` : ''}
-                {modal.domain}
+                {modal.year} · {modal.language}
+                {modal.stars > 0 ? ` · ⭐ ${modal.stars}` : ''}
+                {modal.forks > 0 ? ` · 🍴 ${modal.forks}` : ''}
               </p>
               <p className="mt-4 text-[#F0F4F4]">{modal.description}</p>
-              {modal.stack.length > 0 && (
-                <p className="mt-4 text-[#3DDFF5] text-sm">
-                  Stack: {modal.stack.join(', ')}
-                </p>
+              {modal.topics.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {modal.topics.map((t) => (
+                    <span key={t} className="px-2 py-1 rounded bg-[#1CB1E3]/20 text-[#3DDFF5] text-xs">{t}</span>
+                  ))}
+                </div>
               )}
-              {modal.link && (
+              <div className="mt-6 flex gap-4">
                 <a
-                  href={modal.link}
+                  href={modal.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 inline-block text-[#3DDFF5] hover:underline"
+                  className="text-[#3DDFF5] hover:underline font-bold"
                 >
-                  View on Devpost →
+                  View on GitHub →
                 </a>
-              )}
+                {modal.homepage && (
+                  <a
+                    href={modal.homepage}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#A7C2C3] hover:underline"
+                  >
+                    Live Demo →
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </div>

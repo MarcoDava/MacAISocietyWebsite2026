@@ -8,7 +8,10 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "sync:devpost": "node ./scripts/devpost-sync.mjs"
+    "sync:devpost": "node ./scripts/devpost-sync.mjs",
+    "sync:github": "node ./scripts/github-sync.mjs",
+    "sync:gallery": "node ./scripts/gallery-sync.mjs",
+    "sync:all": "node ./scripts/github-sync.mjs && node ./scripts/gallery-sync.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

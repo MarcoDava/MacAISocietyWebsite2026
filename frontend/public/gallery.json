@@ -1,0 +1,66 @@
+{
+  "syncedAt": "2026-03-14T18:37:47.453Z",
+  "count": 6,
+  "images": [
+    {
+      "id": "1",
+      "src": "",
+      "thumb": "",
+      "caption": "Students collaborating at a workshop.",
+      "event": "Workshops",
+      "year": 2025,
+      "width": 800,
+      "height": 600
+    },
+    {
+      "id": "2",
+      "src": "",
+      "thumb": "",
+      "caption": "MacHacks 2023 — team presenting their project.",
+      "event": "MacHacks",
+      "year": 2023,
+      "width": 800,
+      "height": 600
+    },
+    {
+      "id": "3",
+      "src": "",
+      "thumb": "",
+      "caption": "CUCAI 2025 project showcase.",
+      "event": "CUCAI",
+      "year": 2025,
+      "width": 800,
+      "height": 600
+    },
+    {
+      "id": "4",
+      "src": "",
+      "thumb": "",
+      "caption": "Keynote and networking at MacHacks.",
+      "event": "MacHacks",
+      "year": 2023,
+      "width": 800,
+      "height": 600
+    },
+    {
+      "id": "5",
+      "src": "",
+      "thumb": "",
+      "caption": "Hands-on coding session.",
+      "event": "Workshops",
+      "year": 2025,
+      "width": 800,
+      "height": 600
+    },
+    {
+      "id": "6",
+      "src": "",
+      "thumb": "",
+      "caption": "Award ceremony and celebration.",
+      "event": "MacHacks",
+      "year": 2023,
+      "width": 800,
+      "height": 600
+    }
+  ]
+}

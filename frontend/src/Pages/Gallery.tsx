@@ -1,25 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 
-type GalleryItem = {
+type GalleryImage = {
   id: string;
   src: string;
+  thumb: string;
   caption: string;
   event: string;
   year: number;
+  width: number;
+  height: number;
 };
 
-const PLACEHOLDERS: GalleryItem[] = [
-  { id: '1', src: '', caption: 'Students collaborating at a workshop.', event: 'Workshops', year: 2025 },
-  { id: '2', src: '', caption: 'MacHacks 2023 — team presenting their project.', event: 'MacHacks 2023', year: 2023 },
-  { id: '3', src: '', caption: 'CUCAI 2025 project showcase.', event: 'CUCAI 2025', year: 2025 },
-  { id: '4', src: '', caption: 'Keynote and networking at MacHacks.', event: 'MacHacks 2023', year: 2023 },
-  { id: '5', src: '', caption: 'Hands-on coding session.', event: 'Workshops', year: 2025 },
-  { id: '6', src: '', caption: 'Award ceremony and celebration.', event: 'MacHacks 2023', year: 2023 },
-];
-
-const EVENTS = ['All', 'Workshops', 'MacHacks 2023', 'CUCAI 2025'];
-const YEARS = ['All', 2025, 2023];
+type GalleryPayload = {
+  syncedAt: string;
+  count: number;
+  images: GalleryImage[];
+};
 
 const fadeIn = {
   initial: { opacity: 0, y: 8 },
@@ -29,11 +26,37 @@ const fadeIn = {
 };
 
 export default function Gallery() {
+  const [images, setImages] = useState<GalleryImage[]>([]);
+  const [loading, setLoading] = useState(true);
   const [eventFilter, setEventFilter] = useState('All');
   const [yearFilter, setYearFilter] = useState<string | number>('All');
-  const [selected, setSelected] = useState<GalleryItem | null>(null);
+  const [selected, setSelected] = useState<GalleryImage | null>(null);
 
-  const filtered = PLACEHOLDERS.filter((p) => {
+  useEffect(() => {
+    let cancelled = false;
+
+    async function load() {
+      try {
+        const res = await fetch('/gallery.json');
+        if (!res.ok) throw new Error(`Failed to load gallery (${res.status})`);
+        const data = (await res.json()) as GalleryPayload;
+        if (!cancelled) setImages(data.images ?? []);
+      } catch (err) {
+        console.error('Failed to load gallery:', err);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+
+    void load();
+    return () => { cancelled = true; };
+  }, []);
+
+  // Derive filter options from data
+  const events = ['All', ...Array.from(new Set(images.map((i) => i.event))).sort()];
+  const years = ['All', ...Array.from(new Set(images.map((i) => i.year))).sort((a, b) => Number(b) - Number(a))];
+
+  const filtered = images.filter((p) => {
     if (eventFilter !== 'All' && p.event !== eventFilter) return false;
     if (yearFilter !== 'All' && p.year !== yearFilter) return false;
     return true;
@@ -61,7 +84,7 @@ export default function Gallery() {
       {/* Filters */}
       <section className="py-6 bg-[#0f0066]/50 border-b border-[#1CB1E3]/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap gap-3">
-          {EVENTS.map((e) => (
+          {events.map((e) => (
             <button
               key={e}
               type="button"
@@ -74,7 +97,7 @@ export default function Gallery() {
             </button>
           ))}
           <span className="text-[#A7C2C3] mx-2">Year:</span>
-          {YEARS.map((y) => (
+          {years.map((y) => (
             <button
               key={y}
               type="button"
@@ -89,28 +112,50 @@ export default function Gallery() {
         </div>
       </section>
 
-      {/* Mosaic grid – mixed aspect ratios */}
+      {/* Mosaic grid */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-            {filtered.map((item, i) => (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => setSelected(item)}
-                className={`rounded-xl overflow-hidden border border-[#1CB1E3]/20 bg-[#1CB1E3]/10 focus:outline-none focus:ring-2 focus:ring-[#3DDFF5] transition-transform hover:scale-[1.02] ${
-                  i % 3 === 0 ? 'col-span-2 md:col-span-1' : ''
-                } ${i % 5 === 2 ? 'md:row-span-2' : ''}`}
-              >
-                <div className={`bg-[#1800AD]/40 flex items-center justify-center text-[#3DDFF5]/50 text-sm ${i % 5 === 2 ? 'aspect-[4/5]' : 'aspect-[4/3]'}`}>
-                  Photo
-                </div>
-                <div className="p-3 text-left">
-                  <p className="text-[#A7C2C3] text-xs">{item.event} · {item.year}</p>
-                </div>
-              </button>
-            ))}
-          </div>
+          {loading ? (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="rounded-xl bg-[#1CB1E3]/10 border border-[#1CB1E3]/20 animate-pulse aspect-[4/3]"
+                />
+              ))}
+            </div>
+          ) : filtered.length === 0 ? (
+            <p className="text-center text-[#A7C2C3] py-12">No photos match your filters.</p>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+              {filtered.map((item, i) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setSelected(item)}
+                  className={`rounded-xl overflow-hidden border border-[#1CB1E3]/20 bg-[#1CB1E3]/10 focus:outline-none focus:ring-2 focus:ring-[#3DDFF5] transition-transform hover:scale-[1.02] ${
+                    i % 3 === 0 ? 'col-span-2 md:col-span-1' : ''
+                  } ${i % 5 === 2 ? 'md:row-span-2' : ''}`}
+                >
+                  {item.src ? (
+                    <img
+                      src={item.thumb || item.src}
+                      alt={item.caption || `${item.event} photo`}
+                      className={`w-full object-cover ${i % 5 === 2 ? 'aspect-[4/5]' : 'aspect-[4/3]'}`}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className={`bg-[#1800AD]/40 flex items-center justify-center text-[#3DDFF5]/50 text-sm ${i % 5 === 2 ? 'aspect-[4/5]' : 'aspect-[4/3]'}`}>
+                      Photo
+                    </div>
+                  )}
+                  <div className="p-3 text-left">
+                    <p className="text-[#A7C2C3] text-xs">{item.event} · {item.year}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -139,9 +184,17 @@ export default function Gallery() {
             className="bg-[#0f0066] rounded-2xl max-w-lg w-full overflow-hidden border border-[#1CB1E3]/30 shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="aspect-video bg-[#1800AD]/40 flex items-center justify-center text-[#3DDFF5]/50">
-              Image
-            </div>
+            {selected.src ? (
+              <img
+                src={selected.src}
+                alt={selected.caption || `${selected.event} photo`}
+                className="w-full aspect-video object-cover"
+              />
+            ) : (
+              <div className="aspect-video bg-[#1800AD]/40 flex items-center justify-center text-[#3DDFF5]/50">
+                Image
+              </div>
+            )}
             <div className="p-6">
               <motion.p
                 {...fadeIn}

@@ -29,7 +29,7 @@ export default function Header() {
               <Link
                 key={to}
                 to={to}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-3 py-2 rounded-lg text-base font-bold transition-colors ${
                   location.pathname === to
                     ? 'text-[#1800AD] bg-[#1CB1E3]/10'
                     : 'text-[#1800AD]/70 hover:text-[#1800AD] hover:bg-[#A7C2C3]/20'
@@ -75,7 +75,7 @@ export default function Header() {
               <li key={to}>
                 <Link
                   to={to}
-                  className={`block px-4 py-3 rounded-lg text-[#1800AD]/70 md:text-[#F0F4F4] ${
+                  className={`block px-4 py-3 rounded-lg text-[#1800AD]/70 font-bold md:text-[#F0F4F4] ${
                     location.pathname === to ? 'bg-[#1CB1E3]/20' : 'hover:bg-white/5'
                   }`}
                   onClick={() => setMenuOpen(false)}
