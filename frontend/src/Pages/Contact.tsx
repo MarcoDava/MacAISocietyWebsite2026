@@ -20,11 +20,35 @@ export default function Contact() {
     transition: { duration: 1, delay: 0.2 },
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!valid) return;
     setSubmitStatus('sending');
-    setTimeout(() => setSubmitStatus('done'), 800);
+    const formId = import.meta.env.VITE_FORMSPREE_FORM_ID;
+    if (!formId) {
+      setSubmitStatus('error');
+      return;
+    }
+    try {
+      const res = await fetch(`https://formspree.io/f/${formId}`, {
+        method: 'POST',
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          message: form.message.trim(),
+        }),
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      });
+      if (res.ok) {
+        setSubmitStatus('done');
+        setForm({ name: '', email: '', message: '' });
+        setTouched({});
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch {
+      setSubmitStatus('error');
+    }
   };
 
   return (
