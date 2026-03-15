@@ -20,11 +20,43 @@ export default function Contact() {
     transition: { duration: 1, delay: 0.2 },
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  // Replace YOUR_FORM_ID with your Formspree form ID (e.g. "xpzvqkdn")
+  const FORMSPREE_ID = 'xbdzagdr';
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!valid) return;
     setSubmitStatus('sending');
-    setTimeout(() => setSubmitStatus('done'), 800);
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
+      });
+
+      if (res.ok) {
+        setSubmitStatus('done');
+        setForm({ name: '', email: '', message: '' });
+        setTouched({});
+      } else {
+        fallbackMailTo();
+        setSubmitStatus('error');
+      }
+    } catch {
+      fallbackMailTo();
+      setSubmitStatus('error');
+    }
+  };
+
+  const fallbackMailTo = () => {
+    const subject = encodeURIComponent(`MacAI Contact — ${form.name}`);
+    const body = encodeURIComponent(`From: ${form.name} (${form.email})\n\n${form.message}`);
+    window.open(`mailto:info@mcmasterai.ca?subject=${subject}&body=${body}`, '_self');
   };
 
   return (
