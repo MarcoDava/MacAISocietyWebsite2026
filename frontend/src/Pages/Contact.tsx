@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { motion } from 'motion/react';
 
 export default function Contact() {
@@ -20,7 +20,7 @@ export default function Contact() {
     transition: { duration: 1, delay: 0.2 },
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!valid) return;
     setSubmitStatus('sending');
@@ -142,16 +142,41 @@ export default function Contact() {
             </a>
             <motion.div
               {...fadeIn}
-              className="aspect-video bg-[#0f0066]/60 rounded-xl border border-[#1CB1E3]/20 flex items-center justify-center text-[#A7C2C3] text-sm"
+              className="aspect-video bg-[#0f0066]/60 rounded-xl border border-[#1CB1E3]/20 overflow-hidden"
             >
-              Map embed placeholder (embed Google Map iframe here)
+              <iframe
+                title="Map of McMaster University"
+                src="https://www.google.com/maps?q=McMaster+University+1280+Main+St+W+Hamilton+ON&output=embed"
+                className="w-full h-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </motion.div>
             <div className="mt-8">
-              <h3 className="font-heading font-bold text-[#F0F4F4] mb-3">Follow us</h3>
+              <h3 className="font-heading font-bold text-[#F0F4F4] mb-3">Connect with us</h3>
               <div className="flex gap-4">
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-[#3DDFF5] hover:underline">Instagram</a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-[#3DDFF5] hover:underline">LinkedIn</a>
-                <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="text-[#3DDFF5] hover:underline">X (Twitter)</a>
+                <a
+                  href="https://www.mcmasterai.ca"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#3DDFF5] hover:underline"
+                >
+                  Website
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/mcmasterai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#3DDFF5] hover:underline"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="mailto:info@mcmasterai.ca"
+                  className="text-[#3DDFF5] hover:underline"
+                >
+                  Email
+                </a>
               </div>
             </div>
           </div>
