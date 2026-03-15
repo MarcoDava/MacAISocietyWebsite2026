@@ -12,6 +12,7 @@ export interface GitHubProject {
   homepage: string | null;
   isArchived: boolean;
   isFork: boolean;
+  image?: string;
 }
 
 export interface GitHubProjectsPayload {

@@ -153,7 +153,7 @@ export default function Home() {
               </Link>
             </motion.div>
           </div>
-          <div className="hidden md:flex aspect-square rounded-2xl flex-col items-center justify-center">
+          <div className="mt-10 hidden md:flex aspect-square rounded-2xl flex-col items-center justify-center">
             <div className="block relative z-10">
               <motion.div
                 initial={{ opacity: 0, y: 40 }}

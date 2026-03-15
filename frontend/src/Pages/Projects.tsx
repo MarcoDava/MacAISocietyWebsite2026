@@ -153,24 +153,20 @@ export default function Projects() {
                   onClick={() => setModal(project)}
                   className="text-left bg-[#0f0066]/60 rounded-xl overflow-hidden border border-[#1CB1E3]/20 card-lift"
                 >
-                  <div className="aspect-video bg-[#1CB1E3]/10 flex items-center justify-center">
-                    <span className="text-[#3DDFF5]/50 text-sm">
-                      {project.language}
-                    </span>
+                  <div className="aspect-video bg-[#1CB1E3]/10 flex items-center justify-center overflow-hidden">
+                    {project.image ? (
+                      <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <span className="text-[#3DDFF5]/50 text-sm">
+                        {project.name}
+                      </span>
+                    )}
                   </div>
                   <div className="p-6">
                     <div className="flex gap-2 mb-2 flex-wrap">
                       <span className="px-2 py-0.5 rounded bg-[#1CB1E3]/20 text-[#3DDFF5] text-xs">
                         {project.year}
                       </span>
-                      <span className="px-2 py-0.5 rounded bg-[#1CB1E3]/20 text-[#A7C2C3] text-xs">
-                        {project.language}
-                      </span>
-                      {project.stars > 0 && (
-                        <span className="px-2 py-0.5 rounded bg-[#1CB1E3]/20 text-[#A7C2C3] text-xs">
-                          ⭐ {project.stars}
-                        </span>
-                      )}
                     </div>
                     <h3 className="font-heading text-xl font-bold text-[#F0F4F4]">
                       {project.name}
@@ -226,9 +222,13 @@ export default function Projects() {
                   ×
                 </button>
               </div>
-              <p className="mt-2 text-[#A7C2C3] text-sm">
-                {modal.year} · {modal.language}
-                {modal.stars > 0 ? ` · ⭐ ${modal.stars}` : ''}
+              {modal.image && (
+                <div className="mt-4 w-full h-64 rounded-xl overflow-hidden">
+                  <img src={modal.image} alt={modal.name} className="w-full h-full object-cover" />
+                </div>
+              )}
+              <p className="mt-4 text-[#A7C2C3] text-sm">
+                {modal.year}
                 {modal.forks > 0 ? ` · 🍴 ${modal.forks}` : ''}
               </p>
               <p className="mt-4 text-[#F0F4F4]">{modal.description}</p>

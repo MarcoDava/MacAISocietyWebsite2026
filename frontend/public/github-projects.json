@@ -16,7 +16,8 @@
       "url": "https://github.com/McMasterAI/isolate",
       "homepage": null,
       "isArchived": false,
-      "isFork": false
+      "isFork": false,
+      "image": "/src/assets/Project Images/Isolate.png"
     },
     {
       "id": "312700654",
@@ -31,7 +32,8 @@
       "url": "https://github.com/McMasterAI/Radiology-and-AI",
       "homepage": null,
       "isArchived": false,
-      "isFork": false
+      "isFork": false,
+      "image": "/src/assets/Project Images/RadiologyAI.png"
     },
     {
       "id": "713641138",
@@ -46,7 +48,8 @@
       "url": "https://github.com/McMasterAI/Second-Brain",
       "homepage": null,
       "isArchived": false,
-      "isFork": false
+      "isFork": false,
+      "image": "/src/assets/Project Images/SecondBrain.png"
     },
     {
       "id": "713548188",
@@ -61,7 +64,8 @@
       "url": "https://github.com/McMasterAI/NoteFlow",
       "homepage": null,
       "isArchived": false,
-      "isFork": false
+      "isFork": false,
+      "image": "/src/assets/Project Images/Gemini_Generated_Image_vhulpkvhulpkvhul.png"
     },
     {
       "id": "714357771",
@@ -76,7 +80,8 @@
       "url": "https://github.com/McMasterAI/MacChat",
       "homepage": null,
       "isArchived": false,
-      "isFork": false
+      "isFork": false,
+      "image": "/src/assets/Project Images/MacChat.png"
     },
     {
       "id": "712169265",
@@ -91,7 +96,8 @@
       "url": "https://github.com/McMasterAI/pianAI",
       "homepage": null,
       "isArchived": false,
-      "isFork": false
+      "isFork": false,
+      "image": "/src/assets/Project Images/PianAI.png"
     },
     {
       "id": "299733036",
@@ -106,7 +112,8 @@
       "url": "https://github.com/McMasterAI/Autonomous-Vehicle",
       "homepage": null,
       "isArchived": false,
-      "isFork": false
+      "isFork": false,
+      "image": ""
     },
     {
       "id": "459355690",
@@ -121,7 +128,8 @@
       "url": "https://github.com/McMasterAI/Brain_Radiology_2022",
       "homepage": null,
       "isArchived": false,
-      "isFork": false
+      "isFork": false,
+      "image": ""
     },
     {
       "id": "424623090",
@@ -136,7 +144,8 @@
       "url": "https://github.com/McMasterAI/POST_study_Project",
       "homepage": null,
       "isArchived": false,
-      "isFork": false
+      "isFork": false,
+      "image": ""
     },
     {
       "id": "425305474",
@@ -151,7 +160,8 @@
       "url": "https://github.com/McMasterAI/Walker-Agent",
       "homepage": null,
       "isArchived": false,
-      "isFork": false
+      "isFork": false,
+      "image": ""
     },
     {
       "id": "410694084",
@@ -166,7 +176,8 @@
       "url": "https://github.com/McMasterAI/projectx-2021",
       "homepage": null,
       "isArchived": false,
-      "isFork": false
+      "isFork": false,
+      "image": ""
     },
     {
       "id": "427447934",
@@ -181,7 +192,8 @@
       "url": "https://github.com/McMasterAI/Broker_project",
       "homepage": null,
       "isArchived": false,
-      "isFork": false
+      "isFork": false,
+      "image": ""
     },
     {
       "id": "426731709",
@@ -196,7 +208,8 @@
       "url": "https://github.com/McMasterAI/Organoid-Detection-and-Classification",
       "homepage": null,
       "isArchived": false,
-      "isFork": false
+      "isFork": false,
+      "image": ""
     },
     {
       "id": "316105960",
@@ -211,7 +224,8 @@
       "url": "https://github.com/McMasterAI/StyleGAN",
       "homepage": null,
       "isArchived": false,
-      "isFork": false
+      "isFork": false,
+      "image": ""
     },
     {
       "id": "283240375",
@@ -226,7 +240,8 @@
       "url": "https://github.com/McMasterAI/TrafficTracker",
       "homepage": null,
       "isArchived": false,
-      "isFork": false
+      "isFork": false,
+      "image": ""
     },
     {
       "id": "283022086",
@@ -241,7 +256,8 @@
       "url": "https://github.com/McMasterAI/CoviDash",
       "homepage": null,
       "isArchived": false,
-      "isFork": false
+      "isFork": false,
+      "image": ""
     }
   ]
 }
