@@ -65,9 +65,40 @@ function transformRepo(repo) {
     updatedAt: repo.updated_at,
     url: repo.html_url,
     homepage: repo.homepage || null,
+    image: getProjectImage(repo.name),
     isArchived: repo.archived,
     isFork: repo.fork,
   };
+}
+
+function getProjectImage(repoName) {
+  // Mapping of repo names to local image filenames (case-insensitive checks)
+  const mapping = {
+    'covidash': 'CoviDash.png',
+    'isolate': 'Isolate.png',
+    'macchat': 'MacChat.png',
+    'noteflow': 'Note Organizer.png',
+    'organoid-detection-and-classification': 'Organoid Classification and Detection.png',
+    'pianai': 'PianAI.png',
+    'post_study_project': 'Post Study Prompt.png',
+    'projectx-2021': 'ProjectX.png',
+    'radiology-and-ai': 'RadiologyAI.png',
+    'brain_radiology_2022': 'RadiologyAI.png',
+    'second-brain': 'SecondBrain.png',
+    'stylegan': 'StyleGan.png',
+    'broker_project': 'The Broker Project.png',
+    'traffictracker': 'Traffic Tracker.png',
+    'walker-agent': 'Walker Agent.png',
+    'autonomous-vehicle': 'Autonomous Vehicle (1).png'
+  };
+
+  const localFile = mapping[repoName.toLowerCase()];
+  if (localFile) {
+    return `/projects/${localFile}`;
+  }
+
+  // Fallback to GitHub Open Graph image
+  return `https://opengraph.githubassets.com/1/McMasterAI/${repoName}`;
 }
 
 async function main() {

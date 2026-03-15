@@ -15,12 +15,14 @@ const CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME;
 const API_KEY = process.env.CLOUDINARY_API_KEY;
 const API_SECRET = process.env.CLOUDINARY_API_SECRET;
 
-// Folders in Cloudinary to scan (create these in your dashboard)
+// Folders in Cloudinary to scan (under macai/ folder)
+// yearLabel comes from the folder name itself (e.g. "2024-2025")
 const FOLDERS = [
-  { folder: 'macai/workshops', event: 'Workshops' },
-  { folder: 'macai/machacks', event: 'MacHacks' },
-  { folder: 'macai/cucai', event: 'CUCAI' },
-  { folder: 'macai/general', event: 'General' },
+  { folder: 'macai/2018-2019', event: 'Archived Moments', yearLabel: '2018-2019' },
+  { folder: 'macai/2019-2020', event: 'Archived Moments', yearLabel: '2019-2020' },
+  { folder: 'macai/2021-2022', event: 'Post-Pandemic', yearLabel: '2021-2022' },
+  { folder: 'macai/2023-2024', event: 'Club Events', yearLabel: '2023-2024' },
+  { folder: 'macai/2024-2025', event: 'Current Semester', yearLabel: '2024-2025' },
 ];
 
 async function fetchCloudinaryFolder(folder) {
@@ -48,7 +50,7 @@ async function fetchCloudinaryFolder(folder) {
   return data.resources || [];
 }
 
-function transformImage(resource, event) {
+function transformImage(resource, event, yearLabel) {
   const thumbUrl = resource.secure_url.replace(
     '/upload/',
     '/upload/w_800,h_600,c_fill,q_auto,f_auto/'
@@ -58,26 +60,31 @@ function transformImage(resource, event) {
     '/upload/q_auto,f_auto/'
   );
 
+  const orientation = resource.width > resource.height ? 'landscape'
+    : resource.width < resource.height ? 'portrait'
+    : 'square';
+
   return {
     id: resource.asset_id || resource.public_id,
     src: fullUrl,
     thumb: thumbUrl,
     caption: resource.context?.custom?.caption || '',
     event,
-    year: new Date(resource.created_at).getFullYear(),
+    year: yearLabel,
     width: resource.width,
     height: resource.height,
+    orientation,
   };
 }
 
 function generatePlaceholders() {
   return [
-    { id: '1', src: '', thumb: '', caption: 'Students collaborating at a workshop.', event: 'Workshops', year: 2025, width: 800, height: 600 },
-    { id: '2', src: '', thumb: '', caption: 'MacHacks 2023 — team presenting their project.', event: 'MacHacks', year: 2023, width: 800, height: 600 },
-    { id: '3', src: '', thumb: '', caption: 'CUCAI 2025 project showcase.', event: 'CUCAI', year: 2025, width: 800, height: 600 },
-    { id: '4', src: '', thumb: '', caption: 'Keynote and networking at MacHacks.', event: 'MacHacks', year: 2023, width: 800, height: 600 },
-    { id: '5', src: '', thumb: '', caption: 'Hands-on coding session.', event: 'Workshops', year: 2025, width: 800, height: 600 },
-    { id: '6', src: '', thumb: '', caption: 'Award ceremony and celebration.', event: 'MacHacks', year: 2023, width: 800, height: 600 },
+    { id: '1', src: '', thumb: '', caption: 'Students collaborating at a workshop.', event: 'Workshops', year: 2025, width: 800, height: 600, orientation: 'landscape' },
+    { id: '2', src: '', thumb: '', caption: 'MacHacks 2023 — team presenting their project.', event: 'MacHacks', year: 2023, width: 800, height: 600, orientation: 'landscape' },
+    { id: '3', src: '', thumb: '', caption: 'CUCAI 2025 project showcase.', event: 'CUCAI', year: 2025, width: 600, height: 800, orientation: 'portrait' },
+    { id: '4', src: '', thumb: '', caption: 'Keynote and networking at MacHacks.', event: 'MacHacks', year: 2023, width: 800, height: 600, orientation: 'landscape' },
+    { id: '5', src: '', thumb: '', caption: 'Hands-on coding session.', event: 'Workshops', year: 2025, width: 600, height: 800, orientation: 'portrait' },
+    { id: '6', src: '', thumb: '', caption: 'Award ceremony and celebration.', event: 'MacHacks', year: 2023, width: 800, height: 600, orientation: 'landscape' },
   ];
 }
 
@@ -90,11 +97,11 @@ async function main() {
 
   if (CLOUD_NAME && API_KEY && API_SECRET) {
     console.log('Syncing gallery from Cloudinary...');
-    for (const { folder, event } of FOLDERS) {
+    for (const { folder, event, yearLabel } of FOLDERS) {
       try {
         const resources = await fetchCloudinaryFolder(folder);
         console.log(`  ${folder}: ${resources.length} images`);
-        images.push(...resources.map((r) => transformImage(r, event)));
+        images.push(...resources.map((r) => transformImage(r, event, yearLabel)));
       } catch (err) {
         console.error(`  Error fetching ${folder}:`, err.message);
       }

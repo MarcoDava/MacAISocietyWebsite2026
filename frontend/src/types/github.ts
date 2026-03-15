@@ -10,9 +10,9 @@ export interface GitHubProject {
   updatedAt: string;
   url: string;
   homepage: string | null;
+  image?: string | null;
   isArchived: boolean;
   isFork: boolean;
-  image?: string;
 }
 
 export interface GitHubProjectsPayload {
