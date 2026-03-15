@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import Countdown from '../Components/Countdown';
 import { HeroParallax } from '../Components/HeroParallax';
+import { HoverEffect } from '../Components/ui/card-hover-effect';
 
 const SCHEDULE = [
   { time: '9:00 AM', title: 'Doors & check-in', category: 'General' },
@@ -29,6 +30,12 @@ const PARALLAX_PRODUCTS = Array.from({ length: 15}, (_, i) => {
     thumbnail: item.thumbnail,
   };
 });
+
+const SPONSORS = [
+  { title: 'Sponsor A', description: 'Platinum sponsor', link: 'https://example.com' },
+  { title: 'Sponsor B', description: 'Gold sponsor', link: 'https://example.com' },
+  { title: 'Sponsor C', description: 'Silver sponsor', link: 'https://example.com' },
+];
 
 const FAQ = [
   { q: 'Who can participate?', a: 'Any current university or high school student. Some tracks may have prerequisites.' },
@@ -70,14 +77,14 @@ export default function MacHacks() {
             <Countdown />
           </div>
           <div className="mt-10">
-          <a
-            href="https://forms.office.com/pages/responsepage.aspx?id=B2M3RCm0rUKMJSjNSW9HctZcAZxBhpdCi9Jv6HOWXYVURU1TRFBES0kxWENQMTVDNzY1SzdaSUFYWS4u&route=shorturl"
-            className="btn-cta text-lg px-8 py-4"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Volunteer for MacHacks
-          </a>
+            <a
+              href="https://forms.office.com/pages/responsepage.aspx?id=B2M3RCm0rUKMJSjNSW9HctZcAZxBhpdCi9Jv6HOWXYVURU1TRFBES0kxWENQMTVDNzY1SzdaSUFYWS4u&route=shorturl"
+              className="btn-cta text-lg px-8 py-4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Volunteer for MacHacks
+            </a>
             <motion.p
               {...fadeIn}
               className="mt-4 text-[#A7C2C3] text-sm"
@@ -155,6 +162,8 @@ export default function MacHacks() {
             MacHacks wouldn't be possible without our sponsors. Interested in supporting 2026?
           </motion.p>
           <Link to="/partnerships" className="btn-cta">Partner with us</Link>
+
+          <HoverEffect items={SPONSORS} className="mt-4" />
         </div>
       </section>
 
