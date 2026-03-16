@@ -96,10 +96,14 @@ export default function MacHacks() {
     <div className="bg-[#060606]">
       {/* Hero with MacHacks banner background */}
       <section className="relative min-h-[80vh] md:min-h-screen overflow-hidden flex flex-col items-center justify-center">
-        {/* Background image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url(/machacks-hero.png)' }}
+        {/* Background video */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/machacks-hero-animated.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
         />
         {/* Dark overlay for better contrast */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#060606] via-transparent to-transparent" />
