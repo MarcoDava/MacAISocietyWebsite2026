@@ -52,11 +52,11 @@ const row3Images = [
 ];
 
 const STATS = [
-  { value: -1, suffix: '+', label: 'Members' },
-  { value: -1, suffix: '+', label: 'Industry Speakers' },
+  { value: 110, suffix: '+', label: 'Members' },
+  { value: 15, suffix: '+', label: 'Industry Speakers' },
   { value: 1, suffix: '', label: 'Flagship Hackathon' },
-  { value: -1, suffix: '+', label: 'Workshops Hosted' },
-  { value: -1, suffix: '+', label: 'Sponsors' },
+  { value: 12, suffix: '+', label: 'Workshops Hosted' },
+  { value: 6, suffix: '+', label: 'Sponsors' },
 ];
 
 const OFFERINGS = [
@@ -348,7 +348,7 @@ export default function Home() {
       </section>
 
       {/* 3) What we offer */}
-      <motion.section {...fadeInRight} className="text-black py-16 md:py-50 bg-[#F0F4F4] rounded-[5vh]">
+      <motion.section {...fadeInRight} className="text-black py-16 md:py-50 rounded-[5vh]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.p {...fadeIn} className="text-center text-macai-sage font-bold tracking-widest uppercase text-xs mb-10">Supported by our partners</motion.p>
           <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20">

@@ -32,31 +32,23 @@ export default function MacHacks() {
     ? SCHEDULE
     : SCHEDULE.filter((s) => s.category === scheduleFilter);
 
-  // Group sponsors by tier
-  const sponsorsByTier = {
-    Platinum: SPONSORS.filter(s => s.tier === 'Platinum'),
-    Gold: SPONSORS.filter(s => s.tier === 'Gold'),
-    Silver: SPONSORS.filter(s => s.tier === 'Silver'),
-    Bronze: SPONSORS.filter(s => s.tier === 'Bronze'),
-  };
-
   return (
     <div className="bg-[#060606]">
       {/* Hero with MacHacks banner background */}
-      <section className="relative min-h-[80vh] md:min-h-screen overflow-hidden flex flex-col items-center justify-center">
+      <section className="relative min-h-[50vh] sm:min-h-[70vh] md:min-h-screen overflow-hidden flex flex-col items-center justify-center">
         {/* Background video */}
         <video
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute sm:flex inset-0 top-16 sm:top-0 sm:w-full sm:h-full object:cover bg-gradient-to-t from-[#000000] via-transparent to-transparent "
           src="/machacks-hero-animated.mp4"
           autoPlay
           muted
           playsInline
         />
         {/* Dark overlay for better contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#060606] via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-transparent" />
 
         {/* Countdown timer only */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 2,delay: 3}} className="relative z-10 mt-auto mb-24 md:mb-32">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 2,delay: 3}} className="relative z-10 mt-[47vh] mb-12 sm:mb-20 md:mb-32">
           <Countdown />
         </motion.div>
       </section>
@@ -221,85 +213,26 @@ export default function MacHacks() {
             </motion.p>
           </div>
 
-          {/* Platinum Sponsors */}
-          {sponsorsByTier.Platinum.length > 0 && (
-            <div className="mb-12">
-              <h3 className="text-[#8B3D5A] font-heading font-bold text-lg mb-4 text-center">Platinum</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
-                {sponsorsByTier.Platinum.map((sponsor) => (
-                  <motion.a
-                    key={sponsor.name}
-                    href={sponsor.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="col-span-2 w-full max-w-md bg-[#221A1D] rounded-2xl p-8 md:p-12
-                      border border-[#8B3D5A]/30 flex items-center justify-center
-                      hover:border-[#8B3D5A]/60 transition-all duration-300 group"
-                    style={{ boxShadow: `0 0 40px ${theme.accentMagenta}20` }}
-                    whileHover={{ y: -4, boxShadow: `0 0 60px ${theme.accentMagenta}30` }}
-                  >
-                    {sponsor.logoUrl ? (
-                      <img src={sponsor.logoUrl} alt={sponsor.name} className="max-h-20 opacity-80 group-hover:opacity-100 transition-opacity" />
-                    ) : (
-                      <span className="font-heading text-2xl md:text-3xl font-bold text-[#E1E0E0] group-hover:text-white transition-colors">
-                        {sponsor.name}
-                      </span>
-                    )}
-                  </motion.a>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Gold Sponsors */}
-          {sponsorsByTier.Gold.length > 0 && (
+          {/* All Sponsors - Unified Display */}
+          {SPONSORS.length > 0 && (
             <div className="mb-10">
-              <h3 className="text-[#4F7C80] font-heading font-bold text-lg mb-4 text-center">Gold</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 justify-items-center">
-                {sponsorsByTier.Gold.map((sponsor) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+                {SPONSORS.map((sponsor) => (
                   <motion.a
                     key={sponsor.name}
                     href={sponsor.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="col-span-1 md:col-span-2 w-full max-w-sm bg-[#221A1D] rounded-xl p-6 md:p-8
-                      border border-[#4F7C80]/30 flex items-center justify-center
-                      hover:border-[#4F7C80]/60 transition-all duration-300 group"
-                    whileHover={{ y: -3 }}
+                    className="w-full max-w-sm bg-[#221A1D] rounded-xl p-6 md:p-8
+                      border border-[#35494C]/40 flex items-center justify-center
+                      hover:border-[#4F7C80]/70 transition-all duration-300 group
+                      min-h-[180px] "
+                    whileHover={{ y: -4, boxShadow: `0 0 30px rgba(79, 124, 128, 0.2)` }}
                   >
                     {sponsor.logoUrl ? (
-                      <img src={sponsor.logoUrl} alt={sponsor.name} className="max-h-14 opacity-70 group-hover:opacity-100 transition-opacity" />
+                      <img src={sponsor.logoUrl} alt={sponsor.name} className="max-h-48 max-w-full object-contain opacity-80 group-hover:opacity-100 transition-opacity rounded-lg" />
                     ) : (
-                      <span className="font-heading text-xl font-bold text-[#E1E0E0] group-hover:text-white transition-colors">
-                        {sponsor.name}
-                      </span>
-                    )}
-                  </motion.a>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Silver & Bronze Sponsors */}
-          {(sponsorsByTier.Silver.length > 0 || sponsorsByTier.Bronze.length > 0) && (
-            <div className="mb-10">
-              <h3 className="text-[#35494C] font-heading font-bold text-lg mb-4 text-center">Partners</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                {[...sponsorsByTier.Silver, ...sponsorsByTier.Bronze].map((sponsor) => (
-                  <motion.a
-                    key={sponsor.name}
-                    href={sponsor.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-[#221A1D] rounded-lg p-4
-                      border border-[#35494C]/20 flex items-center justify-center
-                      hover:border-[#35494C]/40 transition-all duration-300 group"
-                    whileHover={{ y: -2 }}
-                  >
-                    {sponsor.logoUrl ? (
-                      <img src={sponsor.logoUrl} alt={sponsor.name} className="max-h-10 opacity-60 group-hover:opacity-90 transition-opacity" />
-                    ) : (
-                      <span className="font-heading text-sm font-medium text-[#E1E0E0]/70 group-hover:text-[#E1E0E0] transition-colors text-center">
+                      <span className="font-heading text-xl font-bold text-[#E1E0E0] group-hover:text-white transition-colors text-center">
                         {sponsor.name}
                       </span>
                     )}
@@ -319,7 +252,7 @@ export default function MacHacks() {
               className="inline-flex items-center justify-center px-6 py-3 font-bold rounded-lg
                 bg-[#8B3D5A] text-white border-2 border-[#8B3D5A]
                 hover:bg-[#A44A68] hover:border-[#A44A68]
-                transition-all duration-300"
+                transition-all duration-300 w-[70vw]"
             >
               Partner with us
             </Link>

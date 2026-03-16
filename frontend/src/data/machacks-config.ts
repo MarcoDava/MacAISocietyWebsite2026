@@ -1,3 +1,12 @@
+import sMapLogo from '../assets/SponsorImages/MacHacks/sMapLogo.webp';
+import manulifeLogo from '../assets/SponsorImages/MacHacks/Manulife.png';
+import johnhanLogo from '../assets/SponsorImages/MacHacks/JohnHancock.png';
+import mlhLogo from '../assets/SponsorImages/MacHacks/mlh-logo-color.png';
+import mcmasterEngLogo from '../assets/SponsorImages/MacHacks/McMaster_Faculty_of_Engineering_logo.png';
+import wspLogo from '../assets/SponsorImages/MacHacks/WSP_logo.svg.png';
+import aigeLogo from '../assets/SponsorImages/MacHacks/AIGE Colour Logo-Picsart-BackgroundRemover.avif';
+import geotabLogo from '../assets/SponsorImages/MacHacks/Geotab White Logo.avif';
+
 /**
  * MacHacks 2026 Configuration
  *
@@ -46,31 +55,21 @@ export const SCHEDULE_CATEGORIES: ('all' | ScheduleCategory)[] = ['all', 'Genera
 // ============================================
 // Sponsors
 // ============================================
-export type SponsorTier = 'Platinum' | 'Gold' | 'Silver' | 'Bronze';
-
 export interface Sponsor {
   name: string;
-  tier: SponsorTier;
   logoUrl?: string;
   website?: string;
 }
 
 export const SPONSORS: Sponsor[] = [
-  // Platinum sponsors - largest display
-  { name: 'TechCorp AI', tier: 'Platinum', logoUrl: '', website: 'https://example.com' },
-
-  // Gold sponsors - medium display
-  { name: 'DataFlow Inc', tier: 'Gold', logoUrl: '', website: 'https://example.com' },
-  { name: 'CloudMind', tier: 'Gold', logoUrl: '', website: 'https://example.com' },
-
-  // Silver sponsors - smaller display
-  { name: 'Neural Labs', tier: 'Silver', logoUrl: '', website: 'https://example.com' },
-  { name: 'AI Ventures', tier: 'Silver', logoUrl: '', website: 'https://example.com' },
-  { name: 'CodeBase', tier: 'Silver', logoUrl: '', website: 'https://example.com' },
-
-  // Bronze sponsors - smallest display
-  { name: 'StartupX', tier: 'Bronze', logoUrl: '', website: 'https://example.com' },
-  { name: 'DevTools Co', tier: 'Bronze', logoUrl: '', website: 'https://example.com' },
+  { name: 'sMap', logoUrl: sMapLogo, website: 'https://pulselab.humanities.mcmaster.ca/' },
+  { name: 'Manulife', logoUrl: manulifeLogo, website: 'https://www.manulife.ca/' },
+  { name: 'John Hancock', logoUrl: johnhanLogo, website: 'https://www.johnhancock.com/' },
+  { name: 'MLH', logoUrl: mlhLogo, website: 'https://mlh.io/' },
+  { name: 'McMaster Engineering', logoUrl: mcmasterEngLogo, website: 'https://engineering.mcmaster.ca/' },
+  { name: 'WSP', logoUrl: wspLogo, website: 'https://www.wsp.com/' },
+  { name: 'AIGE', logoUrl: aigeLogo, website: '#' },
+  { name: 'Geotab', logoUrl: geotabLogo, website: '#' },
 ];
 
 // ============================================
