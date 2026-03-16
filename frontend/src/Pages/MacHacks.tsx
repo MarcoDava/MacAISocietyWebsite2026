@@ -12,7 +12,6 @@ import {
   PARALLAX_PRODUCTS,
   FAQ,
   MACHACKS_THEME as theme,
-  type ScheduleCategory,
   type Sponsor,
 } from '../data/machacks-config';
 
