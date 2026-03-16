@@ -45,7 +45,7 @@ export default function Header() {
               to="/machacks"
               className="btn-cta text-sm py-2 px-4 hidden sm:inline-block"
             >
-              Register for MacHacks
+              View MacHacks
             </Link>
             <button
               type="button"

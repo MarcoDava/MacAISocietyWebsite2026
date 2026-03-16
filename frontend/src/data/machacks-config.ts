@@ -31,26 +31,35 @@ export const EVENT_INFO = {
 // ============================================
 // Schedule
 // ============================================
-export type ScheduleCategory = 'General' | 'Hacking' | 'Beginner' | 'Advanced';
+export type ScheduleCategory = 'General' | 'Hacking' | 'Workshop' | 'Food' | 'Closing';
 
 export interface ScheduleItem {
   time: string;
   title: string;
   category: ScheduleCategory;
+  location: string;
 }
 
 export const SCHEDULE: ScheduleItem[] = [
-  { time: '9:00 AM', title: 'Doors & check-in', category: 'General' },
-  { time: '10:00 AM', title: 'Opening keynote', category: 'General' },
-  { time: '11:00 AM', title: 'Hacking begins', category: 'Hacking' },
-  { time: '12:00 PM', title: 'Workshop: Intro to ML', category: 'Beginner' },
-  { time: '2:00 PM', title: 'Workshop: APIs & tools', category: 'Beginner' },
-  { time: '4:00 PM', title: 'Advanced track: NLP', category: 'Advanced' },
-  { time: '8:00 PM', title: 'Mentorship office hours', category: 'General' },
-  { time: 'Next day 10:00 AM', title: 'Submissions & demos', category: 'General' },
+  { time: '9:00–10:30 AM', title: 'Registration & Team Formation', category: 'General', location: 'First Floor Lobby + PGCCLL 127' },
+  { time: '10:30–11:00 AM', title: 'Opening Ceremony', category: 'General', location: 'PGCCLL 127' },
+  { time: '11:00 AM–12:00 PM', title: 'Hacking Begins', category: 'Hacking', location: 'PGCCLL 127 or B131 (Quiet Hacking Space)' },
+  { time: '12:00–1:00 PM', title: 'Lunch', category: 'Food', location: 'PGCCLL B138' },
+  { time: '1:00–2:00 PM', title: 'WORKSHOP: "Build a Fleet Management App in 60 Minutes: AI-Assisted Development with Geotab."', category: 'Workshop', location: 'PGCCLL 124' },
+  { time: '1:00–3:30 PM', title: 'Hacking Continues', category: 'Hacking', location: 'PGCCLL 127 or B131 (Quiet Hacking Space)' },
+  { time: '2:30–3:00 PM', title: 'WORKSHOP: "The Power of Artificial Intelligence in Academic Systems with MacAI"', category: 'Workshop', location: 'PGCCLL 124' },
+  { time: '3:00–3:30 PM', title: 'Hacking Continues', category: 'Hacking', location: 'PGCCLL 127 or B131 (Quiet Hacking Space)' },
+  { time: '3:30–4:00 PM', title: 'Trivia', category: 'General', location: 'PGCCLL 127' },
+  { time: '4:00–5:00 PM', title: 'Dinner', category: 'Food', location: 'PGCCLL B138' },
+  { time: '4:00–6:00 PM', title: 'Hacking Continues', category: 'Hacking', location: 'PGCCLL 127 or B131 (Quiet Hacking Space)' },
+  { time: '6:00 PM', title: 'Project Submissions Due', category: 'General', location: 'Online' },
+  { time: '6:30–7:30 PM', title: 'Project Demo + Judging', category: 'General', location: 'To be revealed!' },
+  { time: '7:30–8:00 PM', title: 'Closing Ceremony', category: 'Closing', location: 'PGCCLL 127' },
+  { time: '8:00–8:30 PM', title: 'Awards & Prizes', category: 'Closing', location: 'PGCCLL 127' },
+  { time: '9:00 PM', title: 'Doors Close!', category: 'General', location: 'N/A' },
 ];
 
-export const SCHEDULE_CATEGORIES: ('all' | ScheduleCategory)[] = ['all', 'General', 'Hacking', 'Beginner', 'Advanced'];
+export const SCHEDULE_CATEGORIES: ('all' | ScheduleCategory)[] = ['all', 'General', 'Hacking', 'Workshop', 'Food', 'Closing'];
 
 // ============================================
 // Sponsors
@@ -157,10 +166,14 @@ export interface FAQItem {
 }
 
 export const FAQ: FAQItem[] = [
-  { q: 'Who can participate?', a: 'Any current university or high school student. Some tracks may have prerequisites.' },
-  { q: 'Is it free?', a: 'Yes. MacHacks is free to attend. Food and swag are provided.' },
-  { q: 'Team size?', a: 'Teams of 2-4. You can also sign up solo and we\'ll help you find a team.' },
-  { q: 'What should I bring?', a: 'Laptop, charger, and enthusiasm. We\'ll share a full list closer to the event.' },
+  { q: 'When is MacHacks 2026?', a: 'Saturday, March 21st 2026 from 9am-9pm.' },
+  { q: 'Where is MacHacks 2026?', a: 'Peter George Centre for Living and Learning (PGCLL) on the McMaster Campus.' },
+  { q: 'Am I eligible to participate in MacHacks?', a: 'Anyone from any post secondary school can attend MacHacks 2026, regardless of year or program.' },
+  { q: 'How much does it cost to participate in MacHacks?', a: 'MacHacks is free for participants!' },
+  { q: 'Why haven\'t I heard of MacHacks? Is it new?', a: 'MacHacks was run in 2021, 2022 and 2023 and is back for 2026 after a brief hiatus! Check out the past events section for more info.' },
+  { q: 'I\'ve never been to a hackathon before, can I still participate?', a: 'Yes! MacHacks is a beginner friendly hackathon and we highly encourage giving it a shot. There will be sessions and mentors throughout the event to help you. We can\'t wait to see you there :)' },
+  { q: 'How big should my team be?', a: 'Teams can have 1-4 people but we highly encourage working with at least one other person. It\'s okay if you don\'t have a team going into the event, there will be opportunities for team forming on the day of the hackathon.' },
+  { q: 'What do I need to bring?', a: 'You\'ll need a laptop and charger. An idea and team are not necessary, although feel free to come in with a pre-assembled team! We will have team building sessions to help you meet new people with who you can make an amazing hack.' },
 ];
 
 // ============================================

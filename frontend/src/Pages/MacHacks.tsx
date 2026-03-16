@@ -161,26 +161,35 @@ export default function MacHacks() {
 
           {/* Schedule items */}
           <ul className="space-y-4">
-            {filteredSchedule.map(({ time, title, category }) => (
+            {filteredSchedule.map(({ time, title, category, location }) => (
               <motion.li
                 key={time + title}
                 {...fadeIn}
                 className="bg-[#221A1D] rounded-xl p-4 md:p-6 border border-[#35494C]/30
-                  flex flex-wrap items-center gap-4
+                  flex flex-col gap-3
                   hover:border-[#4F7C80]/50 transition-all duration-300
                   hover:shadow-[0_0_20px_rgba(79,124,128,0.1)]"
               >
-                <span className="font-heading font-bold text-[#4F7C80] w-32 md:w-40">{time}</span>
-                <span className="text-white flex-1">{title}</span>
-                <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                  category === 'Advanced'
-                    ? 'bg-[#8B3D5A]/20 text-[#8B3D5A]'
-                    : category === 'Beginner'
-                    ? 'bg-[#4F7C80]/20 text-[#4F7C80]'
-                    : 'bg-[#35494C]/30 text-[#E1E0E0]'
-                }`}>
-                  {category}
-                </span>
+                <div className="flex flex-wrap items-start gap-4">
+                  <span className="font-heading font-bold text-[#4F7C80] w-32 md:w-40 flex-shrink-0">{time}</span>
+                  <div className="flex-1">
+                    <span className="text-white block font-medium">{title}</span>
+                    <span className="text-[#E1E0E0]/70 text-sm block mt-1">{location}</span>
+                  </div>
+                  <span className={`px-3 py-1 rounded-full text-xs font-medium flex-shrink-0 ${
+                    category === 'Workshop'
+                      ? 'bg-[#8B3D5A]/20 text-[#8B3D5A]'
+                      : category === 'Hacking'
+                      ? 'bg-[#4F7C80]/20 text-[#4F7C80]'
+                      : category === 'Food'
+                      ? 'bg-[#C0A35B]/20 text-[#C0A35B]'
+                      : category === 'Closing'
+                      ? 'bg-[#8B3D5A]/30 text-[#8B3D5A]'
+                      : 'bg-[#35494C]/30 text-[#E1E0E0]'
+                  }`}>
+                    {category}
+                  </span>
+                </div>
               </motion.li>
             ))}
           </ul>
