@@ -12,7 +12,7 @@ import {
   PARALLAX_PRODUCTS,
   FAQ,
   MACHACKS_THEME as theme,
-  type Sponsor,
+  // type Sponsor,
 } from '../data/machacks-config';
 
 const fadeIn = {
