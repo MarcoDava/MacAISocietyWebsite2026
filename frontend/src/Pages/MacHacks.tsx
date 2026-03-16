@@ -22,58 +22,7 @@ const fadeIn = {
   transition: { duration: 1, delay: 0.2 },
 };
 
-// Sponsor card component with tiered sizing
-function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
-  const tierStyles = {
-    Platinum: 'col-span-2 row-span-2 p-8',
-    Gold: 'col-span-2 p-6',
-    Silver: 'col-span-1 p-4',
-    Bronze: 'col-span-1 p-3',
-  };
 
-  const tierGlow = {
-    Platinum: `0 0 40px ${theme.accentMagenta}40`,
-    Gold: `0 0 30px ${theme.accentCyan}30`,
-    Silver: `0 0 20px ${theme.accentTeal}20`,
-    Bronze: 'none',
-  };
-
-  return (
-    <motion.a
-      href={sponsor.website}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`
-        ${tierStyles[sponsor.tier]}
-        bg-[${theme.bgCharcoal}] rounded-xl
-        border border-[${theme.accentTeal}]/30
-        flex items-center justify-center
-        transition-all duration-300
-        hover:border-[${theme.accentMagenta}]/60
-        hover:scale-[1.02]
-        group
-      `}
-      style={{ boxShadow: tierGlow[sponsor.tier] }}
-      whileHover={{ y: -4 }}
-    >
-      {sponsor.logoUrl ? (
-        <img
-          src={sponsor.logoUrl}
-          alt={sponsor.name}
-          className="max-h-full max-w-full object-contain opacity-70 group-hover:opacity-100 transition-opacity"
-        />
-      ) : (
-        <span className={`
-          font-heading font-bold text-center
-          ${sponsor.tier === 'Platinum' ? 'text-2xl' : sponsor.tier === 'Gold' ? 'text-xl' : 'text-base'}
-          text-[${theme.textMuted}] group-hover:text-[${theme.textPrimary}] transition-colors
-        `}>
-          {sponsor.name}
-        </span>
-      )}
-    </motion.a>
-  );
-}
 
 export default function MacHacks() {
   const [scheduleFilter, setScheduleFilter] = useState<string>('all');
