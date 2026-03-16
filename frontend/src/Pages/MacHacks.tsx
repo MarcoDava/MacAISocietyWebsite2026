@@ -101,7 +101,6 @@ export default function MacHacks() {
           className="absolute inset-0 w-full h-full object-cover"
           src="/machacks-hero-animated.mp4"
           autoPlay
-          loop
           muted
           playsInline
         />
@@ -109,9 +108,9 @@ export default function MacHacks() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#060606] via-transparent to-transparent" />
 
         {/* Countdown timer only */}
-        <div className="relative z-10 mt-auto mb-24 md:mb-32">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 2,delay: 3}} className="relative z-10 mt-auto mb-24 md:mb-32">
           <Countdown />
-        </div>
+        </motion.div>
       </section>
 
       {/* Event overview */}
