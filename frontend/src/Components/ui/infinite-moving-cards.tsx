@@ -11,8 +11,11 @@ export const InfiniteMovingCards = ({
   className,
 }: {
   items: {
-     src: string;
-     alt: string;
+    src: string;
+    alt: string;
+    title?: string;
+    event?: string;
+    link?: string;
   }[];
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
@@ -89,16 +92,37 @@ export const InfiniteMovingCards = ({
           return (
             <li
               key={idx}
-              className="relative h-[200px] w-[320px] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-transparent flex items-center justify-center md:w-[420px]"
+              className="group relative h-[200px] w-[320px] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-transparent flex items-center justify-center md:w-[420px] cursor-pointer"
             >
-              <img
-                src={item.src}
-                alt={item.alt}
-                className="h-full w-full object-cover"
-                loading={isPriority ? 'eager' : 'lazy'}
-                decoding="async"
-                fetchPriority={isPriority ? 'high' : undefined}
-              />
+              <a
+                href={item.link}
+                target={item.link ? "_blank" : undefined}
+                rel={item.link ? "noopener noreferrer" : undefined}
+                className="relative block h-full w-full"
+              >
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  className="h-full w-full object-cover transition duration-300 group-hover:grayscale group-hover:brightness-75"
+                  loading={isPriority ? "eager" : "lazy"}
+                  decoding="async"
+                  fetchPriority={isPriority ? "high" : undefined}
+                />
+                {(item.title || item.event) && (
+                  <div className="pointer-events-none absolute inset-0">
+                    {item.title && (
+                      <div className="absolute top-2 left-3 rounded-md bg-black/60 px-2 py-1 text-xs font-semibold text-white">
+                        {item.title}
+                      </div>
+                    )}
+                    {item.event && (
+                      <div className="absolute top-2 right-3 rounded-md bg-black/60 px-2 py-1 text-xs font-semibold text-white">
+                        {item.event}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </a>
             </li>
           );
         })}

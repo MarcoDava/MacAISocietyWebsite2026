@@ -347,8 +347,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7) Sponsors – Professional Finale */}
-      <section className="py-20 border-t border-[#1CB1E3]/20 bg-[#0f0066]">
+      {/* 3) What we offer */}
+      <motion.section {...fadeInRight} className="text-black py-16 md:py-50 bg-[#F0F4F4] rounded-[5vh]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.p {...fadeIn} className="text-center text-macai-sage font-bold tracking-widest uppercase text-xs mb-10">Supported by our partners</motion.p>
           <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20">
@@ -369,7 +369,7 @@ export default function Home() {
             <Link to="/partnerships" className="text-[#3DDFF5] font-bold hover:underline tracking-wide uppercase text-xs">Become a Partner</Link>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
