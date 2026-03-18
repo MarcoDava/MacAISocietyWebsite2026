@@ -1,6 +1,5 @@
 import { useState, type FormEvent } from 'react';
 import { motion } from 'motion/react';
-import { InfiniteMovingCards } from '../Components/ui/infinite-moving-cards';
 import { CURRENT_PARTNERS, PAST_PARTNERS } from '../data/partners';
 
 const fadeIn = {
@@ -170,18 +169,24 @@ export default function Partnerships() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
           <h2 className="font-heading text-3xl font-bold text-[#1800AD]">Past sponsors</h2>
         </div>
-        <div className="flex flex-col antialiased items-center justify-center relative overflow-hidden">
-          <InfiniteMovingCards
-            items={PAST_PARTNERS.filter(p => p.logoUrl).map(p => ({
-              src: p.logoUrl!,
-              alt: p.alt || p.name,
-              title: String(p.year || ''),
-              link: p.website
-            }))}
-            direction="left"
-            speed="slow"
-            className="bg-white"
-          />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 items-center justify-items-center">
+            {PAST_PARTNERS.filter(p => p.logoUrl).map((partner) => (
+              <a
+                key={partner.name + partner.year}
+                href={partner.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white rounded-xl p-4 border border-[#1800AD]/10 flex items-center justify-center h-24 w-full card-lift shadow-sm hover:shadow-md transition-all group"
+              >
+                <img 
+                  src={partner.logoUrl} 
+                  alt={partner.alt || partner.name} 
+                  className="max-h-12 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300" 
+                />
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
