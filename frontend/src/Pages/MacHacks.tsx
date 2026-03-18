@@ -40,19 +40,22 @@ export default function MacHacks() {
       {/* Hero with MacHacks banner background */}
       <section className="relative min-h-[50vh] sm:min-h-[70vh] md:min-h-screen overflow-hidden flex flex-col items-center justify-center">
         {/* Background video */}
-        <video
-          className="absolute sm:flex inset-0 top-16 sm:top-0 sm:w-full sm:h-full object-cover bg-gradient-to-t from-[#000000] via-transparent to-transparent "
-          src="/machacks-hero-animated.mp4"
-          autoPlay
-          muted
-          playsInline
-          loop
-        />
+        <div className="absolute sm:flex inset-0 top-16 sm:top-0 sm:w-full sm:h-full justify-center items-end">
+         
+            <video
+              className="relative w-full h-full object-cover rounded-[25vh]"
+              src="/machacks-hero-animated.mp4"
+              autoPlay
+              muted
+              playsInline
+            />
+          
+        </div>
         {/* Dark overlay for better contrast */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-transparent" />
 
         {/* Countdown timer only */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 2, delay: 1 }} className="relative z-10 mt-[47vh] mb-12 sm:mb-20 md:mb-32">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 2, delay: 1 }} className="relative z-10 mt-[55vh] mb-12 sm:mb-20 md:mb-32">
           <Countdown variant="dark" />
         </motion.div>
       </section>
@@ -280,15 +283,15 @@ export default function MacHacks() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full max-w-lg rounded-2xl p-8 md:p-10
-                      border border-white/30 flex flex-col items-center justify-center
-                      hover:border-white/60 transition-all duration-300 group
+                      bg-white border border-gray-200 flex flex-col items-center justify-center
+                      hover:border-gray-300 transition-all duration-300 group
                       min-h-[200px]"
-                    whileHover={{ y: -4, boxShadow: `0 0 30px rgba(255, 255, 255, 0.2)` }}
+                    whileHover={{ y: -4, boxShadow: `0 10px 30px rgba(0, 0, 0, 0.1)` }}
                   >
                     {sponsor.logoUrl ? (
-                      <img src={sponsor.logoUrl} alt={sponsor.name} className="max-h-24 max-w-full object-contain opacity-80 group-hover:opacity-100 transition-opacity rounded-lg" />
+                      <img src={sponsor.logoUrl} alt={sponsor.name} className="max-h-24 max-w-full object-contain opacity-90 group-hover:opacity-100 transition-opacity rounded-lg" />
                     ) : (
-                      <span className="font-heading text-2xl font-bold text-[#E1E0E0] group-hover:text-white transition-colors text-center">
+                      <span className="font-heading text-2xl font-bold text-black transition-colors text-center">
                         {sponsor.name}
                       </span>
                     )}
@@ -309,15 +312,15 @@ export default function MacHacks() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full max-w-sm rounded-xl p-6 md:p-8
-                      border border-white/20 flex items-center justify-center
-                      hover:border-white/40 transition-all duration-300 group
+                      bg-white border border-gray-200 flex items-center justify-center
+                      hover:border-gray-300 transition-all duration-300 group
                       min-h-[180px]"
-                    whileHover={{ y: -4, boxShadow: `0 0 30px rgba(255, 255, 255, 0.1)` }}
+                    whileHover={{ y: -4, boxShadow: `0 10px 30px rgba(0, 0, 0, 0.1)` }}
                   >
                     {sponsor.logoUrl ? (
-                      <img src={sponsor.logoUrl} alt={sponsor.name} className="max-h-48 max-w-full object-contain opacity-80 group-hover:opacity-100 transition-opacity rounded-lg" />
+                      <img src={sponsor.logoUrl} alt={sponsor.name} className="max-h-48 max-w-full object-contain opacity-90 group-hover:opacity-100 transition-opacity rounded-lg" />
                     ) : (
-                      <span className="font-heading text-xl font-bold text-[#E1E0E0] group-hover:text-white transition-colors text-center">
+                      <span className="font-heading text-xl font-bold text-black transition-colors text-center">
                         {sponsor.name}
                       </span>
                     )}
@@ -339,15 +342,15 @@ export default function MacHacks() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="rounded-xl p-6
-                      border border-white/10 flex items-center justify-center
-                      hover:border-white/30 transition-all duration-300 group
+                      bg-white border border-gray-100 flex items-center justify-center
+                      hover:border-gray-200 transition-all duration-300 group
                       min-h-[120px] w-48"
-                    whileHover={{ y: -2 }}
+                    whileHover={{ y: -2, boxShadow: `0 5px 15px rgba(0, 0, 0, 0.05)` }}
                   >
                     {sponsor.logoUrl ? (
-                      <img src={sponsor.logoUrl} alt={sponsor.name} className="max-h-16 max-w-full object-contain opacity-70 group-hover:opacity-100 transition-opacity rounded-lg" />
+                      <img src={sponsor.logoUrl} alt={sponsor.name} className="max-h-16 max-w-full object-contain opacity-90 group-hover:opacity-100 transition-opacity rounded-lg" />
                     ) : (
-                      <span className="font-heading text-lg font-bold text-[#E1E0E0]/70 group-hover:text-white transition-colors text-center">
+                      <span className="font-heading text-lg font-bold text-black transition-colors text-center">
                         {sponsor.name}
                       </span>
                     )}

@@ -90,6 +90,25 @@ export default function Gallery() {
     ? [...filtered].sort((a, b) => b.year.localeCompare(a.year))
     : stableShuffled(filtered);
 
+  // Modal navigation derived values
+  const selectedIndex = selected ? displayImages.findIndex(img => img.id === selected.id) : -1;
+  const hasPrev = selectedIndex > 0;
+  const hasNext = selectedIndex < displayImages.length - 1;
+  const goToPrev = () => selectedIndex > 0 && setSelected(displayImages[selectedIndex - 1]);
+  const goToNext = () => selectedIndex < displayImages.length - 1 && setSelected(displayImages[selectedIndex + 1]);
+
+  // Keyboard navigation for modal
+  useEffect(() => {
+    if (!selected) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft' && selectedIndex > 0) setSelected(displayImages[selectedIndex - 1]);
+      if (e.key === 'ArrowRight' && selectedIndex < displayImages.length - 1) setSelected(displayImages[selectedIndex + 1]);
+      if (e.key === 'Escape') setSelected(null);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [selected, selectedIndex, displayImages]);
+
   return (
     <>
       {/* Hero */}
@@ -106,6 +125,13 @@ export default function Gallery() {
           >
             Curated moments from workshops, MacHacks, and CUCAI — our community in action.
           </motion.p>
+          {!loading && images.length > 0 && (
+            <motion.div {...fadeIn} className="mt-6">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-[#3DDFF5]/20 text-[#3DDFF5] text-sm font-bold border border-[#3DDFF5]/30">
+                {images.length} moments captured
+              </span>
+            </motion.div>
+          )}
         </div>
       </section>
 
@@ -120,8 +146,8 @@ export default function Gallery() {
                 key={e}
                 type="button"
                 onClick={() => setEventFilter(e)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  eventFilter === e ? 'bg-[#1800AD] text-[#F0F4F4]' : 'bg-[#1800AD]/10 text-[#4A5568] hover:text-[#1800AD]'
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  eventFilter === e ? 'bg-[#1800AD] text-[#F0F4F4] shadow-[0_0_12px_rgba(24,0,173,0.3)]' : 'bg-[#1800AD]/10 text-[#4A5568] hover:text-[#1800AD]'
                 }`}
               >
                 {e}
@@ -136,8 +162,8 @@ export default function Gallery() {
                 key={y}
                 type="button"
                 onClick={() => setYearFilter(y)}
-                className={`px-3 py-1.5 rounded-lg text-sm whitespace-nowrap transition-colors ${
-                  yearFilter === y ? 'bg-[#1800AD] text-[#F0F4F4]' : 'bg-[#1800AD]/10 text-[#4A5568] hover:text-[#1800AD]'
+                className={`px-3 py-1.5 rounded-full text-sm whitespace-nowrap transition-colors ${
+                  yearFilter === y ? 'bg-[#1800AD] text-[#F0F4F4] shadow-[0_0_12px_rgba(24,0,173,0.3)]' : 'bg-[#1800AD]/10 text-[#4A5568] hover:text-[#1800AD]'
                 }`}
               >
                 {y}
@@ -155,7 +181,7 @@ export default function Gallery() {
               {Array.from({ length: 8 }).map((_, i) => (
                 <div
                   key={i}
-                  className={`rounded-xl bg-[#1CB1E3]/10 border border-[#1CB1E3]/20 animate-pulse ${
+                  className={`rounded-xl bg-gradient-to-r from-[#1CB1E3]/10 via-[#1CB1E3]/5 to-[#1CB1E3]/10 border border-[#1CB1E3]/20 animate-pulse ${
                     i % 3 === 0 ? 'aspect-[3/4] row-span-2' : 'aspect-[4/3]'
                   }`}
                 />
@@ -172,17 +198,30 @@ export default function Gallery() {
                     key={item.id}
                     type="button"
                     onClick={() => setSelected(item)}
-                    className={`rounded-xl overflow-hidden border border-[#1800AD]/10 bg-[#1800AD]/5 focus:outline-none focus:ring-2 focus:ring-[#1800AD] transition-transform hover:scale-[1.02] ${
+                    className={`rounded-xl overflow-hidden border border-[#1800AD]/10 bg-[#1800AD]/5 focus:outline-none focus:ring-2 focus:ring-[#1800AD] group relative ${
                       isPortrait ? 'row-span-2' : ''
                     }`}
                   >
                     {item.src ? (
-                      <img
-                        src={item.thumb || item.src}
-                        alt={item.caption || `${item.event} photo`}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
+                      <>
+                        <img
+                          src={item.thumb || item.src}
+                          alt={item.caption || `${item.event} photo`}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                        {/* Hover overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0f0066]/90 via-[#1800AD]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                          {item.caption && (
+                            <p className="text-white text-sm font-medium leading-snug translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                              {item.caption}
+                            </p>
+                          )}
+                          <p className="text-[#3DDFF5] text-xs mt-1 translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                            {item.event} · {item.year}
+                          </p>
+                        </div>
+                      </>
                     ) : (
                       <div className="w-full h-full bg-[#1800AD]/10 flex items-center justify-center text-[#1800AD]/30 text-sm">
                         Photo
@@ -196,7 +235,7 @@ export default function Gallery() {
         </div>
       </section>
 
-      {/* Video highlights */}
+      {/* Video highlights 
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-heading text-2xl font-bold text-[#1800AD] mb-6">Highlight reels</h2>
@@ -208,7 +247,7 @@ export default function Gallery() {
           </motion.div>
         </div>
       </section>
-
+*/}
       {/* Modal with loading spinner */}
       {selected && (
         <div
@@ -218,11 +257,32 @@ export default function Gallery() {
           aria-modal="true"
         >
           <div
-            className={`bg-[#0f0066] rounded-2xl overflow-hidden border border-[#1CB1E3]/30 shadow-xl ${
+            className={`bg-[#0f0066] rounded-2xl overflow-hidden border border-[#1CB1E3]/30 shadow-xl relative ${
               selected.orientation === 'portrait' ? 'max-w-md' : 'max-w-4xl'
             } w-full`}
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Navigation arrows */}
+            {hasPrev && (
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); goToPrev(); }}
+                className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-black/50 border border-white/20 flex items-center justify-center text-white hover:bg-black/70 transition-colors"
+                aria-label="Previous image"
+              >
+                ←
+              </button>
+            )}
+            {hasNext && (
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); goToNext(); }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-black/50 border border-white/20 flex items-center justify-center text-white hover:bg-black/70 transition-colors"
+                aria-label="Next image"
+              >
+                →
+              </button>
+            )}
             {/* Image area with fixed placeholder size + spinner */}
             <div
               className="relative bg-[#1800AD]/40"

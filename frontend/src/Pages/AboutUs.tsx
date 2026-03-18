@@ -46,7 +46,7 @@ export default function AboutUs() {
             {...fadeIn}
             className="mt-4 text-xl text-[#A7C2C3] max-w-2xl"
           >
-            Learn a little about Mac AI.
+            Founded in 2017, MacAI has grown into one of Canada's most active student AI societies — driving education, innovation, and community at McMaster and beyond.
           </motion.p>
         </div>
       </section>

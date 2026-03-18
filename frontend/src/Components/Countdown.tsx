@@ -45,18 +45,18 @@ export default function Countdown({ variant = 'light' }: CountdownProps) {
         <div
           key={label}
           className={`${
-            isDark 
-              ? 'bg-white/10 border-white/10' 
+            isDark
+              ? 'bg-[#3DDFF5]/10 border-[#3DDFF5]/25'
               : 'bg-[#1800AD]/10 border-[#1800AD]/5'
           } rounded-xl px-4 py-3 min-w-[70px] text-center border shadow-sm`}
         >
           <div className={`text-2xl sm:text-4xl font-heading font-bold tabular-nums ${
-            isDark ? 'text-white' : 'text-[#1800AD]'
+            isDark ? 'text-[#3DDFF5] drop-shadow-[0_0_8px_rgba(61,223,245,0.6)]' : 'text-[#1800AD]'
           }`}>
             {pad(Number(value))}
           </div>
           <div className={`text-xs sm:text-sm uppercase tracking-wider font-semibold ${
-            isDark ? 'text-white/60' : 'text-[#4A5568]'
+            isDark ? 'text-[#1CB1E3]/80' : 'text-[#4A5568]'
           }`}>{label}</div>
         </div>
       ))}
