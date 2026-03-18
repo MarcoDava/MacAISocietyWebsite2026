@@ -123,32 +123,32 @@ export default function Home() {
     }
   };
     return (
-    <div className="bg-[#1800AD] text-[#F0F4F4]">
-      {/* 1) Hero – Hook (vision + energy) */}
+    <div className="bg-[#F0F4F4] text-[#1800AD]">
+      {/* 1) Hero – Off-white bg with blue text */}
       <section className="relative h-screen flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1800AD] via-[#0f0066] to-[#1800AD]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_70%_30%,rgba(28,177,227,0.15),transparent)]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#F0F4F4] via-[#E8EEEE] to-[#F0F4F4]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_70%_30%,rgba(24,0,173,0.06),transparent)]" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid lg:grid-cols-2 gap-12 items-center">
         <Spotlight
           className="-top-40 left-0 md:-top-20 md:left-20"
-          fill="white"
+          fill="#1800AD"
           />
           <div className="relative z-20 max-w-xl">
             <EncryptedText 
             text="Building the Future of AI at McMaster." 
-            className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F0F4F4] leading-tight z-10" 
+            className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1800AD] leading-tight z-10" 
             revealDelayMs={20}
             charset="abcdefghijklmnopqrstuvwxyz"
             />
-            <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.40, 1], x: [-60, -5, 0] }} transition={{ duration: 2, delay: 0.2 }} className="mt-6 text-xl text-[#A7C2C3] max-w-xl">
+            <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.40, 1], x: [-60, -5, 0] }} transition={{ duration: 2, delay: 0.2 }} className="mt-6 text-xl text-[#4A5568] max-w-xl">
               Canada's next generation of AI innovators, creators, and problem-solvers starts here.
             </motion.p>
-            <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.20, 1], x: [-60, -10, 0] }} transition={{ duration: 2, delay: 0.2 }} className="mt-4 text-[#3DDFF5] font-medium">Empowering the McMaster community through AI education and collaboration.</motion.p>
+            <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.20, 1], x: [-60, -10, 0] }} transition={{ duration: 2, delay: 0.2 }} className="mt-4 text-[#1800AD] font-semibold">Empowering the McMaster community through AI education and collaboration.</motion.p>
             <motion.div initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0,0.10, 1], x: [-60, -20, 0] }} transition={{ duration: 2, delay: 0.2 }} className="mt-10 flex flex-wrap gap-4">
               <Link to="/contact" className="btn-cta">
                 Join the Society
               </Link>
-              <Link to="/machacks" className="btn-secondary">
+              <Link to="/machacks" className="font-heading font-bold text-[#1800AD] border-2 border-[#1800AD] px-6 py-3 rounded-lg hover:bg-[#1800AD] hover:text-white transition-all">
                 Explore MacHacks 2026
               </Link>
             </motion.div>
@@ -205,12 +205,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2) What we offer – Immediate Value */}
-      <motion.section {...fadeInRight} className="text-black py-24 md:py-32 bg-[#F0F4F4] rounded-b-[5vh] relative z-10">
+      {/* 2) What we offer – White cards on off-white */}
+      <motion.section {...fadeInRight} className="text-[#1800AD] py-24 md:py-32 bg-white rounded-b-[5vh] relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <motion.h2 {...fadeInDown} className="font-heading text-4xl font-bold mb-4">Elevate your AI journey</motion.h2>
-            <motion.p {...fadeIn} className="max-w-2xl mx-auto text-lg text-black/70">
+            <motion.h2 {...fadeInDown} className="font-heading text-4xl font-bold mb-4 text-[#1800AD]">Elevate your AI journey</motion.h2>
+            <motion.p {...fadeIn} className="max-w-2xl mx-auto text-lg text-[#4A5568]">
               MacAI provides a comprehensive ecosystem for learners and builders alike. From foundational knowledge to real-world deployment, we've got you covered.
             </motion.p>
           </div>
@@ -219,21 +219,21 @@ export default function Home() {
               <motion.div
                 key={title}
                 {...fadeInRight}
-                className="bg-white rounded-3xl p-6 border border-black/5 shadow-sm hover:shadow-xl transition-all duration-300 group"
+                className="bg-[#F0F4F4] rounded-3xl p-6 border border-[#1800AD]/10 shadow-sm hover:shadow-xl transition-all duration-300 group"
               >
                 <div className="overflow-hidden rounded-2xl mb-6">
                   <img src={imgsrc} alt={title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <h3 className="font-heading text-2xl font-bold text-[#1800AD] mb-3">{title}</h3>
-                <p className="text-black/60 leading-relaxed">{desc}</p>
+                <p className="text-[#4A5568] leading-relaxed">{desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </motion.section>
 
-      {/* 3) Social proof — Condensed & Modern */}
-      <section className="py-24 md:py-32 bg-[#0f0066]">
+      {/* 3) Social proof — Off-white bg with blue accents */}
+      <section className="py-24 md:py-32 bg-[#F0F4F4]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
             {STATS.map(({ value, suffix, label }) => (
@@ -242,21 +242,21 @@ export default function Home() {
                 {...fadeIn}
                 className="text-center group"
               >
-                <div className="font-heading text-4xl md:text-5xl font-bold text-[#3DDFF5] mb-2 group-hover:scale-110 transition-transform">
+                <div className="font-heading text-4xl md:text-5xl font-bold text-[#1800AD] mb-2 group-hover:scale-110 transition-transform">
                   <CountUp end={value} suffix={suffix} />
                 </div>
-                <div className="text-macai-sage font-medium tracking-wide uppercase text-xs">{label}</div>
+                <div className="text-[#4A5568] font-medium tracking-wide uppercase text-xs">{label}</div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 4) Testimonials — The Human Element */}
-      <section className="py-24 md:py-32 bg-gradient-to-b from-[#0f0066] to-[#1800AD]">
+      {/* 4) Testimonials — Light bg with blue accents */}
+      <section className="py-24 md:py-32 bg-gradient-to-b from-[#F0F4F4] to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <motion.h2 {...fadeInDown} className="font-heading text-3xl font-bold text-[#F0F4F4]">
+            <motion.h2 {...fadeInDown} className="font-heading text-3xl font-bold text-[#1800AD]">
               Stories from our community
             </motion.h2>
           </div>
@@ -265,15 +265,15 @@ export default function Home() {
       </section>
 
       {/* 5) MacHacks — The Big Event */}
-      <section className="py-24 md:py-32 pb-36 md:pb-70 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[#1CB1E3]/5 pointer-events-none" />
+      <section className="py-24 md:py-32 pb-36 md:pb-70 relative overflow-hidden bg-white">
+        <div className="absolute inset-0 bg-[#1800AD]/3 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div {...fadeInDown}>
-            <span className="inline-block px-4 py-1.5 rounded-full bg-[#1CB1E3]/20 text-[#3DDFF5] text-sm font-bold tracking-wider uppercase mb-6">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-[#1800AD]/10 text-[#1800AD] text-sm font-bold tracking-wider uppercase mb-6">
               Coming Soon
             </span>
-            <h2 className="font-heading text-5xl md:text-6xl font-bold text-[#F0F4F4] mb-6">MacHacks 2026</h2>
-            <p className="text-xl text-macai-sage mb-12 max-w-2xl mx-auto">
+            <h2 className="font-heading text-5xl md:text-6xl font-bold text-[#1800AD] mb-6">MacHacks 2026</h2>
+            <p className="text-xl text-[#4A5568] mb-12 max-w-2xl mx-auto">
               Our flagship hackathon returns on March 21st. Join hundreds of students to build, learn, and compete for $10k+ in prizes.
             </p>
           </motion.div>
@@ -286,8 +286,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6) Pathway Quiz — Discovery & Interaction */}
-      <section className="py-24 md:py-32 bg-[#F0F4F4] text-black rounded-t-[5vh]">
+      {/* 6) Pathway Quiz */}
+      <section className="py-24 md:py-32 bg-[#F0F4F4] text-[#1800AD] rounded-t-[5vh]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
             {done ? (
@@ -295,7 +295,7 @@ export default function Home() {
                 <span className="text-[#1800AD] font-bold tracking-widest uppercase text-sm mb-4 block">Result</span>
                 <h2 className="text-4xl font-bold text-[#1800AD] mb-6">Your MacAI Pathway</h2>
                 <div className="bg-white p-8 rounded-3xl shadow-xl border border-[#1800AD]/10">
-                  <p className="text-xl text-[#1800AD]/80 leading-relaxed italic">
+                  <p className="text-xl text-[#4A5568] leading-relaxed italic">
                     {PATHWAYS[answers.pathway ?? 'projects'] || PATHWAYS.projects}
                   </p>
                 </div>
@@ -307,14 +307,14 @@ export default function Home() {
                   <h2 className="font-heading text-4xl font-bold text-[#1800AD] mb-6">
                     Find your place in the society
                   </h2>
-                  <p className="text-black/60 text-lg mb-8">
+                  <p className="text-[#4A5568] text-lg mb-8">
                     Not sure where to start? Tell us a bit about your goals and we'll point you to the perfect pathway.
                   </p>
                 </div>
-                <motion.div {...fadeIn} className="bg-white rounded-3xl p-8 shadow-2xl border border-black/5">
-                  <div className="mb-6 flex justify-between items-center text-xs font-bold uppercase tracking-widest text-black/40">
+                <motion.div {...fadeIn} className="bg-white rounded-3xl p-8 shadow-2xl border border-[#1800AD]/5">
+                  <div className="mb-6 flex justify-between items-center text-xs font-bold uppercase tracking-widest text-[#4A5568]/60">
                     <span>Question {step + 1} of {QUIZ_QUESTIONS.length}</span>
-                    <div className="w-24 h-1.5 bg-black/5 rounded-full overflow-hidden">
+                    <div className="w-24 h-1.5 bg-[#1800AD]/10 rounded-full overflow-hidden">
                       <div className="h-full bg-[#1800AD]" style={{ width: `${((step + 1) / QUIZ_QUESTIONS.length) * 100}%` }} />
                     </div>
                   </div>
@@ -325,9 +325,9 @@ export default function Home() {
                         key={opt}
                         type="button"
                         onClick={() => handleNext(opt)}
-                        className="w-full text-left px-6 py-4 rounded-xl border-2 border-black/5 hover:border-[#1800AD] hover:bg-[#1800AD]/5 transition-all group relative overflow-hidden"
+                        className="w-full text-left px-6 py-4 rounded-xl border-2 border-[#1800AD]/10 hover:border-[#1800AD] hover:bg-[#1800AD]/5 transition-all group relative overflow-hidden"
                       >
-                        <span className="relative z-10 font-bold text-black/80 group-hover:text-[#1800AD]">{opt}</span>
+                        <span className="relative z-10 font-bold text-[#4A5568] group-hover:text-[#1800AD]">{opt}</span>
                       </button>
                     ))}
                   </div>
@@ -336,7 +336,7 @@ export default function Home() {
             )}
           </div>
           
-          <div className="mt-24 pt-16 border-t border-black/5 flex flex-wrap justify-center gap-6">
+          <div className="mt-24 pt-16 border-t border-[#1800AD]/10 flex flex-wrap justify-center gap-6">
             <Link to="/contact" className="font-heading font-bold text-[#1800AD] border-2 border-[#1800AD] px-8 py-4 rounded-xl hover:bg-[#1800AD] hover:text-white transition-all">
               Join the Society
             </Link>
@@ -347,11 +347,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3) What we offer */}
-      <motion.section {...fadeInRight} className="text-black py-16 md:py-50 rounded-[5vh]">
+      {/* 7) Partners */}
+      <motion.section {...fadeInRight} className="py-16 md:py-50 bg-[#F0F4F4]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.p {...fadeIn} className="text-center text-macai-sage font-bold tracking-widest uppercase text-xs mb-10">Supported by our partners</motion.p>
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20">
+          <motion.p {...fadeIn} className="text-center text-[#4A5568] font-bold tracking-widest uppercase text-xs mb-10">Supported by our partners</motion.p>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12 items-center justify-items-center">
             {CURRENT_PARTNERS.map((partner) => (
               <motion.a
                 whileHover={{ scale: 1.05 }}
@@ -359,14 +359,20 @@ export default function Home() {
                 href={partner.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center opacity-60 hover:opacity-100 transition-opacity"
+                className="flex flex-col items-center opacity-70 hover:opacity-100 transition-all duration-300 w-full max-w-[200px]"
               >
-                <img src={partner.logoUrl} alt={partner.name} className="w-32 h-16 object-contain filter grayscale invert brightness-200" />
+                <div className="bg-white/50 rounded-xl p-4 w-full aspect-[2/1] flex items-center justify-center border border-[#1800AD]/5 shadow-sm hover:shadow-md transition-shadow">
+                  <img 
+                    src={partner.logoUrl} 
+                    alt={partner.name} 
+                    className="w-full h-full object-contain" 
+                  />
+                </div>
               </motion.a>
             ))}
           </div>
           <div className="text-center mt-12">
-            <Link to="/partnerships" className="text-[#3DDFF5] font-bold hover:underline tracking-wide uppercase text-xs">Become a Partner</Link>
+            <Link to="/partnerships" className="text-[#1800AD] font-bold hover:underline tracking-wide uppercase text-xs">Become a Partner</Link>
           </div>
         </div>
       </motion.section>

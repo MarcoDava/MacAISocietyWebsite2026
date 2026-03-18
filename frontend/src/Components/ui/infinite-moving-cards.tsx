@@ -103,7 +103,7 @@ export const InfiniteMovingCards = ({
                 <img
                   src={item.src}
                   alt={item.alt}
-                  className="h-full w-full object-cover transition duration-300 group-hover:grayscale group-hover:brightness-75"
+                  className="h-full w-full object-contain p-4 transition duration-300 group-hover:grayscale group-hover:brightness-75"
                   loading={isPriority ? "eager" : "lazy"}
                   decoding="async"
                   fetchPriority={isPriority ? "high" : undefined}

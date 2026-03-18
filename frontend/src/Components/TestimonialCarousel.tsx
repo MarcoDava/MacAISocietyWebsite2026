@@ -73,15 +73,15 @@ export default function TestimonialCarousel({
         {/* Left peek card – hidden on mobile */}
         <div className="hidden md:block w-1/4 flex-shrink-0 pointer-events-none select-none">
           <div
-            className="bg-[#0f0066]/60 rounded-xl p-8 border border-[#1CB1E3]/20 opacity-40 scale-[0.85] blur-[1px] transition-all duration-500"
+            className="bg-[#1800AD]/10 rounded-xl p-8 border border-[#1800AD]/10 opacity-30 scale-[0.85] blur-[1px] transition-all duration-500 shadow-sm"
           >
-            <p className="text-[#F0F4F4] italic">"{items[prevIndex].quote}"</p>
-            <cite className="mt-4 block text-[#3DDFF5] not-italic">— {items[prevIndex].name}</cite>
+            <p className="text-[#1800AD]/60 italic">"{items[prevIndex].quote}"</p>
+            <cite className="mt-4 block text-[#1800AD] not-italic">— {items[prevIndex].name}</cite>
           </div>
         </div>
 
         {/* Center card – animated */}
-        <div className="w-full md:w-1/2 flex-shrink-0 relative min-h-[200px]">
+        <div className="w-full md:w-1/2 flex-shrink-0 relative min-h-[220px]">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.blockquote
               key={activeIndex}
@@ -95,12 +95,13 @@ export default function TestimonialCarousel({
                 opacity: { duration: 0.3 },
                 scale: { duration: 0.3 },
               }}
-              className="absolute inset-0 bg-[#0f0066]/60 rounded-xl p-8 border border-[#1CB1E3]/40 shadow-[0_0_30px_rgba(28,177,227,0.15)]"
+              className="absolute inset-0 bg-[#1800AD] rounded-3xl p-8 border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.12)] flex flex-col justify-center"
             >
-              <p className="text-[#F0F4F4] italic text-lg leading-relaxed">
-                "{items[activeIndex].quote}"
+              <div className="absolute top-4 left-6 text-4xl text-white/10 font-serif">"</div>
+              <p className="text-[#F0F4F4] italic text-lg leading-relaxed relative z-10">
+                {items[activeIndex].quote}
               </p>
-              <cite className="mt-6 block text-[#3DDFF5] not-italic font-medium">
+              <cite className="mt-6 block text-[#3DDFF5] not-italic font-bold tracking-tight">
                 — {items[activeIndex].name}
               </cite>
             </motion.blockquote>
@@ -110,10 +111,10 @@ export default function TestimonialCarousel({
         {/* Right peek card – hidden on mobile */}
         <div className="hidden md:block w-1/4 flex-shrink-0 pointer-events-none select-none">
           <div
-            className="bg-[#0f0066]/60 rounded-xl p-8 border border-[#1CB1E3]/20 opacity-40 scale-[0.85] blur-[1px] transition-all duration-500"
+            className="bg-[#1800AD]/10 rounded-xl p-8 border border-[#1800AD]/10 opacity-30 scale-[0.85] blur-[1px] transition-all duration-500 shadow-sm"
           >
-            <p className="text-[#F0F4F4] italic">"{items[nextIndex].quote}"</p>
-            <cite className="mt-4 block text-[#3DDFF5] not-italic">— {items[nextIndex].name}</cite>
+            <p className="text-[#1800AD]/60 italic">"{items[nextIndex].quote}"</p>
+            <cite className="mt-4 block text-[#1800AD] not-italic">— {items[nextIndex].name}</cite>
           </div>
         </div>
       </div>
@@ -128,8 +129,8 @@ export default function TestimonialCarousel({
             onClick={() => goTo(idx)}
             className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
               idx === activeIndex
-                ? 'bg-[#3DDFF5] scale-125 shadow-[0_0_8px_rgba(61,223,245,0.6)]'
-                : 'bg-[#1CB1E3]/30 hover:bg-[#1CB1E3]/60'
+                ? 'bg-[#1800AD] scale-125 shadow-[0_0_8px_rgba(24,0,173,0.3)]'
+                : 'bg-[#1800AD]/20 hover:bg-[#1800AD]/40'
             }`}
           />
         ))}

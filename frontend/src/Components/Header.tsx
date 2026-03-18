@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-// import { motion } from 'motion/react';
 import logo from '../assets/mcmasterAiLogo.svg';
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
-  { to: '/machacks', label: 'MacHacks 2026' },
+  { to: '/about', label: 'About' },
+  { to: '/machacks', label: 'MacHacks' },
   { to: '/projects', label: 'Projects' },
   { to: '/partnerships', label: 'Partnerships' },
   { to: '/gallery', label: 'Gallery' },
@@ -15,13 +15,20 @@ const NAV_LINKS = [
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const isMacHacks = location.pathname === '/machacks';
 
   return (
-    <header className={`w-full fixed top-0 z-50 backdrop-blur-sm border-b ${menuOpen ? 'bg-[#F0F4F4]' : 'bg-[#F0F4F4]/60'}`}>
+    <header className={`w-full fixed top-0 z-50 backdrop-blur-sm border-b transition-colors duration-300 ${
+      isMacHacks ? 'border-[#35494C]/40' : 'border-[#F0F4F4]/20'
+    } ${
+      menuOpen 
+        ? (isMacHacks ? 'bg-[#060606]' : 'bg-[#1800AD]') 
+        : (isMacHacks ? 'bg-[#060606]/90' : 'bg-[#1800AD]/95')
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <Link to="/" className="flex items-center gap-2 focus-ring rounded h-full" aria-label="MacAI Society home">
-            <img src={logo} alt="MacAI Society Logo" className="h-[80%]" />
+            <img src={logo} alt="MacAI Society Logo" className="h-[80%] brightness-0 invert" />
           </Link>
 
           <nav className="hidden md:flex items-center gap-1">
@@ -31,8 +38,8 @@ export default function Header() {
                 to={to}
                 className={`px-3 py-2 rounded-lg text-base font-bold transition-colors ${
                   location.pathname === to
-                    ? 'text-[#1800AD] bg-[#1CB1E3]/10'
-                    : 'text-[#1800AD]/70 hover:text-[#1800AD] hover:bg-[#A7C2C3]/20'
+                    ? 'text-[#F0F4F4] bg-[#F0F4F4]/15'
+                    : 'text-[#F0F4F4]/70 hover:text-[#F0F4F4] hover:bg-[#F0F4F4]/10'
                 }`}
               >
                 {label}
@@ -43,13 +50,17 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <Link
               to="/machacks"
-              className="btn-cta text-sm py-2 px-4 hidden sm:inline-block"
+              className={`${
+                isMacHacks 
+                  ? 'bg-[#4F7C80] hover:bg-[#35494C] text-white' 
+                  : 'btn-cta'
+              } text-sm py-2 px-4 rounded-lg font-bold transition-all hidden sm:inline-block`}
             >
-              View MacHacks
+              {isMacHacks ? 'Register Now' : 'View MacHacks'}
             </Link>
             <button
               type="button"
-              className="md:hidden p-2 text-black rounded-lg hover:bg-white/10 focus-ring"
+              className="md:hidden p-2 text-[#F0F4F4] rounded-lg hover:bg-[#F0F4F4]/10 focus-ring"
               onClick={() => setMenuOpen((o) => !o)}
               aria-expanded={menuOpen}
               aria-label="Toggle menu"
@@ -66,7 +77,7 @@ export default function Header() {
         </div>
 
         <nav
-          className={`md:hidden border-t border-[#1CB1E3]/20 overflow-hidden transition-all duration-300 ease-out ${
+          className={`md:hidden border-t border-[#F0F4F4]/20 overflow-hidden transition-all duration-300 ease-out ${
             menuOpen ? 'h-screen opacity-100 py-4' : 'h-0 opacity-0 py-0'
           }`}
         >
@@ -75,8 +86,8 @@ export default function Header() {
               <li key={to}>
                 <Link
                   to={to}
-                  className={`block px-4 py-3 rounded-lg text-[#1800AD]/70 font-bold md:text-[#F0F4F4] ${
-                    location.pathname === to ? 'bg-[#1CB1E3]/20' : 'hover:bg-white/5'
+                  className={`block px-4 py-3 rounded-lg text-[#F0F4F4]/80 font-bold ${
+                    location.pathname === to ? 'bg-[#F0F4F4]/15 text-[#F0F4F4]' : 'hover:bg-[#F0F4F4]/5'
                   }`}
                   onClick={() => setMenuOpen(false)}
                 >
@@ -87,10 +98,12 @@ export default function Header() {
             <li>
               <Link
                 to="/machacks"
-                className="block px-4 py-3 text-[#E00064] font-bold"
+                className={`block px-4 py-3 font-bold ${
+                  isMacHacks ? 'text-[#4F7C80]' : 'text-[#E00064]'
+                }`}
                 onClick={() => setMenuOpen(false)}
               >
-                Register for MacHacks 2026
+                {isMacHacks ? 'Register for MacHacks' : 'Register for MacHacks 2026'}
               </Link>
             </li>
           </ul>

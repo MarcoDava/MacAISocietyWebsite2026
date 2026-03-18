@@ -93,7 +93,7 @@ export default function Gallery() {
   return (
     <>
       {/* Hero */}
-      <section className="relative py-20 md:py-28 overflow-hidden">
+      <section className="relative py-30 md:py-38 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#1800AD] via-[#0f0066] to-[#1800AD]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_70%_30%,rgba(28,177,227,0.12),transparent)]" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -110,18 +110,18 @@ export default function Gallery() {
       </section>
 
       {/* Filters */}
-      <section className="py-6 bg-[#0f0066]/50 border-b border-[#1CB1E3]/20">
+      <section className="py-6 bg-white/80 border-b border-[#1800AD]/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
           {/* Event filters */}
           <div className="flex flex-wrap items-center gap-3">
-            <span className="text-[#A7C2C3] text-sm font-medium shrink-0">Category:</span>
+            <span className="text-[#4A5568] text-sm font-medium shrink-0">Category:</span>
             {events.map((e) => (
               <button
                 key={e}
                 type="button"
                 onClick={() => setEventFilter(e)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  eventFilter === e ? 'bg-[#3DDFF5] text-[#1800AD]' : 'bg-[#1CB1E3]/20 text-[#A7C2C3] hover:text-[#F0F4F4]'
+                  eventFilter === e ? 'bg-[#1800AD] text-[#F0F4F4]' : 'bg-[#1800AD]/10 text-[#4A5568] hover:text-[#1800AD]'
                 }`}
               >
                 {e}
@@ -130,14 +130,14 @@ export default function Gallery() {
           </div>
           {/* Year filters */}
           <div className="flex flex-wrap items-center gap-3">
-            <span className="text-[#A7C2C3] text-sm font-medium shrink-0">Year:</span>
+            <span className="text-[#4A5568] text-sm font-medium shrink-0">Year:</span>
             {years.map((y) => (
               <button
                 key={y}
                 type="button"
                 onClick={() => setYearFilter(y)}
                 className={`px-3 py-1.5 rounded-lg text-sm whitespace-nowrap transition-colors ${
-                  yearFilter === y ? 'bg-[#3DDFF5] text-[#1800AD]' : 'bg-[#1CB1E3]/20 text-[#A7C2C3] hover:text-[#F0F4F4]'
+                  yearFilter === y ? 'bg-[#1800AD] text-[#F0F4F4]' : 'bg-[#1800AD]/10 text-[#4A5568] hover:text-[#1800AD]'
                 }`}
               >
                 {y}
@@ -147,8 +147,8 @@ export default function Gallery() {
         </div>
       </section>
 
-      {/* Mosaic grid — orientation-aware */}
-      <section className="py-16 md:py-24">
+      {/* Mosaic grid */}
+      <section className="py-16 md:py-24 bg-[#F0F4F4]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
@@ -162,7 +162,7 @@ export default function Gallery() {
               ))}
             </div>
           ) : displayImages.length === 0 ? (
-            <p className="text-center text-[#A7C2C3] py-12">No photos match your filters.</p>
+            <p className="text-center text-[#4A5568] py-12">No photos match your filters.</p>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[200px] md:auto-rows-[250px]">
               {displayImages.map((item) => {
@@ -172,7 +172,7 @@ export default function Gallery() {
                     key={item.id}
                     type="button"
                     onClick={() => setSelected(item)}
-                    className={`rounded-xl overflow-hidden border border-[#1CB1E3]/20 bg-[#1CB1E3]/10 focus:outline-none focus:ring-2 focus:ring-[#3DDFF5] transition-transform hover:scale-[1.02] ${
+                    className={`rounded-xl overflow-hidden border border-[#1800AD]/10 bg-[#1800AD]/5 focus:outline-none focus:ring-2 focus:ring-[#1800AD] transition-transform hover:scale-[1.02] ${
                       isPortrait ? 'row-span-2' : ''
                     }`}
                   >
@@ -184,7 +184,7 @@ export default function Gallery() {
                         loading="lazy"
                       />
                     ) : (
-                      <div className="w-full h-full bg-[#1800AD]/40 flex items-center justify-center text-[#3DDFF5]/50 text-sm">
+                      <div className="w-full h-full bg-[#1800AD]/10 flex items-center justify-center text-[#1800AD]/30 text-sm">
                         Photo
                       </div>
                     )}
@@ -197,12 +197,12 @@ export default function Gallery() {
       </section>
 
       {/* Video highlights */}
-      <section className="py-16 md:py-24 bg-[#0f0066]/50">
+      <section className="py-16 md:py-24 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-2xl font-bold text-[#F0F4F4] mb-6">Highlight reels</h2>
+          <h2 className="font-heading text-2xl font-bold text-[#1800AD] mb-6">Highlight reels</h2>
           <motion.div
             {...fadeIn}
-            className="aspect-video bg-[#1800AD]/60 rounded-xl border border-[#1CB1E3]/20 flex items-center justify-center text-[#A7C2C3]"
+            className="aspect-video bg-[#1800AD]/5 rounded-xl border border-[#1800AD]/10 flex items-center justify-center text-[#4A5568]"
           >
             Video embed placeholder (MacHacks / workshop highlights)
           </motion.div>

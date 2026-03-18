@@ -76,44 +76,44 @@ export default function Projects() {
       </section>
 
       {/* Filters & search */}
-      <section className="py-8 bg-[#0f0066]/50 backdrop-blur-sm sticky top-[4rem] z-40 border-b border-[#1CB1E3]/20">
+      <section className="py-8 bg-white/80 backdrop-blur-sm sticky top-[4rem] z-40 border-b border-[#1800AD]/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading && (
-            <p className="text-[#A7C2C3] text-sm mb-2">Loading projects…</p>
+            <p className="text-[#4A5568] text-sm mb-2">Loading projects…</p>
           )}
           {error && (
-            <p className="text-[#A7C2C3] text-sm mb-2">{error}</p>
+            <p className="text-[#4A5568] text-sm mb-2">{error}</p>
           )}
           <input
             type="search"
             placeholder="Search projects..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full max-w-md px-4 py-3 rounded-lg bg-[#1800AD]/60 border border-[#1CB1E3]/30 text-[#F0F4F4] placeholder-[#A7C2C3] focus:outline-none focus:border-[#3DDFF5] mb-4"
+            className="w-full max-w-md px-4 py-3 rounded-lg bg-[#F0F4F4] border border-[#1800AD]/20 text-[#1800AD] placeholder-[#4A5568]/50 focus:outline-none focus:border-[#1800AD] mb-4"
             aria-label="Search projects"
           />
           <div className="flex flex-wrap gap-3">
-            <span className="text-[#A7C2C3] text-sm mr-2">Year:</span>
+            <span className="text-[#4A5568] text-sm mr-2">Year:</span>
             {years.map((y) => (
               <button
                 key={y}
                 type="button"
                 onClick={() => setYearFilter(y)}
                 className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                  yearFilter === y ? 'bg-[#3DDFF5] text-[#1800AD]' : 'bg-[#1CB1E3]/20 text-[#A7C2C3] hover:text-[#F0F4F4]'
+                  yearFilter === y ? 'bg-[#1800AD] text-[#F0F4F4]' : 'bg-[#1800AD]/10 text-[#4A5568] hover:text-[#1800AD]'
                 }`}
               >
                 {y}
               </button>
             ))}
-            <span className="text-[#A7C2C3] text-sm mx-2">Language:</span>
+            <span className="text-[#4A5568] text-sm mx-2">Language:</span>
             {languages.map((l) => (
               <button
                 key={l}
                 type="button"
                 onClick={() => setLangFilter(l)}
                 className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                  langFilter === l ? 'bg-[#3DDFF5] text-[#1800AD]' : 'bg-[#1CB1E3]/20 text-[#A7C2C3] hover:text-[#F0F4F4]'
+                  langFilter === l ? 'bg-[#1800AD] text-[#F0F4F4]' : 'bg-[#1800AD]/10 text-[#4A5568] hover:text-[#1800AD]'
                 }`}
               >
                 {l}
@@ -124,24 +124,24 @@ export default function Projects() {
       </section>
 
       {/* Grid */}
-      <section className="py-16 md:py-24">
+      <section className="py-16 md:py-24 bg-[#F0F4F4]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {Array.from({ length: 6 }).map((_, index) => (
                 <div
                   key={index}
-                  className="bg-[#1800AD]/40 rounded-xl p-6 border border-[#1CB1E3]/20 animate-pulse"
+                  className="bg-white rounded-xl p-6 border border-[#1800AD]/10 animate-pulse"
                 >
-                  <div className="aspect-video rounded-lg bg-[#1CB1E3]/10 mb-4" />
-                  <div className="h-5 w-2/3 bg-[#1CB1E3]/20 rounded mb-2" />
-                  <div className="h-4 w-full bg-[#1CB1E3]/10 rounded mb-1" />
-                  <div className="h-4 w-3/4 bg-[#1CB1E3]/10 rounded" />
+                  <div className="aspect-video rounded-lg bg-[#1800AD]/5 mb-4" />
+                  <div className="h-5 w-2/3 bg-[#1800AD]/10 rounded mb-2" />
+                  <div className="h-4 w-full bg-[#1800AD]/5 rounded mb-1" />
+                  <div className="h-4 w-3/4 bg-[#1800AD]/5 rounded" />
                 </div>
               ))}
             </div>
           ) : filtered.length === 0 ? (
-            <p className="text-center text-[#A7C2C3] py-12">
+            <p className="text-center text-[#4A5568] py-12">
               No projects match your filters.
             </p>
           ) : (
@@ -151,31 +151,31 @@ export default function Projects() {
                   key={project.id}
                   type="button"
                   onClick={() => setModal(project)}
-                  className="text-left bg-[#0f0066]/60 rounded-xl overflow-hidden border border-[#1CB1E3]/20 card-lift"
+                  className="text-left bg-white rounded-xl overflow-hidden border border-[#1800AD]/10 card-lift shadow-sm hover:shadow-lg"
                 >
-                  <div className="aspect-video bg-[#1CB1E3]/10 flex items-center justify-center overflow-hidden">
+                  <div className="aspect-video bg-[#1800AD]/5 flex items-center justify-center overflow-hidden">
                     {project.image ? (
                       <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
                     ) : (
-                      <span className="text-[#3DDFF5]/50 text-sm">
+                      <span className="text-[#1800AD]/30 text-sm">
                         {project.name}
                       </span>
                     )}
                   </div>
                   <div className="p-6">
                     <div className="flex gap-2 mb-2 flex-wrap">
-                      <span className="px-2 py-0.5 rounded bg-[#1CB1E3]/20 text-[#3DDFF5] text-xs">
+                      <span className="px-2 py-0.5 rounded bg-[#1800AD]/10 text-[#1800AD] text-xs">
                         {project.year}
                       </span>
                     </div>
-                    <h3 className="font-heading text-xl font-bold text-[#F0F4F4]">
+                    <h3 className="font-heading text-xl font-bold text-[#1800AD]">
                       {project.name}
                     </h3>
-                    <p className="mt-2 text-[#A7C2C3] text-sm line-clamp-2">
+                    <p className="mt-2 text-[#4A5568] text-sm line-clamp-2">
                       {project.description}
                     </p>
                     {project.topics.length > 0 && (
-                      <p className="mt-3 text-[#3DDFF5] text-xs">
+                      <p className="mt-3 text-[#1800AD]/60 text-xs">
                         {project.topics.join(' · ')}
                       </p>
                     )}
@@ -188,7 +188,7 @@ export default function Projects() {
           <div className="mt-16 text-center">
             <motion.p
               {...fadeIn}
-              className="text-[#A7C2C3] mb-4"
+              className="text-[#4A5568] mb-4"
             >
               Want to propose a project or join an existing one?
             </motion.p>

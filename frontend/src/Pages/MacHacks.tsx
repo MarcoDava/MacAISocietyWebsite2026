@@ -4,15 +4,16 @@ import { motion } from 'motion/react';
 import CountUp from '../Components/CountUp';
 import Countdown from '../Components/Countdown';
 import { HeroParallax } from '../Components/HeroParallax';
+import macHacksImage from '../assets/MacHacksImageContent.avif';
 import {
   EVENT_INFO,
   SCHEDULE,
   SCHEDULE_CATEGORIES,
   SPONSORS,
+  PAST_MACHACKS_SPONSORS,
   PARALLAX_PRODUCTS,
   FAQ,
   MACHACKS_THEME as theme,
-  // type Sponsor,
 } from '../data/machacks-config';
 
 const fadeIn = {
@@ -22,8 +23,6 @@ const fadeIn = {
   transition: { duration: 1, delay: 0.2 },
 };
 
-
-
 export default function MacHacks() {
   const [scheduleFilter, setScheduleFilter] = useState<string>('all');
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
@@ -32,24 +31,29 @@ export default function MacHacks() {
     ? SCHEDULE
     : SCHEDULE.filter((s) => s.category === scheduleFilter);
 
+  const featuredSponsors = SPONSORS.filter(s => s.tier === 'featured');
+  const standardSponsors = SPONSORS.filter(s => s.tier === 'standard');
+  const communitySponsors = SPONSORS.filter(s => s.tier === 'community');
+
   return (
     <div className="bg-[#060606]">
       {/* Hero with MacHacks banner background */}
       <section className="relative min-h-[50vh] sm:min-h-[70vh] md:min-h-screen overflow-hidden flex flex-col items-center justify-center">
         {/* Background video */}
         <video
-          className="absolute sm:flex inset-0 top-16 sm:top-0 sm:w-full sm:h-full object:cover bg-gradient-to-t from-[#000000] via-transparent to-transparent "
+          className="absolute sm:flex inset-0 top-16 sm:top-0 sm:w-full sm:h-full object-cover bg-gradient-to-t from-[#000000] via-transparent to-transparent "
           src="/machacks-hero-animated.mp4"
           autoPlay
           muted
           playsInline
+          loop
         />
         {/* Dark overlay for better contrast */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-transparent" />
 
         {/* Countdown timer only */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 2,delay: 3}} className="relative z-10 mt-[47vh] mb-12 sm:mb-20 md:mb-32">
-          <Countdown />
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 2, delay: 1 }} className="relative z-10 mt-[47vh] mb-12 sm:mb-20 md:mb-32">
+          <Countdown variant="dark" />
         </motion.div>
       </section>
 
@@ -73,6 +77,48 @@ export default function MacHacks() {
             <span className="px-4 py-2 rounded-full bg-[#8B3D5A]/20 text-[#8B3D5A] text-sm font-medium border border-[#8B3D5A]/30">
               AI challenges
             </span>
+          </div>
+        </div>
+      </section>
+
+      {/* What is MacHacks? — About Us section */}
+      <section className="py-16 md:py-24 bg-[#060606] border-t border-[#35494C]/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Text – left */}
+            <motion.div {...fadeIn}>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-6">
+                What is MacHacks?
+              </h2>
+              <p className="text-[#E1E0E0] text-lg leading-relaxed mb-6">
+                MacHacks — presented by the McMaster Artificial Intelligence Society — is one of Canada's first major hackathons with a focus on Artificial Intelligence. The competition is sprint-style and enables students from all disciplines and experience levels to come together to produce innovative solutions.
+              </p>
+              <p className="text-[#E1E0E0] text-lg leading-relaxed mb-6">
+                This year's event will be a one day MLH certified HackDay on Saturday March 21st, from 9am-9pm in PGCLL. We can't wait to see you there! More information regarding scheduling and workshops will be released on our Instagram and website in the coming weeks.
+              </p>
+              <p className="text-[#E1E0E0]/80 mb-8">
+                Questions can be directed to our <a href="#faq" className="text-[#4F7C80] hover:underline font-medium">FAQ below</a>.
+              </p>
+              <p className="text-[#E1E0E0]/80 mb-8">
+                Interested in partnering with us and impacting students through MacHacks 2026?{' '}
+                <Link to="/partnerships" className="text-[#8B3D5A] hover:underline font-medium">Contact us!</Link>
+              </p>
+            </motion.div>
+
+            {/* Image – right */}
+            <motion.div
+              {...fadeIn}
+              className="relative"
+            >
+              <div className="bg-[#221A1D] rounded-2xl border border-[#35494C]/40 aspect-[4/3] flex items-center justify-center overflow-hidden group">
+                <img 
+                  src={macHacksImage} 
+                  alt="MacHacks Event" 
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -196,7 +242,7 @@ export default function MacHacks() {
         </div>
       </section>
 
-      {/* Sponsors Section */}
+      {/* Sponsors Section – Tiered */}
       <section className="py-16 md:py-24 bg-[#221A1D]/30 relative overflow-hidden">
         {/* Circuit board background pattern */}
         <div className="absolute inset-0 opacity-5" style={{
@@ -222,21 +268,51 @@ export default function MacHacks() {
             </motion.p>
           </div>
 
-          {/* All Sponsors - Unified Display */}
-          {SPONSORS.length > 0 && (
+          {/* Featured – Geotab own row */}
+          {featuredSponsors.length > 0 && (
             <div className="mb-10">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-                {SPONSORS.map((sponsor) => (
+              <p className="text-xs font-bold uppercase tracking-widest text-[#4F7C80]/60 mb-4 text-center">Featured Partner</p>
+              <div className="flex justify-center">
+                {featuredSponsors.map((sponsor) => (
                   <motion.a
                     key={sponsor.name}
                     href={sponsor.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full max-w-sm bg-[#221A1D] rounded-xl p-6 md:p-8
-                      border border-[#35494C]/40 flex items-center justify-center
-                      hover:border-[#4F7C80]/70 transition-all duration-300 group
-                      min-h-[180px] "
-                    whileHover={{ y: -4, boxShadow: `0 0 30px rgba(79, 124, 128, 0.2)` }}
+                    className="w-full max-w-lg rounded-2xl p-8 md:p-10
+                      border border-white/30 flex flex-col items-center justify-center
+                      hover:border-white/60 transition-all duration-300 group
+                      min-h-[200px]"
+                    whileHover={{ y: -4, boxShadow: `0 0 30px rgba(255, 255, 255, 0.2)` }}
+                  >
+                    {sponsor.logoUrl ? (
+                      <img src={sponsor.logoUrl} alt={sponsor.name} className="max-h-24 max-w-full object-contain opacity-80 group-hover:opacity-100 transition-opacity rounded-lg" />
+                    ) : (
+                      <span className="font-heading text-2xl font-bold text-[#E1E0E0] group-hover:text-white transition-colors text-center">
+                        {sponsor.name}
+                      </span>
+                    )}
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Standard sponsors grid */}
+          {standardSponsors.length > 0 && (
+            <div className="mb-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+                {standardSponsors.map((sponsor) => (
+                  <motion.a
+                    key={sponsor.name}
+                    href={sponsor.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full max-w-sm rounded-xl p-6 md:p-8
+                      border border-white/20 flex items-center justify-center
+                      hover:border-white/40 transition-all duration-300 group
+                      min-h-[180px]"
+                    whileHover={{ y: -4, boxShadow: `0 0 30px rgba(255, 255, 255, 0.1)` }}
                   >
                     {sponsor.logoUrl ? (
                       <img src={sponsor.logoUrl} alt={sponsor.name} className="max-h-48 max-w-full object-contain opacity-80 group-hover:opacity-100 transition-opacity rounded-lg" />
@@ -250,6 +326,70 @@ export default function MacHacks() {
               </div>
             </div>
           )}
+
+          {/* Community – MLH bottom */}
+          {communitySponsors.length > 0 && (
+            <div className="mb-10">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#E1E0E0]/40 mb-4 text-center">Community Partners</p>
+              <div className="flex justify-center">
+                {communitySponsors.map((sponsor) => (
+                  <motion.a
+                    key={sponsor.name}
+                    href={sponsor.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-xl p-6
+                      border border-white/10 flex items-center justify-center
+                      hover:border-white/30 transition-all duration-300 group
+                      min-h-[120px] w-48"
+                    whileHover={{ y: -2 }}
+                  >
+                    {sponsor.logoUrl ? (
+                      <img src={sponsor.logoUrl} alt={sponsor.name} className="max-h-16 max-w-full object-contain opacity-70 group-hover:opacity-100 transition-opacity rounded-lg" />
+                    ) : (
+                      <span className="font-heading text-lg font-bold text-[#E1E0E0]/70 group-hover:text-white transition-colors text-center">
+                        {sponsor.name}
+                      </span>
+                    )}
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Past MacHacks Sponsors */}
+          <div className="mt-20 pt-16 border-t border-white/10">
+            <h3 className="font-heading text-xl md:text-2xl font-bold text-white/80 mb-8 text-center uppercase tracking-widest">
+              Sponsors from previous years
+            </h3>
+            <div className="flex flex-wrap justify-center gap-6 md:gap-8 max-w-5xl mx-auto">
+              {PAST_MACHACKS_SPONSORS.map((sponsor) => (
+                <motion.a
+                  key={sponsor.name}
+                  href={sponsor.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-black rounded-xl p-4 md:p-6
+                    border border-white/10 flex items-center justify-center
+                    hover:border-white/30 transition-all duration-300 group
+                    h-24 w-40 md:w-48"
+                  whileHover={{ y: -2, scale: 1.05 }}
+                >
+                  {sponsor.logoUrl ? (
+                    <img 
+                      src={sponsor.logoUrl} 
+                      alt={sponsor.name} 
+                      className="max-h-14 max-w-full object-contain opacity-70 group-hover:opacity-100 transition-opacity" 
+                    />
+                  ) : (
+                    <span className="text-sm font-bold text-black/50 group-hover:text-black/80 transition-colors text-center">
+                      {sponsor.name}
+                    </span>
+                  )}
+                </motion.a>
+              ))}
+            </div>
+          </div>
 
           {/* Become a sponsor CTA */}
           <div className="text-center mt-12">
@@ -270,7 +410,7 @@ export default function MacHacks() {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 md:py-24 bg-[#221A1D]/50">
+      <section id="faq" className="py-16 md:py-24 bg-[#221A1D]/50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-heading text-3xl font-bold text-white mb-8">
             Frequently Asked Questions
@@ -309,3 +449,4 @@ export default function MacHacks() {
     </div>
   );
 }
+

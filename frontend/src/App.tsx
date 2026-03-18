@@ -6,6 +6,8 @@ import Projects from './Pages/Projects';
 import Partnerships from './Pages/Partnerships';
 import Gallery from './Pages/Gallery';
 import Contact from './Pages/Contact';
+import AboutUs from './Pages/AboutUs';
+import Team from './Pages/Team';
 import PlaceholderLegal from './Pages/PlaceholderLegal';
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="about" element={<AboutUs />} />
+          <Route path="team" element={<Team />} />
           <Route path="machacks" element={<MacHacks />} />
           <Route path="projects" element={<Projects />} />
           <Route path="partnerships" element={<Partnerships />} />

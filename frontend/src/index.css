@@ -16,10 +16,10 @@
   --color-macai-offwhite: #F0F4F4;
   --color-macai-cta: #E00064;
   /* Semantic */
-  --color-macai-bg: #1800AD;
-  --color-macai-bg-alt: #0f0066;
-  --color-macai-text: #F0F4F4;
-  --color-macai-text-muted: #A7C2C3;
+  --color-macai-bg: #F0F4F4;
+  --color-macai-bg-alt: #FFFFFF;
+  --color-macai-text: #1800AD;
+  --color-macai-text-muted: #4A5568;
   /* Fonts */
   --font-heading: "Montserrat", system-ui, sans-serif;
   --font-body: "Roboto", system-ui, sans-serif;
@@ -31,7 +31,7 @@
   font-weight: 400;
   color: var(--color-macai-text);
   background-color: var(--color-macai-bg);
-  color-scheme: dark;
+  color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

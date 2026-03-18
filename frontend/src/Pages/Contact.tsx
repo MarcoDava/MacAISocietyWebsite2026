@@ -20,7 +20,6 @@ export default function Contact() {
     transition: { duration: 1, delay: 0.2 },
   };
 
-  // Replace YOUR_FORM_ID with your Formspree form ID (e.g. "xpzvqkdn")
   const FORMSPREE_ID = 'xbdzagdr';
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -61,8 +60,8 @@ export default function Contact() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative py-20 md:py-28 overflow-hidden">
+      {/* Hero – blue header */}
+      <section className="relative py-30 md:py-38 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#1800AD] via-[#0f0066] to-[#1800AD]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_70%_30%,rgba(28,177,227,0.12),transparent)]" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -78,14 +77,15 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24">
+      {/* Form section – off-white body */}
+      <section className="py-16 md:py-24 bg-[#F0F4F4]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12">
           {/* Form */}
           <div>
-            <h2 className="font-heading text-2xl font-bold text-[#F0F4F4] mb-6">Send a message</h2>
+            <h2 className="font-heading text-2xl font-bold text-[#1800AD] mb-6">Send a message</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="contact-name" className="block text-sm font-medium text-[#A7C2C3] mb-2">
+                <label htmlFor="contact-name" className="block text-sm font-medium text-[#4A5568] mb-2">
                   Name
                 </label>
                 <input
@@ -95,7 +95,7 @@ export default function Contact() {
                   value={form.name}
                   onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                   onBlur={() => setTouched((t) => ({ ...t, name: true }))}
-                  className="w-full px-4 py-3 rounded-lg bg-[#0f0066]/60 border border-[#1CB1E3]/30 text-[#F0F4F4] placeholder-[#A7C2C3] focus:outline-none focus:border-[#3DDFF5]"
+                  className="w-full px-4 py-3 rounded-lg bg-white border border-[#1800AD]/20 text-[#1800AD] placeholder-[#4A5568]/50 focus:outline-none focus:border-[#1800AD] focus:ring-1 focus:ring-[#1800AD]/30"
                   aria-invalid={touched.name && !!errors.name}
                   aria-describedby={touched.name && errors.name ? 'name-error' : undefined}
                 />
@@ -104,7 +104,7 @@ export default function Contact() {
                 )}
               </div>
               <div>
-                <label htmlFor="contact-email" className="block text-sm font-medium text-[#A7C2C3] mb-2">
+                <label htmlFor="contact-email" className="block text-sm font-medium text-[#4A5568] mb-2">
                   Email
                 </label>
                 <input
@@ -114,7 +114,7 @@ export default function Contact() {
                   value={form.email}
                   onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
                   onBlur={() => setTouched((t) => ({ ...t, email: true }))}
-                  className="w-full px-4 py-3 rounded-lg bg-[#0f0066]/60 border border-[#1CB1E3]/30 text-[#F0F4F4] placeholder-[#A7C2C3] focus:outline-none focus:border-[#3DDFF5]"
+                  className="w-full px-4 py-3 rounded-lg bg-white border border-[#1800AD]/20 text-[#1800AD] placeholder-[#4A5568]/50 focus:outline-none focus:border-[#1800AD] focus:ring-1 focus:ring-[#1800AD]/30"
                   aria-invalid={touched.email && !!errors.email}
                   aria-describedby={touched.email && errors.email ? 'email-error' : undefined}
                 />
@@ -123,7 +123,7 @@ export default function Contact() {
                 )}
               </div>
               <div>
-                <label htmlFor="contact-message" className="block text-sm font-medium text-[#A7C2C3] mb-2">
+                <label htmlFor="contact-message" className="block text-sm font-medium text-[#4A5568] mb-2">
                   Message
                 </label>
                 <textarea
@@ -133,7 +133,7 @@ export default function Contact() {
                   value={form.message}
                   onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
                   onBlur={() => setTouched((t) => ({ ...t, message: true }))}
-                  className="w-full px-4 py-3 rounded-lg bg-[#0f0066]/60 border border-[#1CB1E3]/30 text-[#F0F4F4] placeholder-[#A7C2C3] focus:outline-none focus:border-[#3DDFF5] resize-y"
+                  className="w-full px-4 py-3 rounded-lg bg-white border border-[#1800AD]/20 text-[#1800AD] placeholder-[#4A5568]/50 focus:outline-none focus:border-[#1800AD] focus:ring-1 focus:ring-[#1800AD]/30 resize-y"
                   aria-invalid={touched.message && !!errors.message}
                   aria-describedby={touched.message && errors.message ? 'message-error' : undefined}
                 />
@@ -156,10 +156,10 @@ export default function Contact() {
 
           {/* Map & info */}
           <div>
-            <h2 className="font-heading text-2xl font-bold text-[#F0F4F4] mb-6">Find us</h2>
+            <h2 className="font-heading text-2xl font-bold text-[#1800AD] mb-6">Find us</h2>
             <motion.p
               {...fadeIn}
-              className="text-[#A7C2C3] mb-4"
+              className="text-[#4A5568] mb-4"
             >
               McMaster University<br />
               1280 Main St W, Hamilton, ON L8S 4L8
@@ -168,13 +168,13 @@ export default function Contact() {
               href="https://www.google.com/maps?q=McMaster+University+1280+Main+St+W+Hamilton+ON"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block text-[#3DDFF5] hover:underline mb-8"
+              className="inline-block text-[#1800AD] hover:underline mb-8 font-medium"
             >
               Open in Google Maps →
             </a>
             <motion.div
               {...fadeIn}
-              className="aspect-video bg-[#0f0066]/60 rounded-xl border border-[#1CB1E3]/20 overflow-hidden"
+              className="aspect-video bg-white rounded-xl border border-[#1800AD]/10 overflow-hidden shadow-sm"
             >
               <iframe
                 title="Map of McMaster University"
@@ -185,27 +185,19 @@ export default function Contact() {
               />
             </motion.div>
             <div className="mt-8">
-              <h3 className="font-heading font-bold text-[#F0F4F4] mb-3">Connect with us</h3>
+              <h3 className="font-heading font-bold text-[#1800AD] mb-3">Connect with us</h3>
               <div className="flex gap-4">
                 <a
-                  href="https://www.mcmasterai.ca"
+                  href="https://www.linkedin.com/company/mcmasterai/posts/?feedView=all"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#3DDFF5] hover:underline"
-                >
-                  Website
-                </a>
-                <a
-                  href="https://www.linkedin.com/company/mcmasterai"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#3DDFF5] hover:underline"
+                  className="text-[#1800AD] hover:underline font-medium"
                 >
                   LinkedIn
                 </a>
                 <a
                   href="mailto:info@mcmasterai.ca"
-                  className="text-[#3DDFF5] hover:underline"
+                  className="text-[#1800AD] hover:underline font-medium"
                 >
                   Email
                 </a>
