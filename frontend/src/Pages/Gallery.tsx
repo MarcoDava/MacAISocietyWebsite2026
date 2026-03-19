@@ -19,12 +19,6 @@ type GalleryPayload = {
   images: GalleryImage[];
 };
 
-const fadeIn = {
-  initial: { opacity: 0, y: 8 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 1, delay: 0.2 },
-};
 
 // Stable shuffle using a simple seed-based approach
 function stableShuffled<T>(arr: T[]): T[] {
@@ -112,26 +106,36 @@ export default function Gallery() {
   return (
     <>
       {/* Hero */}
-      <section className="relative py-30 md:py-38 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1800AD] via-[#0f0066] to-[#1800AD]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_70%_30%,rgba(28,177,227,0.12),transparent)]" />
+      <section className="relative mt-8 py-16 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#04002a] via-[#1800AD] to-[#1400a0]" />
+        <div className="absolute -top-20 right-10 w-[500px] h-[500px] rounded-full bg-[#1CB1E3]/15 blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 left-1/3 w-72 h-72 rounded-full bg-[#3DDFF5]/10 blur-[80px] pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-[#F0F4F4]">
-            Gallery
-          </h1>
-          <motion.p
-            {...fadeIn}
-            className="mt-4 text-xl text-[#A7C2C3] max-w-2xl"
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
-            Curated moments from workshops, MacHacks, and CUCAI — our community in action.
-          </motion.p>
-          {!loading && images.length > 0 && (
-            <motion.div {...fadeIn} className="mt-6">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#3DDFF5]/20 text-[#3DDFF5] text-sm font-bold border border-[#3DDFF5]/30">
-                {images.length} moments captured
+            <p className="font-mono text-[#3DDFF5] text-xs tracking-[0.3em] uppercase mb-5">
+              McMaster AI Society · In Focus
+            </p>
+            <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl font-black text-white leading-[1.02] tracking-tight">
+              Our Community<br />
+              <span className="bg-gradient-to-r from-[#1CB1E3] to-[#3DDFF5] bg-clip-text text-transparent">
+                In Action
               </span>
-            </motion.div>
-          )}
+            </h1>
+            <p className="mt-6 text-[#A7C2C3] text-lg max-w-md leading-relaxed">
+              Curated moments from workshops, MacHacks, and CUCAI, our community in action.
+            </p>
+            {!loading && images.length > 0 && (
+              <div className="mt-6">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-[#3DDFF5]/20 text-[#3DDFF5] text-sm font-bold border border-[#3DDFF5]/30">
+                  {images.length} moments captured
+                </span>
+              </div>
+            )}
+          </motion.div>
         </div>
       </section>
 

@@ -131,7 +131,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_70%_30%,rgba(24,0,173,0.06),transparent)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_60%_at_80%_50%,rgba(28,177,227,0.08),transparent)]" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid lg:grid-cols-2 gap-12 items-center">
-          
+
           <div className="relative z-20 max-w-xl">
             <EncryptedText
               text="Building the Future of AI at McMaster."

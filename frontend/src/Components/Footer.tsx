@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logosmall.svg';
 
 const SOCIAL = [
-  { label: 'Instagram', href: 'https://www.instagram.com/mcmaster.ai/', icon: 'instagram' },
+  { label: 'Instagram', href: 'https://www.instagram.com/macaisociety/', icon: 'instagram' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/mcmasterai/', icon: 'linkedin' },
 ];
 

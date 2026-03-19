@@ -5,6 +5,7 @@ import logo from '../assets/mcmasterAiLogo.svg';
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
+  { to: '/team', label: 'Team' },
   { to: '/machacks', label: 'MacHacks' },
   { to: '/projects', label: 'Projects' },
   { to: '/partnerships', label: 'Partnerships' },
@@ -31,7 +32,7 @@ export default function Header() {
             <img src={logo} alt="MacAI Society Logo" className="h-[80%] brightness-0 invert" />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1">
             {NAV_LINKS.map(({ to, label }) => (
               <Link
                 key={to}
@@ -60,7 +61,7 @@ export default function Header() {
             </Link>
             <button
               type="button"
-              className="md:hidden p-2 text-[#F0F4F4] rounded-lg hover:bg-[#F0F4F4]/10 focus-ring"
+              className="lg:hidden p-2 text-[#F0F4F4] rounded-lg hover:bg-[#F0F4F4]/10 focus-ring"
               onClick={() => setMenuOpen((o) => !o)}
               aria-expanded={menuOpen}
               aria-label="Toggle menu"
@@ -77,7 +78,7 @@ export default function Header() {
         </div>
 
         <nav
-          className={`md:hidden border-t border-[#F0F4F4]/20 overflow-hidden transition-all duration-300 ease-out ${
+          className={`lg:hidden border-t border-[#F0F4F4]/20 overflow-hidden transition-all duration-300 ease-out ${
             menuOpen ? 'h-screen opacity-100 py-4' : 'h-0 opacity-0 py-0'
           }`}
         >

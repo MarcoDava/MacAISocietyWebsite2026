@@ -60,20 +60,30 @@ export default function Contact() {
 
   return (
     <>
-      {/* Hero – blue header */}
-      <section className="relative py-30 md:py-38 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1800AD] via-[#0f0066] to-[#1800AD]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_70%_30%,rgba(28,177,227,0.12),transparent)]" />
+      {/* Hero */}
+      <section className="relative py-28 md:py-44 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#04002a] via-[#1800AD] to-[#1400a0]" />
+        <div className="absolute -top-20 right-10 w-[500px] h-[500px] rounded-full bg-[#1CB1E3]/15 blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 left-1/3 w-72 h-72 rounded-full bg-[#3DDFF5]/10 blur-[80px] pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-[#F0F4F4]">
-            Contact
-          </h1>
-          <motion.p
-            {...fadeIn}
-            className="mt-4 text-xl text-[#A7C2C3] max-w-2xl"
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
-            Have a question or want to get involved? We'd love to hear from you.
-          </motion.p>
+            <p className="font-mono text-[#3DDFF5] text-xs tracking-[0.3em] uppercase mb-5">
+              McMaster AI Society · Get In Touch
+            </p>
+            <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl font-black text-white leading-[1.02] tracking-tight">
+              We'd Love to<br />
+              <span className="bg-gradient-to-r from-[#1CB1E3] to-[#3DDFF5] bg-clip-text text-transparent">
+                Hear From You
+              </span>
+            </h1>
+            <p className="mt-6 text-[#A7C2C3] text-lg max-w-md leading-relaxed">
+              Have a question or want to get involved? Reach out! We'd love to connect.
+            </p>
+          </motion.div>
         </div>
       </section>
 
