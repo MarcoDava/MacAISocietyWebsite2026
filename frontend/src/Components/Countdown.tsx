@@ -35,7 +35,7 @@ export default function Countdown({ variant = 'light' }: CountdownProps) {
   const isDark = variant === 'dark';
 
   return (
-    <div className="flex gap-3 sm:gap-6 justify-center flex-wrap">
+    <div className="flex gap-2 sm:gap-6 justify-center">
       {[
         [diff.days, 'Days'],
         [diff.hours, 'Hours'],
@@ -48,7 +48,7 @@ export default function Countdown({ variant = 'light' }: CountdownProps) {
             isDark
               ? 'bg-[#3DDFF5]/10 border-[#3DDFF5]/25'
               : 'bg-[#1800AD]/10 border-[#1800AD]/5'
-          } rounded-xl px-4 py-3 min-w-[70px] text-center border shadow-sm`}
+          } rounded-xl px-2 sm:px-4 py-3 min-w-[60px] sm:min-w-[70px] text-center border shadow-sm`}
         >
           <div className={`text-2xl sm:text-4xl font-heading font-bold tabular-nums ${
             isDark ? 'text-[#3DDFF5] drop-shadow-[0_0_8px_rgba(61,223,245,0.6)]' : 'text-[#1800AD]'

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
+import { fadeIn } from '@/lib/animations';
 import CountUp from '../Components/CountUp';
 import Countdown from '../Components/Countdown';
 import { HeroParallax } from '../Components/HeroParallax';
@@ -16,12 +17,6 @@ import {
   MACHACKS_THEME as theme,
 } from '../data/machacks-config';
 
-const fadeIn = {
-  initial: { opacity: 0, y: 8 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 1, delay: 0.2 },
-};
 
 export default function MacHacks() {
   const [scheduleFilter, setScheduleFilter] = useState<string>('all');
@@ -55,7 +50,7 @@ export default function MacHacks() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-transparent" />
 
         {/* Countdown timer only */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 2, delay: 1 }} className="relative z-10 mt-[55vh] mb-12 sm:mb-20 md:mb-32">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ type: 'spring', stiffness: 60, damping: 18, delay: 1 }} className="relative z-10 mt-[55vh] mb-12 sm:mb-20 md:mb-32">
           <Countdown variant="dark" />
         </motion.div>
       </section>
@@ -215,17 +210,14 @@ export default function MacHacks() {
                 key={time + title}
                 {...fadeIn}
                 className="bg-[#221A1D] rounded-xl p-4 md:p-6 border border-[#35494C]/30
-                  flex flex-col gap-3
                   hover:border-[#4F7C80]/50 transition-all duration-300
                   hover:shadow-[0_0_20px_rgba(79,124,128,0.1)]"
               >
-                <div className="flex flex-wrap items-start gap-4">
-                  <span className="font-heading font-bold text-[#4F7C80] w-32 md:w-40 flex-shrink-0">{time}</span>
-                  <div className="flex-1">
-                    <span className="text-white block font-medium">{title}</span>
-                    <span className="text-[#E1E0E0]/70 text-sm block mt-1">{location}</span>
-                  </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium flex-shrink-0 ${
+                {/* Top row: time | title | tag — never wraps */}
+                <div className="flex items-center gap-2 md:gap-4 min-w-0">
+                  <span className="font-heading font-bold text-[#4F7C80] text-sm md:text-base w-16 md:w-28 flex-shrink-0">{time}</span>
+                  <span className="text-white font-medium flex-1 min-w-0 text-sm md:text-base">{title}</span>
+                  <span className={`px-2 md:px-3 py-1 rounded-full text-xs font-medium flex-shrink-0 ${
                     category === 'Workshop'
                       ? 'bg-[#8B3D5A]/20 text-[#8B3D5A]'
                       : category === 'Hacking'
@@ -239,6 +231,10 @@ export default function MacHacks() {
                     {category}
                   </span>
                 </div>
+                {/* Location below */}
+                {location && (
+                  <p className="text-[#E1E0E0]/60 text-xs mt-2 pl-[4.5rem] md:pl-32">{location}</p>
+                )}
               </motion.li>
             ))}
           </ul>
@@ -435,15 +431,21 @@ export default function MacHacks() {
                   <span className="font-medium">{q}</span>
                   <span className="text-[#8B3D5A] text-xl">{faqOpen === i ? '−' : '+'}</span>
                 </button>
-                {faqOpen === i && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    className="px-6 py-4 bg-[#060606] text-[#E1E0E0] text-sm border-t border-[#35494C]/20"
-                  >
-                    {a}
-                  </motion.div>
-                )}
+                <AnimatePresence initial={false}>
+                  {faqOpen === i && (
+                    <motion.div
+                      key="content"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ type: 'spring', stiffness: 280, damping: 28 }}
+                      style={{ overflow: 'hidden' }}
+                      className="bg-[#060606] border-t border-[#35494C]/20"
+                    >
+                      <div className="px-6 py-4 text-[#E1E0E0] text-sm">{a}</div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.li>
             ))}
           </ul>

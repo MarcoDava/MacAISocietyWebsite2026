@@ -114,7 +114,7 @@ export default function Gallery() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ type: 'spring', stiffness: 60, damping: 18 }}
           >
             <p className="font-mono text-[#3DDFF5] text-xs tracking-[0.3em] uppercase mb-5">
               McMaster AI Society · In Focus

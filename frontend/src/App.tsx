@@ -8,7 +8,7 @@ import Gallery from './Pages/Gallery';
 import Contact from './Pages/Contact';
 import AboutUs from './Pages/AboutUs';
 import Team from './Pages/Team';
-import PlaceholderLegal from './Pages/PlaceholderLegal';
+import NotFound from './Pages/NotFound';
 
 function App() {
   return (
@@ -23,10 +23,8 @@ function App() {
           <Route path="partnerships" element={<Partnerships />} />
           <Route path="gallery" element={<Gallery />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="accessibility" element={<PlaceholderLegal title="Accessibility" />} />
-          <Route path="privacy" element={<PlaceholderLegal title="Privacy Policy" />} />
-          <Route path="terms" element={<PlaceholderLegal title="Terms of Service" />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

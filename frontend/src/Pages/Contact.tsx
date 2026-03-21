@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { motion } from 'motion/react';
+import { fadeIn } from '@/lib/animations';
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -12,13 +13,6 @@ export default function Contact() {
     message: form.message.trim().length < 10 ? 'Message must be at least 10 characters' : '',
   };
   const valid = !errors.name && !errors.email && !errors.message;
-
-  const fadeIn = {
-    initial: { opacity: 0, y: 8 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.2 },
-    transition: { duration: 1, delay: 0.2 },
-  };
 
   const FORMSPREE_ID = 'xbdzagdr';
 

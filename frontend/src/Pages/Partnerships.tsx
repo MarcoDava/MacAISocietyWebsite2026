@@ -1,14 +1,12 @@
 import { useState, type FormEvent } from 'react';
 import { motion } from 'motion/react';
+import { fadeIn } from '@/lib/animations';
 import { CURRENT_PARTNERS, PAST_PARTNERS } from '../data/partners';
 import CountUp from '@/Components/CountUp';
 
-const fadeIn = {
-  initial: { opacity: 0, y: 8 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 1, delay: 0.2 },
-};
+// Change this ID when the partnerships form gets its own Formspree endpoint
+const PARTNERSHIPS_FORMSPREE_ID = 'xbdzagdr';
+
 
 export default function Partnerships() {
   const [form, setForm] = useState({ orgName: '', contactName: '', email: '', partnershipType: '', message: '' });
@@ -24,8 +22,6 @@ export default function Partnerships() {
   };
   const valid = !errors.orgName && !errors.contactName && !errors.email && !errors.partnershipType && !errors.message;
 
-  const FORMSPREE_ID = 'xbdzagdr';
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setTouched({ orgName: true, contactName: true, email: true, partnershipType: true, message: true });
@@ -33,7 +29,7 @@ export default function Partnerships() {
     setSubmitStatus('sending');
 
     try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const res = await fetch(`https://formspree.io/f/${PARTNERSHIPS_FORMSPREE_ID}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -75,7 +71,7 @@ export default function Partnerships() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ type: 'spring', stiffness: 60, damping: 18 }}
           >
             <p className="font-mono text-[#3DDFF5] text-xs tracking-[0.3em] uppercase mb-5">
               McMaster AI Society · Partners
@@ -289,7 +285,7 @@ export default function Partnerships() {
       </section>
 
       {/* Partnership Contact Form */}
-      <section className="py-16 md:py-24 bg-[#F0F4F4]">
+      <section id="contact-form" className="py-16 md:py-24 bg-[#F0F4F4]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Form card with gradient header */}

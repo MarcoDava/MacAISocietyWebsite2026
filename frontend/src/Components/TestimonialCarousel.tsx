@@ -92,8 +92,8 @@ export default function TestimonialCarousel({
               exit="exit"
               transition={{
                 x: { type: 'spring', stiffness: 300, damping: 30 },
-                opacity: { duration: 0.3 },
-                scale: { duration: 0.3 },
+                opacity: { type: 'spring', stiffness: 200, damping: 30 },
+                scale: { type: 'spring', stiffness: 200, damping: 30 },
               }}
               className="absolute inset-0 bg-[#1800AD] rounded-3xl p-8 border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.12)] flex flex-col justify-center"
             >

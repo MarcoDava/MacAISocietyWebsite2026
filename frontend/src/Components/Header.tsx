@@ -32,7 +32,7 @@ export default function Header() {
             <img src={logo} alt="MacAI Society Logo" className="h-[80%] brightness-0 invert" />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-1">
             {NAV_LINKS.map(({ to, label }) => (
               <Link
                 key={to}
@@ -51,11 +51,7 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <Link
               to="/machacks"
-              className={`${
-                isMacHacks 
-                  ? 'bg-[#4F7C80] hover:bg-[#35494C] text-white' 
-                  : 'btn-cta'
-              } text-sm py-2 px-4 rounded-lg font-bold transition-all hidden sm:inline-block`}
+              className={`${isMacHacks ? 'bg-[#4F7C80] hover:bg-[#35494C]' : 'bg-[#E00064] hover:bg-[#b8004f]'} text-white hidden md:inline-flex items-center text-sm py-2 px-4 rounded-lg font-bold transition-all`}
             >
               {isMacHacks ? 'Register Now' : 'View MacHacks'}
             </Link>

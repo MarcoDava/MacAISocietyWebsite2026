@@ -17,12 +17,6 @@ const FOOTER_LINKS = [
   { to: '/contact', label: 'Contact' },
 ];
 
-const LEGAL = [
-  { to: '/accessibility', label: 'Accessibility' },
-  { to: '/privacy', label: 'Privacy Policy' },
-  { to: '/terms', label: 'Terms of Service' },
-];
-
 export default function Footer() {
   const location = useLocation();
   const isMacHacks = location.pathname === '/machacks';
@@ -112,22 +106,6 @@ export default function Footer() {
             </a>
           </div>
 
-          <div>
-            <h4 className={`font-[family-name:var(--font-heading)] font-bold mb-4 ${
-              isMacHacks ? 'text-white' : 'text-[#F0F4F4]'
-            }`}>Legal</h4>
-            <ul className="space-y-2">
-              {LEGAL.map(({ to, label }) => (
-                <li key={to}>
-                  <Link to={to} className={`text-sm transition-colors ${
-                    isMacHacks ? 'text-[#E1E0E0] hover:text-[#4F7C80]' : 'text-[#A7C2C3] hover:text-[#3DDFF5]'
-                  }`}>
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
 
         <div className={`mt-12 pt-8 border-t flex flex-col sm:flex-row justify-between items-center gap-4 ${
@@ -137,11 +115,6 @@ export default function Footer() {
             isMacHacks ? 'text-[#E1E0E0]' : 'text-[#A7C2C3]'
           }`}>
             © {new Date().getFullYear()} McMaster AI Society. All rights reserved.
-          </p>
-          <p className={`text-sm ${
-            isMacHacks ? 'text-[#E1E0E0]' : 'text-[#A7C2C3]'
-          }`}>
-            Logo usage and brand guidelines: do not alter MacAI logo size, spacing, or colours.
           </p>
         </div>
       </div>

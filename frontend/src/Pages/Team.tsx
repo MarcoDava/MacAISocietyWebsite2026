@@ -13,7 +13,7 @@ const cardVariants = {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { type: 'spring' as const, stiffness: 100, damping: 20 },
   },
 };
 
@@ -33,7 +33,7 @@ export default function Team() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ type: 'spring', stiffness: 60, damping: 18 }}
           >
             <p className="font-mono text-[#3DDFF5] text-xs tracking-[0.3em] uppercase mb-5">
               McMaster AI Society · 2025–2026
@@ -59,7 +59,7 @@ export default function Team() {
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ type: 'spring', stiffness: 80, damping: 20 }}
             className="mb-12"
           >
             
@@ -133,7 +133,7 @@ export default function Team() {
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ type: 'spring', stiffness: 80, damping: 20 }}
             className="mb-12"
           >
             
@@ -153,7 +153,7 @@ export default function Team() {
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.6, delay: i * 0.08 }}
+                transition={{ type: 'spring', stiffness: 80, damping: 20, delay: i * 0.08 }}
                 className="bg-[#F0F4F4] rounded-2xl overflow-hidden border border-[#1800AD]/10 shadow-sm hover:shadow-md transition-shadow duration-300"
               >
                 <div className="flex flex-col md:flex-row md:items-start">

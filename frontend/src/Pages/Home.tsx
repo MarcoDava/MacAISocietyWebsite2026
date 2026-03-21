@@ -4,6 +4,7 @@ import CountUp from '../Components/CountUp';
 import { motion } from 'motion/react';
 import { EncryptedText } from '../Components/ui/encrypted-text';
 import { useState } from 'react';
+import { fadeIn, fadeInRight, fadeInDown } from '@/lib/animations';
 import { CURRENT_PARTNERS } from '../data/partners';
 import { InfiniteMovingCards } from '../Components/ui/infinite-moving-cards';
 import TestimonialCarousel from '../Components/TestimonialCarousel';
@@ -84,25 +85,6 @@ const PATHWAYS: Record<string, string> = {
   hackathons: 'MacHacks 2026 is for you. Register and join us on March 21st.',
 };
 
-const fadeInRight = {
-  initial: { opacity: 0, x: -24 },
-  whileInView: { opacity: 1, x: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 1, delay: 0.2 },
-};
-const fadeInDown = {
-  initial: { opacity: 0, y: -24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 1, delay: 0.2 },
-};
-const fadeIn = {
-  initial: { opacity: 0, y: 8 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 1, delay: 0.2 },
-};
-
 export default function Home() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -110,6 +92,8 @@ export default function Home() {
 
   const current = QUIZ_QUESTIONS[step];
   const isLast = step === QUIZ_QUESTIONS.length - 1;
+
+  const handleResetQuiz = () => { setDone(false); setStep(0); setAnswers({}); };
 
   const handleNext = (value: string) => {
     const next = { ...answers, [current.id]: value };
@@ -139,11 +123,11 @@ export default function Home() {
               revealDelayMs={20}
               charset="abcdefghijklmnopqrstuvwxyz"
             />
-            <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0, 0.40, 1], x: [-60, -5, 0] }} transition={{ duration: 2, delay: 0.2 }} className="mt-6 text-xl text-[#4A5568] max-w-xl">
+            <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: 1, x: 0 }} transition={{ type: 'spring', stiffness: 60, damping: 20, delay: 0.2 }} className="mt-6 text-xl text-[#4A5568] max-w-xl">
               Canada's next generation of AI innovators, creators, and problem-solvers starts here.
             </motion.p>
-            <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0, 0.20, 1], x: [-60, -10, 0] }} transition={{ duration: 2, delay: 0.2 }} className="mt-4 text-[#1800AD] font-semibold">Empowering the McMaster community through AI education and collaboration.</motion.p>
-            <motion.div initial={{ opacity: 0, x: -60 }} animate={{ opacity: [0, 0.10, 1], x: [-60, -20, 0] }} transition={{ duration: 2, delay: 0.2 }} className="mt-10 flex flex-wrap gap-4">
+            <motion.p initial={{ opacity: 0, x: -60 }} animate={{ opacity: 1, x: 0 }} transition={{ type: 'spring', stiffness: 60, damping: 20, delay: 0.35 }} className="mt-4 text-[#1800AD] font-semibold">Empowering the McMaster community through AI education and collaboration.</motion.p>
+            <motion.div initial={{ opacity: 0, x: -60 }} animate={{ opacity: 1, x: 0 }} transition={{ type: 'spring', stiffness: 60, damping: 20, delay: 0.5 }} className="mt-10 flex flex-wrap gap-4">
               <Link to="/contact" className="btn-cta">
                 Join the Society
               </Link>
@@ -158,7 +142,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.8, delay: 0.15 }}
+                transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.15 }}
               >
                 <InfiniteMovingCards items={row1Images} direction="right" speed="slow" />
               </motion.div>
@@ -166,7 +150,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
+                transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.8 }}
               >
                 <InfiniteMovingCards items={row2Images} direction="left" speed="slow" />
               </motion.div>
@@ -174,7 +158,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.8, delay: 1.3 }}
+                transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 1.3 }}
               >
                 <InfiniteMovingCards items={row3Images} direction="right" speed="slow" />
               </motion.div>
@@ -245,7 +229,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 1.5 }}
+          transition={{ type: 'spring', stiffness: 60, damping: 20 }}
         >
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(61,223,245,0.12),transparent_70%)]" />
           <div className="absolute top-0 left-1/4 w-[400px] h-[200px] bg-[radial-gradient(ellipse_at_center,rgba(28,177,227,0.08),transparent_70%)]" />
@@ -282,10 +266,10 @@ export default function Home() {
       </section>
 
       {/* 5) MacHacks – Marquee event announcement, very dark with glows */}
-      <section className="relative h-full py-24 md:py-32 m-5 overflow-hidden rounded-[25vh]">
+      <section className="relative h-full py-12 md:py-32 m-5 overflow-hidden rounded-[2rem] md:rounded-[25vh]">
         {/* Background image */}
         <div
-          className="absolute inset-0 h-screen"
+          className="absolute inset-0 h-full"
           style={{ backgroundImage: 'url(/machacksbg.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}
         />
         {/* Top gradient: fade in from testimonials bg (#F0F0F0)
@@ -329,7 +313,7 @@ export default function Home() {
                     {PATHWAYS[answers.pathway ?? 'projects'] || PATHWAYS.projects}
                   </p>
                 </div>
-                <button onClick={() => setDone(false)} className="mt-10 text-[#1800AD] font-bold hover:underline">Take it again</button>
+                <button onClick={handleResetQuiz} className="mt-10 text-[#1800AD] font-bold hover:underline">Take it again</button>
               </motion.div>
             ) : (
               <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -396,7 +380,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="flex flex-col items-center opacity-70 hover:opacity-100 transition-all duration-300 w-full max-w-[200px]"
               >
-                <div className="bg-white/50 rounded-xl p-4 w-full aspect-[2/1] flex items-center justify-center border border-[#1800AD]/5 shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-white/50 rounded-xl p-4 w-full aspect-square flex items-center justify-center border border-[#1800AD]/5 shadow-sm hover:shadow-md transition-shadow">
                   <img
                     src={partner.logoUrl}
                     alt={partner.name}
@@ -407,7 +391,7 @@ export default function Home() {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Link to="/partnerships" className="text-[#1800AD] font-bold hover:underline tracking-wide uppercase text-xs">Become a Partner</Link>
+            <Link to="/partnerships#contact-form" className="font-heading font-bold text-white bg-[#E00064] hover:bg-[#b8004f] px-8 py-4 rounded-xl text-base transition-all inline-flex items-center justify-center">Partner With Us</Link>
           </div>
         </div>
       </motion.section>
