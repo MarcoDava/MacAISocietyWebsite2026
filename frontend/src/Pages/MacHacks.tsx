@@ -38,7 +38,7 @@ export default function MacHacks() {
         <div className="absolute sm:flex inset-0 top-16 sm:top-0 sm:w-full sm:h-full justify-center items-end">
          
             <video
-              className="relative w-full h-full object-cover rounded-[25vh]"
+              className="relative w-full h-full object-contain md:object-cover rounded-[25vh]"
               src="/machacks-hero-animated.mp4"
               autoPlay
               muted

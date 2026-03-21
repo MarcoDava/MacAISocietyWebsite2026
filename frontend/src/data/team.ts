@@ -37,7 +37,7 @@ export const EXEC_TEAM: TeamMember[] = [
   { name: 'Leon Yao', role: 'Co-VP Logistics', image: leonImg },
   { name: 'Megann Nkenglack', role: 'Co-VP Logistics', image: megannImg },
   { name: 'Iain MacDonald', role: 'VP Technical', image: iainImg },
-  { name: 'Tiya Jathan', role: 'VP Partnerships', image: tiyaImg },
+  { name: 'Tiya Jathan', role: 'Director of Partnerships', image: tiyaImg },
   { name: 'Calder Smith', role: 'VP Partnerships', image: calderImg },
   { name: 'Tamilla Zeynalova', role: 'Director of Education', image: tamillaImg },
   { name: 'Fatima Malik', role: 'Director of Attendee Relations', image: fatimaImg },

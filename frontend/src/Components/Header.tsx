@@ -49,12 +49,14 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link
-              to="/machacks"
-              className={`${isMacHacks ? 'bg-[#4F7C80] hover:bg-[#35494C]' : 'bg-[#E00064] hover:bg-[#b8004f]'} text-white hidden md:inline-flex items-center text-sm py-2 px-4 rounded-lg font-bold transition-all`}
-            >
-              {isMacHacks ? 'Register Now' : 'View MacHacks'}
-            </Link>
+            {!isMacHacks && (
+              <Link
+                to="/machacks"
+                className="bg-[#E00064] hover:bg-[#b8004f] text-white hidden md:inline-flex items-center text-sm py-2 px-4 rounded-lg font-bold transition-all"
+              >
+                View MacHacks
+              </Link>
+            )}
             <button
               type="button"
               className="lg:hidden p-2 text-[#F0F4F4] rounded-lg hover:bg-[#F0F4F4]/10 focus-ring"
