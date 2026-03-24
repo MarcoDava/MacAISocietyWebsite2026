@@ -1,31 +1,19 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { fadeIn } from '@/lib/animations';
 import CountUp from '../Components/CountUp';
-import Countdown from '../Components/Countdown';
 import { HeroParallax } from '../Components/HeroParallax';
 import macHacksImage from '../assets/MacHacksImageContent.avif';
 import {
   EVENT_INFO,
-  SCHEDULE,
-  SCHEDULE_CATEGORIES,
   SPONSORS,
   PAST_MACHACKS_SPONSORS,
   PARALLAX_PRODUCTS,
-  FAQ,
   MACHACKS_THEME as theme,
 } from '../data/machacks-config';
 
 
 export default function MacHacks() {
-  const [scheduleFilter, setScheduleFilter] = useState<string>('all');
-  const [faqOpen, setFaqOpen] = useState<number | null>(null);
-
-  const filteredSchedule = scheduleFilter === 'all'
-    ? SCHEDULE
-    : SCHEDULE.filter((s) => s.category === scheduleFilter);
-
   const featuredSponsors = SPONSORS.filter(s => s.tier === 'featured');
   const standardSponsors = SPONSORS.filter(s => s.tier === 'standard');
   const communitySponsors = SPONSORS.filter(s => s.tier === 'community');
@@ -49,9 +37,16 @@ export default function MacHacks() {
         {/* Dark overlay for better contrast */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-transparent" />
 
-        {/* Countdown timer only */}
+        {/* Devpost CTA */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ type: 'spring', stiffness: 60, damping: 18, delay: 1 }} className="relative z-10 mt-[55vh] mb-12 sm:mb-20 md:mb-32">
-          <Countdown variant="dark" />
+          <a
+            href="https://machacks.devpost.com/?ref_feature=challenge&ref_medium=your-open-hackathons&ref_content=Recently+ended&_gl=1*fstwdi*_gcl_au*NTU2Mjc2MTA5LjE3NjgwMDAwMjM.*_ga*MTQxMjc5NzA2LjE3NDEyODY3Nzg.*_ga_0YHJK3Y10M*czE3NzQzNjQwMTUkbzQ5JGcwJHQxNzc0MzY0MDE1JGo2MCRsMCRoMA.."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-[#E00064] text-white font-bold text-lg px-10 py-4 rounded-xl hover:bg-[#c0004f] transition-colors shadow-[0_0_30px_rgba(224,0,100,0.4)]"
+          >
+            View MacHacks 2026 on Devpost
+          </a>
         </motion.div>
       </section>
 
@@ -93,9 +88,6 @@ export default function MacHacks() {
               </p>
               <p className="text-[#E1E0E0] text-lg leading-relaxed mb-6">
                 This year's event will be a one day MLH certified HackDay on Saturday March 21st, from 9am-9pm in PGCLL. We can't wait to see you there! More information regarding scheduling and workshops will be released on our Instagram and website in the coming weeks.
-              </p>
-              <p className="text-[#E1E0E0]/80 mb-8">
-                Questions can be directed to our <a href="#faq" className="text-[#4F7C80] hover:underline font-medium">FAQ below</a>.
               </p>
               <p className="text-[#E1E0E0]/80 mb-8">
                 Interested in partnering with us and impacting students through MacHacks 2026?{' '}
@@ -180,66 +172,13 @@ export default function MacHacks() {
         </div>
       </section>
 
-      {/* Schedule & workshops */}
-      <section className="py-16 md:py-24 bg-[#060606]">
+      {/* Schedule & workshops — temporarily hidden */}
+      {/* <section className="py-16 md:py-24 bg-[#060606]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-heading text-3xl font-bold text-white mb-6">Schedule & workshops</h2>
-
-          {/* Filter buttons */}
-          <div className="flex flex-wrap gap-2 mb-8">
-            {SCHEDULE_CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setScheduleFilter(cat)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                  scheduleFilter === cat
-                    ? 'bg-[#8B3D5A] text-white shadow-[0_0_20px_rgba(139,61,90,0.3)]'
-                    : 'bg-[#221A1D] text-[#E1E0E0] hover:bg-[#35494C]/30 border border-[#35494C]/30'
-                }`}
-              >
-                {cat === 'all' ? 'All' : cat}
-              </button>
-            ))}
-          </div>
-
-          {/* Schedule items */}
-          <ul className="space-y-4">
-            {filteredSchedule.map(({ time, title, category, location }) => (
-              <motion.li
-                key={time + title}
-                {...fadeIn}
-                className="bg-[#221A1D] rounded-xl p-4 md:p-6 border border-[#35494C]/30
-                  hover:border-[#4F7C80]/50 transition-all duration-300
-                  hover:shadow-[0_0_20px_rgba(79,124,128,0.1)]"
-              >
-                {/* Top row: time | title | tag — never wraps */}
-                <div className="flex items-center gap-2 md:gap-4 min-w-0">
-                  <span className="font-heading font-bold text-[#4F7C80] text-sm md:text-base w-16 md:w-28 flex-shrink-0">{time}</span>
-                  <span className="text-white font-medium flex-1 min-w-0 text-sm md:text-base">{title}</span>
-                  <span className={`px-2 md:px-3 py-1 rounded-full text-xs font-medium flex-shrink-0 ${
-                    category === 'Workshop'
-                      ? 'bg-[#8B3D5A]/20 text-[#8B3D5A]'
-                      : category === 'Hacking'
-                      ? 'bg-[#4F7C80]/20 text-[#4F7C80]'
-                      : category === 'Food'
-                      ? 'bg-[#C0A35B]/20 text-[#C0A35B]'
-                      : category === 'Closing'
-                      ? 'bg-[#8B3D5A]/30 text-[#8B3D5A]'
-                      : 'bg-[#35494C]/30 text-[#E1E0E0]'
-                  }`}>
-                    {category}
-                  </span>
-                </div>
-                {/* Location below */}
-                {location && (
-                  <p className="text-[#E1E0E0]/60 text-xs mt-2 pl-[4.5rem] md:pl-32">{location}</p>
-                )}
-              </motion.li>
-            ))}
-          </ul>
+          ...
         </div>
-      </section>
+      </section> */}
 
       {/* Sponsors Section – Tiered */}
       <section className="py-16 md:py-24 bg-[#221A1D]/30 relative overflow-hidden">
@@ -408,49 +347,10 @@ export default function MacHacks() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section id="faq" className="py-16 md:py-24 bg-[#221A1D]/50">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-3xl font-bold text-white mb-8">
-            Frequently Asked Questions
-          </h2>
-          <ul className="space-y-3">
-          {FAQ.map(({ q, a }, i) => (
-              <motion.li
-                key={i}
-                {...fadeIn}
-                className="rounded-xl border border-[#35494C]/30 overflow-hidden"
-              >
-                <button
-                  type="button"
-                  className="w-full text-left px-6 py-4 flex justify-between items-center
-                    bg-[#221A1D] text-white hover:bg-[#221A1D]/80 transition-colors"
-                  onClick={() => setFaqOpen(faqOpen === i ? null : i)}
-                  aria-expanded={faqOpen === i}
-                >
-                  <span className="font-medium">{q}</span>
-                  <span className="text-[#8B3D5A] text-xl">{faqOpen === i ? '−' : '+'}</span>
-                </button>
-                <AnimatePresence initial={false}>
-                  {faqOpen === i && (
-                    <motion.div
-                      key="content"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ type: 'spring', stiffness: 280, damping: 28 }}
-                      style={{ overflow: 'hidden' }}
-                      className="bg-[#060606] border-t border-[#35494C]/20"
-                    >
-                      <div className="px-6 py-4 text-[#E1E0E0] text-sm">{a}</div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      {/* FAQ — temporarily hidden */}
+      {/* <section id="faq" className="py-16 md:py-24 bg-[#221A1D]/50">
+        ...
+      </section> */}
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import Countdown from '../Components/Countdown';
 import CountUp from '../Components/CountUp';
 import { motion } from 'motion/react';
 import { EncryptedText } from '../Components/ui/encrypted-text';
@@ -286,13 +285,7 @@ export default function Home() {
               Our flagship hackathon returns on March 21st. Join hundreds of students to build, learn, and compete.
             </p>
           </motion.div>
-          {/* Glow ring around countdown */}
-          <div className="inline-block rounded-2xl p-px bg-gradient-to-br from-[#1CB1E3]/40 via-[#3DDFF5]/20 to-[#1800AD]/40 shadow-[0_0_40px_rgba(28,177,227,0.15)]">
-            <div className="rounded-2xl bg-[#060606]/80 px-6 py-4 backdrop-blur-sm">
-              <Countdown variant="dark" />
-            </div>
-          </div>
-          <motion.div {...fadeIn} className="mt-16">
+          <motion.div {...fadeIn}>
             <Link to="/machacks" className="btn-cta text-lg px-10 py-4">
               View MacHacks
             </Link>
