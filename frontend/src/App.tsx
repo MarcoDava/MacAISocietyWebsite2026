@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import Layout from './Components/Layout';
 import Home from './Pages/Home';
 import MacHacks from './Pages/MacHacks';
@@ -27,6 +28,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
+    <Analytics />
   );
 }
 
