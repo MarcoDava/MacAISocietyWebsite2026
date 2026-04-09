@@ -13,22 +13,24 @@ import NotFound from './Pages/NotFound';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="about" element={<AboutUs />} />
-          <Route path="team" element={<Team />} />
-          <Route path="machacks" element={<MacHacks />} />
-          <Route path="projects" element={<Projects />} />
-          <Route path="partnerships" element={<Partnerships />} />
-          <Route path="gallery" element={<Gallery />} />
-          <Route path="contact" element={<Contact />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-    <Analytics />
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<AboutUs />} />
+            <Route path="team" element={<Team />} />
+            <Route path="machacks" element={<MacHacks />} />
+            <Route path="projects" element={<Projects />} />
+            <Route path="partnerships" element={<Partnerships />} />
+            <Route path="gallery" element={<Gallery />} />
+            <Route path="contact" element={<Contact />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+      <Analytics />
+    </>
   );
 }
 
