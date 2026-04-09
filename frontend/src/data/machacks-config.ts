@@ -46,7 +46,7 @@ export const SCHEDULE_CATEGORIES: ('all' | ScheduleCategory)[] = ['all', 'Genera
 // ============================================
 // Sponsors
 // ============================================
-export type SponsorTier = 'Platinum' | 'Gold' | 'Silver' | 'Bronze';
+export type SponsorTier = 'featured' | 'standard' | 'community';
 
 export interface Sponsor {
   name: string;
@@ -56,21 +56,19 @@ export interface Sponsor {
 }
 
 export const SPONSORS: Sponsor[] = [
-  // Platinum sponsors - largest display
-  { name: 'TechCorp AI', tier: 'Platinum', logoUrl: '', website: 'https://example.com' },
+  // Featured sponsor - largest display, own row
+  // { name: 'Example Featured', tier: 'featured', logoUrl: '', website: 'https://example.com' },
 
-  // Gold sponsors - medium display
-  { name: 'DataFlow Inc', tier: 'Gold', logoUrl: '', website: 'https://example.com' },
-  { name: 'CloudMind', tier: 'Gold', logoUrl: '', website: 'https://example.com' },
+  // Standard sponsors - grid
+  // { name: 'Example Standard', tier: 'standard', logoUrl: '', website: 'https://example.com' },
 
-  // Silver sponsors - smaller display
-  { name: 'Neural Labs', tier: 'Silver', logoUrl: '', website: 'https://example.com' },
-  { name: 'AI Ventures', tier: 'Silver', logoUrl: '', website: 'https://example.com' },
-  { name: 'CodeBase', tier: 'Silver', logoUrl: '', website: 'https://example.com' },
+  // Community partners - smaller display
+  // { name: 'Example Community', tier: 'community', logoUrl: '', website: 'https://example.com' },
+];
 
-  // Bronze sponsors - smallest display
-  { name: 'StartupX', tier: 'Bronze', logoUrl: '', website: 'https://example.com' },
-  { name: 'DevTools Co', tier: 'Bronze', logoUrl: '', website: 'https://example.com' },
+export const PAST_MACHACKS_SPONSORS: Sponsor[] = [
+  // Past sponsors from previous MacHacks years
+  // { name: 'Past Sponsor', tier: 'standard', logoUrl: '', website: 'https://example.com' },
 ];
 
 // ============================================
