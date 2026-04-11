@@ -13,6 +13,9 @@ import sebastianImg from '../assets/Team/SebastianMaurice.jpeg';
 import tamillaImg from '../assets/Team/Tamilla Zeynalova.jpeg';
 import tiyaImg from '../assets/Team/Tiya Jathan 02.jpeg';
 import calderImg from '../assets/Team/CalderSmith.jpg';
+import marcoImg from '../assets/Team/MarcoDava.png';
+import danielImg from '../assets/Team/DanielNguyen.png';
+import jackImg from '../assets/Team/JackEaston.jpg';
 
 export interface TeamMember {
   name: string;
@@ -41,6 +44,9 @@ export const EXEC_TEAM: TeamMember[] = [
   { name: 'Calder Smith', role: 'VP Partnerships', image: calderImg },
   { name: 'Tamilla Zeynalova', role: 'Director of Education', image: tamillaImg },
   { name: 'Fatima Malik', role: 'Director of Attendee Relations', image: fatimaImg },
+  { name: 'Marco Dava', role: 'Web Development Lead', image: marcoImg },
+  { name: 'Daniel Nguyen', role: 'Web Developer', image: danielImg },
+  { name: 'Jack Easton', role: 'Quality Assurance', image: jackImg },
 ];
 
 export const ADVISORY_BOARD: AdvisoryBoardMember[] = [
