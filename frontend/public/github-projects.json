@@ -1,8 +1,24 @@
 {
-  "syncedAt": "2026-04-25T07:39:26.615Z",
+  "syncedAt": "2026-04-26T07:48:47.059Z",
   "org": "McMasterAI",
   "count": 16,
   "projects": [
+    {
+      "id": "312700654",
+      "name": "Radiology-and-AI",
+      "description": "Training and applying AI models for segmenting and characterizing brain tumours given 3D neuroimaging data",
+      "language": "Jupyter Notebook",
+      "topics": [],
+      "stars": 9,
+      "forks": 4,
+      "year": 2020,
+      "updatedAt": "2026-04-25T15:55:01Z",
+      "url": "https://github.com/McMasterAI/Radiology-and-AI",
+      "homepage": null,
+      "image": "/projects/RadiologyAI.png",
+      "isArchived": false,
+      "isFork": false
+    },
     {
       "id": "385757040",
       "name": "isolate",
@@ -64,22 +80,6 @@
       "url": "https://github.com/McMasterAI/POST_study_Project",
       "homepage": null,
       "image": "/projects/Post Study Prompt.png",
-      "isArchived": false,
-      "isFork": false
-    },
-    {
-      "id": "312700654",
-      "name": "Radiology-and-AI",
-      "description": "Training and applying AI models for segmenting and characterizing brain tumours given 3D neuroimaging data",
-      "language": "Jupyter Notebook",
-      "topics": [],
-      "stars": 8,
-      "forks": 4,
-      "year": 2020,
-      "updatedAt": "2026-03-26T17:27:18Z",
-      "url": "https://github.com/McMasterAI/Radiology-and-AI",
-      "homepage": null,
-      "image": "/projects/RadiologyAI.png",
       "isArchived": false,
       "isFork": false
     },
