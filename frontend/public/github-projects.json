@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-05-20T09:48:42.104Z",
+  "syncedAt": "2026-05-21T09:55:21.275Z",
   "org": "McMasterAI",
   "count": 16,
   "projects": [
@@ -9,10 +9,10 @@
       "description": "Training and applying AI models for segmenting and characterizing brain tumours given 3D neuroimaging data",
       "language": "Jupyter Notebook",
       "topics": [],
-      "stars": 9,
+      "stars": 10,
       "forks": 4,
       "year": 2020,
-      "updatedAt": "2026-04-25T15:55:01Z",
+      "updatedAt": "2026-05-20T18:15:25Z",
       "url": "https://github.com/McMasterAI/Radiology-and-AI",
       "homepage": null,
       "image": "/projects/RadiologyAI.png",
