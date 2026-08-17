@@ -1,7 +1,10 @@
 {
-  "syncedAt": "2026-08-17T07:07:04.654Z",
-  "org": "McMasterAI",
-  "count": 16,
+  "syncedAt": "2026-08-17T22:43:58.404Z",
+  "orgs": [
+    "McMasterAI-Society",
+    "McMasterAI"
+  ],
+  "count": 23,
   "projects": [
     {
       "id": "713641138",
@@ -15,6 +18,7 @@
       "updatedAt": "2026-06-30T16:44:53Z",
       "url": "https://github.com/McMasterAI/Second-Brain",
       "homepage": null,
+      "org": "McMasterAI",
       "image": "/projects/SecondBrain.png",
       "isArchived": false,
       "isFork": false
@@ -31,6 +35,7 @@
       "updatedAt": "2026-06-30T16:41:07Z",
       "url": "https://github.com/McMasterAI/POST_study_Project",
       "homepage": null,
+      "org": "McMasterAI",
       "image": "/projects/Post Study Prompt.png",
       "isArchived": false,
       "isFork": false
@@ -47,6 +52,7 @@
       "updatedAt": "2026-06-30T16:40:40Z",
       "url": "https://github.com/McMasterAI/isolate",
       "homepage": null,
+      "org": "McMasterAI",
       "image": "/projects/Isolate.png",
       "isArchived": false,
       "isFork": false
@@ -63,6 +69,7 @@
       "updatedAt": "2026-06-30T16:39:57Z",
       "url": "https://github.com/McMasterAI/Radiology-and-AI",
       "homepage": null,
+      "org": "McMasterAI",
       "image": "/projects/RadiologyAI.png",
       "isArchived": false,
       "isFork": false
@@ -79,7 +86,138 @@
       "updatedAt": "2026-06-30T16:39:35Z",
       "url": "https://github.com/McMasterAI/TrafficTracker",
       "homepage": null,
+      "org": "McMasterAI",
       "image": "/projects/Traffic Tracker.png",
+      "isArchived": false,
+      "isFork": false
+    },
+    {
+      "id": "1071840873",
+      "name": "ai_music_master",
+      "description": "Music Master helps new guitarists learn core fundamentals and gives context about influential genres, using AI-powered, real-time audio analysis.",
+      "language": "C++",
+      "topics": [
+        "audio-processing",
+        "cnn-classification",
+        "cpp",
+        "hardware",
+        "interprocess-communication",
+        "multithreading",
+        "python",
+        "raspberry-pi"
+      ],
+      "stars": 1,
+      "forks": 0,
+      "year": 2025,
+      "updatedAt": "2026-06-10T23:18:06Z",
+      "url": "https://github.com/McMasterAI-Society/ai_music_master",
+      "homepage": "https://mcmasterai-society.github.io/ai_music_master/",
+      "org": "McMasterAI-Society",
+      "image": "https://opengraph.githubassets.com/1/McMasterAI-Society/ai_music_master",
+      "isArchived": false,
+      "isFork": false
+    },
+    {
+      "id": "1076480370",
+      "name": "DeepFakeDetector",
+      "description": "An AI-powered system that detects and explains deepfake and AI-generated images using CNNs, Vision Transformers, and frequency analysis.",
+      "language": "Jupyter Notebook",
+      "topics": [],
+      "stars": 9,
+      "forks": 1,
+      "year": 2025,
+      "updatedAt": "2026-05-31T04:58:36Z",
+      "url": "https://github.com/McMasterAI-Society/DeepFakeDetector",
+      "homepage": "https://deepfake-detector.app",
+      "org": "McMasterAI-Society",
+      "image": "https://opengraph.githubassets.com/1/McMasterAI-Society/DeepFakeDetector",
+      "isArchived": false,
+      "isFork": false
+    },
+    {
+      "id": "911831142",
+      "name": "TrafficLightRL",
+      "description": "A reinforcement learning-based system optimizing real-world traffic light control to reduce congestion and improve urban mobility.",
+      "language": "Jupyter Notebook",
+      "topics": [
+        "reinforcement-learning"
+      ],
+      "stars": 5,
+      "forks": 2,
+      "year": 2025,
+      "updatedAt": "2026-04-27T20:54:50Z",
+      "url": "https://github.com/McMasterAI-Society/TrafficLightRL",
+      "homepage": null,
+      "org": "McMasterAI-Society",
+      "image": "https://opengraph.githubassets.com/1/McMasterAI-Society/TrafficLightRL",
+      "isArchived": false,
+      "isFork": false
+    },
+    {
+      "id": "1077791292",
+      "name": "Artlingo",
+      "description": "Critique and training for art",
+      "language": "Python",
+      "topics": [],
+      "stars": 1,
+      "forks": 0,
+      "year": 2025,
+      "updatedAt": "2025-10-24T21:15:09Z",
+      "url": "https://github.com/McMasterAI-Society/Artlingo",
+      "homepage": null,
+      "org": "McMasterAI-Society",
+      "image": "https://opengraph.githubassets.com/1/McMasterAI-Society/Artlingo",
+      "isArchived": false,
+      "isFork": false
+    },
+    {
+      "id": "868633230",
+      "name": "ArtSuggesterAI",
+      "description": "AI-based art recommendation tool. Take a photo of your art supplies and get art recommendations",
+      "language": "JavaScript",
+      "topics": [],
+      "stars": 4,
+      "forks": 0,
+      "year": 2024,
+      "updatedAt": "2025-10-19T18:44:18Z",
+      "url": "https://github.com/McMasterAI-Society/ArtSuggesterAI",
+      "homepage": null,
+      "org": "McMasterAI-Society",
+      "image": "https://opengraph.githubassets.com/1/McMasterAI-Society/ArtSuggesterAI",
+      "isArchived": false,
+      "isFork": false
+    },
+    {
+      "id": "918042986",
+      "name": "BOLLD",
+      "description": "Multi-modal model that integrates body language analysis, lip transcriptions, and reinforcement learning to detect threats in real-time using computer vision and natural language processing.",
+      "language": "Jupyter Notebook",
+      "topics": [],
+      "stars": 1,
+      "forks": 2,
+      "year": 2025,
+      "updatedAt": "2025-03-08T02:47:58Z",
+      "url": "https://github.com/McMasterAI-Society/BOLLD",
+      "homepage": null,
+      "org": "McMasterAI-Society",
+      "image": "https://opengraph.githubassets.com/1/McMasterAI-Society/BOLLD",
+      "isArchived": false,
+      "isFork": false
+    },
+    {
+      "id": "916369816",
+      "name": "formfit-macai",
+      "description": "A computer vision-powered app for classifying physiotherapy exercises and providing real-time feedback to correct form. Utilizing OpenCV, MediaPipe, and advanced modelling for precise analysis and guidance.",
+      "language": "Python",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "year": 2025,
+      "updatedAt": "2025-02-03T00:16:30Z",
+      "url": "https://github.com/McMasterAI-Society/formfit-macai",
+      "homepage": null,
+      "org": "McMasterAI-Society",
+      "image": "https://opengraph.githubassets.com/1/McMasterAI-Society/formfit-macai",
       "isArchived": false,
       "isFork": false
     },
@@ -95,6 +233,7 @@
       "updatedAt": "2024-09-16T04:19:06Z",
       "url": "https://github.com/McMasterAI/NoteFlow",
       "homepage": null,
+      "org": "McMasterAI",
       "image": "/projects/Note Organizer.png",
       "isArchived": false,
       "isFork": false
@@ -111,6 +250,7 @@
       "updatedAt": "2023-11-17T01:42:40Z",
       "url": "https://github.com/McMasterAI/MacChat",
       "homepage": null,
+      "org": "McMasterAI",
       "image": "/projects/MacChat.png",
       "isArchived": false,
       "isFork": false
@@ -127,6 +267,7 @@
       "updatedAt": "2023-11-15T21:34:09Z",
       "url": "https://github.com/McMasterAI/pianAI",
       "homepage": null,
+      "org": "McMasterAI",
       "image": "/projects/PianAI.png",
       "isArchived": false,
       "isFork": false
@@ -143,6 +284,7 @@
       "updatedAt": "2022-04-15T16:02:13Z",
       "url": "https://github.com/McMasterAI/Autonomous-Vehicle",
       "homepage": null,
+      "org": "McMasterAI",
       "image": "/projects/Autonomous Vehicle (1).png",
       "isArchived": false,
       "isFork": false
@@ -159,6 +301,7 @@
       "updatedAt": "2022-02-20T20:45:31Z",
       "url": "https://github.com/McMasterAI/Brain_Radiology_2022",
       "homepage": null,
+      "org": "McMasterAI",
       "image": "/projects/RadiologyAI.png",
       "isArchived": false,
       "isFork": false
@@ -175,6 +318,7 @@
       "updatedAt": "2022-01-25T03:57:58Z",
       "url": "https://github.com/McMasterAI/Walker-Agent",
       "homepage": null,
+      "org": "McMasterAI",
       "image": "/projects/Walker Agent.png",
       "isArchived": false,
       "isFork": false
@@ -191,6 +335,7 @@
       "updatedAt": "2022-01-11T00:56:59Z",
       "url": "https://github.com/McMasterAI/projectx-2021",
       "homepage": null,
+      "org": "McMasterAI",
       "image": "/projects/ProjectX.png",
       "isArchived": false,
       "isFork": false
@@ -207,6 +352,7 @@
       "updatedAt": "2022-01-06T06:12:16Z",
       "url": "https://github.com/McMasterAI/Broker_project",
       "homepage": null,
+      "org": "McMasterAI",
       "image": "/projects/The Broker Project.png",
       "isArchived": false,
       "isFork": false
@@ -223,6 +369,7 @@
       "updatedAt": "2021-11-10T18:23:19Z",
       "url": "https://github.com/McMasterAI/Organoid-Detection-and-Classification",
       "homepage": null,
+      "org": "McMasterAI",
       "image": "/projects/Organoid Classification and Detection.png",
       "isArchived": false,
       "isFork": false
@@ -239,6 +386,7 @@
       "updatedAt": "2021-04-28T18:22:30Z",
       "url": "https://github.com/McMasterAI/StyleGAN",
       "homepage": null,
+      "org": "McMasterAI",
       "image": "/projects/StyleGan.png",
       "isArchived": false,
       "isFork": false
@@ -255,6 +403,7 @@
       "updatedAt": "2021-02-21T19:45:23Z",
       "url": "https://github.com/McMasterAI/CoviDash",
       "homepage": null,
+      "org": "McMasterAI",
       "image": "/projects/CoviDash.png",
       "isArchived": false,
       "isFork": false

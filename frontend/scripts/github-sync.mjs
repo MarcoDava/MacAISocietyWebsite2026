@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 
 /**
- * Fetches all public repos from the McMasterAI GitHub organization
+ * Fetches all public repos from the MacAI GitHub organizations
  * and writes a curated JSON file to public/github-projects.json.
+ *
+ * Both the legacy org (McMasterAI, access lost) and the current org
+ * (McMasterAI-Society) are synced so old and new projects both appear.
  *
  * Usage:
  *   node scripts/github-sync.mjs
@@ -11,7 +14,7 @@
  *   GITHUB_TOKEN — raises rate limit from 60 to 5 000 req/hr
  */
 
-const ORG = 'McMasterAI';
+const ORGS = ['McMasterAI-Society', 'McMasterAI'];
 const OUT_PATH = new URL('../public/github-projects.json', import.meta.url);
 
 // Repos to exclude (meta repos, old website, templates, forks)
@@ -22,12 +25,12 @@ const EXCLUDE = new Set([
   'RadiologyandAI-MedicalZooPytorch', // fork
 ]);
 
-async function fetchAllRepos() {
+async function fetchAllRepos(org) {
   const repos = [];
   let page = 1;
 
   while (true) {
-    const url = `https://api.github.com/orgs/${ORG}/repos?per_page=100&sort=updated&page=${page}`;
+    const url = `https://api.github.com/orgs/${org}/repos?per_page=100&sort=updated&page=${page}`;
     const headers = {
       Accept: 'application/vnd.github+json',
       'User-Agent': 'MacAI-Website-Sync',
@@ -65,13 +68,15 @@ function transformRepo(repo) {
     updatedAt: repo.updated_at,
     url: repo.html_url,
     homepage: repo.homepage || null,
-    image: getProjectImage(repo.name),
+    org: repo.owner?.login ?? null,
+    image: getProjectImage(repo),
     isArchived: repo.archived,
     isFork: repo.fork,
   };
 }
 
-function getProjectImage(repoName) {
+function getProjectImage(repo) {
+  const repoName = repo.name;
   // Mapping of repo names to local image filenames (case-insensitive checks)
   const mapping = {
     'covidash': 'CoviDash.png',
@@ -97,16 +102,31 @@ function getProjectImage(repoName) {
     return `/projects/${localFile}`;
   }
 
-  // Fallback to GitHub Open Graph image
-  return `https://opengraph.githubassets.com/1/McMasterAI/${repoName}`;
+  // Fallback to GitHub Open Graph image for the repo's actual owner
+  const owner = repo.owner?.login ?? ORGS[0];
+  return `https://opengraph.githubassets.com/1/${owner}/${repoName}`;
 }
 
 async function main() {
-  console.log(`Fetching repos from github.com/orgs/${ORG}...`);
-  const raw = await fetchAllRepos();
-  console.log(`  Found ${raw.length} total repos.`);
+  const raw = [];
 
-  const projects = raw
+  for (const org of ORGS) {
+    console.log(`Fetching repos from github.com/orgs/${org}...`);
+    const orgRepos = await fetchAllRepos(org);
+    console.log(`  Found ${orgRepos.length} repos in ${org}.`);
+    raw.push(...orgRepos);
+  }
+
+  // Dedupe by repo id in case a project was transferred between orgs
+  const seen = new Set();
+  const unique = raw.filter((r) => {
+    const key = r.name.toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  const projects = unique
     .filter((r) => !r.fork && !EXCLUDE.has(r.name))
     .map(transformRepo)
     .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
@@ -119,7 +139,7 @@ async function main() {
 
   const payload = {
     syncedAt: new Date().toISOString(),
-    org: ORG,
+    orgs: ORGS,
     count: projects.length,
     projects,
   };

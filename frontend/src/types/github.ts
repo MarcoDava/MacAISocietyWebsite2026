@@ -10,6 +10,7 @@ export interface GitHubProject {
   updatedAt: string;
   url: string;
   homepage: string | null;
+  org?: string | null;
   image?: string | null;
   isArchived: boolean;
   isFork: boolean;
@@ -17,7 +18,7 @@ export interface GitHubProject {
 
 export interface GitHubProjectsPayload {
   syncedAt: string;
-  org: string;
+  orgs: string[];
   count: number;
   projects: GitHubProject[];
 }
