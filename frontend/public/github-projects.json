@@ -1,11 +1,28 @@
 {
-  "syncedAt": "2026-08-19T06:54:10.941Z",
+  "syncedAt": "2026-08-20T06:55:32.865Z",
   "orgs": [
     "McMasterAI-Society",
     "McMasterAI"
   ],
-  "count": 23,
+  "count": 24,
   "projects": [
+    {
+      "id": "1157465238",
+      "name": "MacAISocietyWebsite2026",
+      "description": "A MacAI project.",
+      "language": "TypeScript",
+      "topics": [],
+      "stars": 1,
+      "forks": 0,
+      "year": 2026,
+      "updatedAt": "2026-08-19T22:10:03Z",
+      "url": "https://github.com/McMasterAI-Society/MacAISocietyWebsite2026",
+      "homepage": "https://mac-ai-society-website2026.vercel.app",
+      "org": "McMasterAI-Society",
+      "image": "https://opengraph.githubassets.com/1/McMasterAI-Society/MacAISocietyWebsite2026",
+      "isArchived": false,
+      "isFork": false
+    },
     {
       "id": "713641138",
       "name": "Second-Brain",
